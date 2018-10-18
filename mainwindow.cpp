@@ -8,11 +8,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     ui->statesStackedWidget->setCurrentIndex(0);
+
+    projectsList = new ProjectsList();
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete projectsList;
+    delete project;
+}
+
+void MainWindow::getValues()
+{
+
 }
 
 void MainWindow::on_addNewButton_clicked()
@@ -22,7 +32,14 @@ void MainWindow::on_addNewButton_clicked()
 
 void MainWindow::on_finalAddButton_clicked()
 {
+    QString name = ui->nameLineEdit->text();
+    unsigned short rows = ui->rowsLineEdit->text().toInt();
+    unsigned short cols = ui->colsLineEdit->text().toInt();
+
+    project = new Project(name, rows, cols, Qt::red);
+
     ui->statesStackedWidget->setCurrentIndex(2);
+
 }
 
 void MainWindow::on_cancelAddingButton_clicked()
