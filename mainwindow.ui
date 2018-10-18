@@ -1,24 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>960</width>
+    <height>540</height>
    </rect>
   </property>
-  <property name="windowTitle" >
-   <string>MainWindow</string>
+  <property name="minimumSize">
+   <size>
+    <width>960</width>
+    <height>540</height>
+   </size>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <property name="maximumSize">
+   <size>
+    <width>960</width>
+    <height>540</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Vis4xe</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #333333;</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QStackedWidget" name="statesStackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>960</width>
+      <height>540</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>960</width>
+      <height>540</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>960</width>
+      <height>540</height>
+     </size>
+    </property>
+    <property name="currentIndex">
+     <number>2</number>
+    </property>
+    <widget class="QWidget" name="homePage">
+     <widget class="QLabel" name="projectNameLabel">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>960</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 50px;
+background-color: #0099ff</string>
+      </property>
+      <property name="text">
+       <string>Vis4xe</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QStackedWidget" name="projectsExists">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>130</y>
+        <width>900</width>
+        <height>270</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="projectsList"/>
+      <widget class="QWidget" name="noProjectsInfo">
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>120</y>
+          <width>791</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #FFFFFF;
+font-size: 20px;</string>
+        </property>
+        <property name="text">
+         <string>You currently do not have any projects. To create a new project press the button below</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="addNewButton">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>430</y>
+        <width>100</width>
+        <height>100</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>-1</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius:  50%;
+background-color: #0099ff;
+font-size: 30px;</string>
+      </property>
+      <property name="text">
+       <string>New</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="addPage">
+     <widget class="QLabel" name="addingProjectHeader">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>960</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 30px;
+background-color: #0099ff</string>
+      </property>
+      <property name="text">
+       <string>Adding Project</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="nameLabel">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>140</y>
+        <width>160</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #FFFFFF;
+font-size: 20px;
+background-color: #0099ff</string>
+      </property>
+      <property name="text">
+       <string>Name</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="nameLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>190</y>
+        <width>161</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #FFFFFF;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="colsLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>320</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #FFFFFF;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lcdSizeLabel">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>230</y>
+        <width>160</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #FFFFFF;
+font-size: 20px;
+background-color: #0099ff</string>
+      </property>
+      <property name="text">
+       <string>Lcd size</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="colsLabel">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>280</y>
+        <width>71</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #FFFFFF;
+font-size: 15px;
+background-color: #0099ff</string>
+      </property>
+      <property name="text">
+       <string>Cols</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="rowsLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>320</y>
+        <width>71</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #FFFFFF;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rowsLabel">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>280</y>
+        <width>71</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #FFFFFF;
+font-size: 15px;
+background-color: #0099ff</string>
+      </property>
+      <property name="text">
+       <string>Rows</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="finalAddButton">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>360</y>
+        <width>161</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #00cc00;</string>
+      </property>
+      <property name="text">
+       <string>Add</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="cancelAddingButton">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>460</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="editPage">
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>800</x>
+        <y>30</y>
+        <width>3</width>
+        <height>510</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #0099ff;</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="editingHeader">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>960</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 30px;
+background-color: #0099ff</string>
+      </property>
+      <property name="text">
+       <string>Editing Project</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="stringsHeader">
+      <property name="geometry">
+       <rect>
+        <x>800</x>
+        <y>30</y>
+        <width>160</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 3px solid #0099ff;
+color: #0099ff;
+font-size: 20px;</string>
+      </property>
+      <property name="text">
+       <string>Strings</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="editingQuitButton">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>490</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Quit</string>
+      </property>
+     </widget>
+     <zorder>editingHeader</zorder>
+     <zorder>line</zorder>
+     <zorder>stringsHeader</zorder>
+     <zorder>editingQuitButton</zorder>
+    </widget>
+   </widget>
+  </widget>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>
