@@ -30,7 +30,7 @@ void Lcd::initCells()
     {
         for(int j = 0; j < rows; j++)
         {
-            cells.push_back(new QLabel(widget));
+            cells.push_back(new MyLabel(widget, QColor(255, 255, 255, 0)));
 
             cells[m]->setGeometry(QRect(0, 0, 20, 30));
             cells[m]->setStyleSheet("QLabel { background-color: #0099ff; color: #FFFFFF; font-size: 25px;}");

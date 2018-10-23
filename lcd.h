@@ -1,12 +1,14 @@
 #ifndef LCD_H
 #define LCD_H
 
-#include <QLabel>
 #include <QColor>
 
 #include <QWidget>
+//#include <QLabel>
 
 #include <QVector>
+
+#include "mylabel.h"
 
 class Lcd
 {
@@ -19,7 +21,7 @@ private:
 
     QWidget* widget;
 
-    QVector <QLabel*> cells;
+    QVector <MyLabel*> cells;
 
     void initCells();
 

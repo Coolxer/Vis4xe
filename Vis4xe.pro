@@ -37,7 +37,8 @@ HEADERS += \
     lcd.h \
     project.h \
     projectslist.h \
-    stringslist.h
+    stringslist.h \
+    mylabel.h
 
 FORMS += \
         mainwindow.ui
