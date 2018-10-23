@@ -8,6 +8,10 @@
 #include "projectslist.h"
 #include "project.h"
 
+#include <QWidget>
+#include <QPushButton>
+#include <QGridLayout>
+
 namespace Ui {
 class MainWindow;
 }
@@ -21,8 +25,6 @@ private:
 
     ProjectsList* projectsList;
     Project* project;
-
-    void getValues();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

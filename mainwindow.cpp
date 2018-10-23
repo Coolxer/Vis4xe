@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     projectsList = new ProjectsList();
 
+    //QPushButton* button = new QPushButton("elo", this->centralWidget());
+
 }
 
 MainWindow::~MainWindow()
@@ -18,11 +20,6 @@ MainWindow::~MainWindow()
     delete ui;
     delete projectsList;
     delete project;
-}
-
-void MainWindow::getValues()
-{
-
 }
 
 void MainWindow::on_addNewButton_clicked()
@@ -36,10 +33,15 @@ void MainWindow::on_finalAddButton_clicked()
     unsigned short rows = ui->rowsLineEdit->text().toInt();
     unsigned short cols = ui->colsLineEdit->text().toInt();
 
-    project = new Project(name, rows, cols, Qt::red);
+    project = new Project(name, rows, cols, Qt::red, ui->editPage);
 
     ui->statesStackedWidget->setCurrentIndex(2);
 
+    //QGridLayout* gridLayout = new QGridLayout(this);
+    //gridLayout->layout()->addWidget(project->getButton());
+
+    //QPushButton* button = new QPushButton("elo", ui->editPage);
+    //button->show();
 }
 
 void MainWindow::on_cancelAddingButton_clicked()

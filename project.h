@@ -6,6 +6,8 @@
 #include "lcd.h"
 #include "stringslist.h"
 
+class QWidget;
+
 class Project
 {
 private:
@@ -15,7 +17,7 @@ private:
     StringsList stringsList;
 public:
     Project(){}
-    Project(QString name, unsigned short rows, unsigned short cols, QColor color);
+    Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
 
     QString getName() { return name; };
 
