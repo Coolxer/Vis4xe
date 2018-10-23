@@ -4,7 +4,6 @@
 #include <QColor>
 
 #include <QWidget>
-//#include <QLabel>
 
 #include <QVector>
 
@@ -26,7 +25,6 @@ private:
     void initCells();
 
 public:
-    Lcd(){};
     Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
     ~Lcd();
 };

@@ -385,10 +385,42 @@ font-size: 20px;</string>
        <string>Quit</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="addStringButton">
+      <property name="geometry">
+       <rect>
+        <x>850</x>
+        <y>490</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="stringValueLine">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>460</y>
+        <width>113</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #FFFFFF;
+color: #000000;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
      <zorder>editingHeader</zorder>
      <zorder>line</zorder>
      <zorder>stringsHeader</zorder>
      <zorder>editingQuitButton</zorder>
+     <zorder>addStringButton</zorder>
+     <zorder>stringValueLine</zorder>
     </widget>
    </widget>
   </widget>

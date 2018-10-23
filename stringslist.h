@@ -2,22 +2,24 @@
 #define STRINGSLIST_H
 
 #include <QString>
-#include <QStringList>
+#include <QVector>
+#include <QWidget>
+
+#include "mylabel.h"
 
 class StringsList
 {
 private:
-    QString test = "maly";
-    QStringList list;
+    QVector <MyLabel*> list;
+
+    QWidget* widget;
 public:
-    StringsList();
+    StringsList(QWidget* widget);
+    ~StringsList();
 
-    void addString();
-    void deleteString();
-    void changeString();
-
-    QString getString(unsigned short index) { return list.at(index); };
-
+    void addString(QString string);
+    void deleteString(MyLabel* label);
+    void changeString(MyLabel* label, QString newString);
 };
 
 #endif // STRINGSLIST_H

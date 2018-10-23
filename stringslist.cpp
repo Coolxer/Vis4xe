@@ -1,21 +1,29 @@
 #include "stringslist.h"
 
-StringsList::StringsList()
+StringsList::StringsList(QWidget* widget)
 {
-    list.push_back(test);
+    this->widget = widget;
 }
 
-void StringsList::addString()
+StringsList::~StringsList()
 {
-
+    delete widget;
 }
 
-void StringsList::deleteString()
+void StringsList::addString(QString string)
 {
-
+    list.push_back(new MyLabel(widget, string));
+    list.back()->setStyleSheet("MyLabel { border: 2px solid #0099ff; }");
 }
 
-void StringsList::changeString()
+void StringsList::deleteString(MyLabel* label)
 {
+    int index = list.indexOf(label);
+    list.removeAt(index);
+}
 
+void StringsList::changeString(MyLabel* label, QString newString)
+{
+    int index = list.indexOf(label);
+    list[index]->setText(newString);
 }

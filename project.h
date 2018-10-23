@@ -16,7 +16,6 @@ private:
     Lcd lcd;
     StringsList stringsList;
 public:
-    Project(){}
     Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
 
     QString getName() { return name; };
