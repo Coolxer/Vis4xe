@@ -38,12 +38,6 @@ void MainWindow::on_finalAddButton_clicked()
     project = new Project(name, rows, cols, Qt::red, ui->editPage);
 
     ui->statesStackedWidget->setCurrentIndex(2);
-
-    //QGridLayout* gridLayout = new QGridLayout(this);
-    //gridLayout->layout()->addWidget(project->getButton());
-
-    //QPushButton* button = new QPushButton("elo", ui->editPage);
-    //button->show();
 }
 
 void MainWindow::on_cancelAddingButton_clicked()

@@ -1,12 +1,19 @@
 #include "stringslist.h"
 
-StringsList::StringsList(QWidget* widget)
+StringsList::StringsList(QWidget* widget, QVector <MyLabel*> xCells)
 {
     this->widget = widget;
 
-    addString("janusz");
-    addString("lukasz");
+    cells = xCells;
+
+    addString("piora");
+    addString("cykle");
+    addString("kat obrotu");
+    addString("Predkosc");
     showList();
+
+    qDebug()<<"inside stringslist";
+
 }
 
 StringsList::~StringsList()
@@ -16,7 +23,7 @@ StringsList::~StringsList()
 
 void StringsList::addString(QString string)
 {
-    list.push_back(new DraggableLabel(widget, string));
+    list.push_back(new DraggableLabel(widget, string, cells));
     list.back()->setStyleSheet("DraggableLabel { border: 2px solid #0099ff; font-size: 20px; }");
 }
 

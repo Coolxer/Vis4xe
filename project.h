@@ -13,10 +13,11 @@ class Project
 private:
     QString name;
 
-    Lcd lcd;
-    StringsList stringsList;
+    Lcd* lcd;
+    StringsList* stringsList;
 public:
     Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
+    ~Project();
 
     QString getName() { return name; };
 

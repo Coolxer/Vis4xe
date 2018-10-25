@@ -6,40 +6,39 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget
     this->cols = cols;
     this->color = color;
 
+    this->widget = widget;
+
+    //for not typing in all the time during tests and developing
     this->rows = 4;
     this->cols = 20;
 
-    this->widget = widget;
+    numberOfCells = rows * cols;
 
     initCells();
-
-    //QPushButton* button = new QPushButton("elo", widget);
-    //button->show();
 }
 
 Lcd::~Lcd()
 {
-    //delete cells;
     delete widget;
 }
 
 void Lcd::initCells()
 {
-    numberOfCells = rows * cols;
+
 
     unsigned short m = 0 ;
 
-    for(unsigned short i = 0; i < cols; i++)
+    for(unsigned short i = 0; i < rows; i++)
     {
-        for(unsigned short j = 0; j < rows; j++)
+        for(unsigned short j = 0; j < cols; j++)
         {
             cells.push_back(new MyLabel(widget, "", QColor(255, 255, 255, 0)));
 
             cells[m]->setGeometry(QRect(0, 0, 20, 30));
-            cells[m]->setStyleSheet("QLabel { background-color: #0099ff; color: #FFFFFF; font-size: 25px;}");
+            cells[m]->setStyleSheet("QLabel { background-color: #0099ff; color: #FFFFFF; font-size: 25px; }");
             cells[m]->setAlignment(Qt::AlignCenter);
 
-            cells[m]->move(50 + (25 * i), 200 + (j * 35));
+            cells[m]->move(150 + (25 * j), 200 + (i * 35));
             //cells[m]->show();
             m++;
         }

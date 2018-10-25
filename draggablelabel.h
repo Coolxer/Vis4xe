@@ -8,20 +8,29 @@
 
 #include <QDebug>
 
+#include <mylabel.h>
+
 class DraggableLabel : public QLabel
 {
      Q_OBJECT
 
 private:
     QPoint offset;
+    QPoint lastPosition;
+    QVector <MyLabel*> cells;
+
+    unsigned short dropIndex;
 
 public:
-   DraggableLabel(QWidget* parent = nullptr, QString string = "") : QLabel(parent)
+    DraggableLabel(QWidget* parent, QString string, QVector <MyLabel*> xCells ) : QLabel(parent)
    {
        this->setText(string);
+       cells = xCells;
        setAutoFillBackground(true);
        setAcceptDrops(true);
    }
+
+    unsigned short getDroppedIndex() { return dropIndex; };
 
 protected:
 
@@ -40,9 +49,23 @@ protected:
             this->move(mapToParent(event->pos() - offset));
    }
 
-   void mouseReleasEvent(QMouseEvent* event)
+   void mouseReleaseEvent(QMouseEvent* event)
    {
-        QApplication::setOverrideCursor(Qt::ArrowCursor);
+        lastPosition = this->mapTo(this->parentWidget(), event->pos());
+
+        QApplication::restoreOverrideCursor();
+
+        for(int i = 0; i< cells.length(); i++)
+        {
+            if((lastPosition.x() >= cells[i]->geometry().x()) && (lastPosition.x() <= cells[i]->geometry().x() + cells[i]->geometry().width()))
+            {
+                if((lastPosition.y() >= cells[i]->geometry().y()) && (lastPosition.y() <= cells[i]->geometry().y() + cells[i]->geometry().height()))
+                {
+                    dropIndex = i;
+                    break;
+                }
+            }
+        }
    }
 
 };

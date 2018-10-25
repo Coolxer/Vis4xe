@@ -6,16 +6,19 @@
 #include <QWidget>
 
 #include "draggablelabel.h"
-#include <QtDebug>
+#include <QDebug>
+
+class MyLabel;
 
 class StringsList
 {
 private:
     QVector <DraggableLabel*> list;
+    QVector <MyLabel*> cells;
 
     QWidget* widget;
 public:
-    StringsList(QWidget* widget);
+    StringsList(QWidget* widget, QVector <MyLabel*> xCells);
     ~StringsList();
 
     void addString(QString string);
