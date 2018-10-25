@@ -394,6 +394,9 @@ font-size: 20px;</string>
         <height>23</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #FFFFFF;</string>
+      </property>
       <property name="text">
        <string>Add</string>
       </property>
@@ -415,12 +418,23 @@ color: #000000;</string>
        <string/>
       </property>
      </widget>
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>100</y>
+        <width>125</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
      <zorder>editingHeader</zorder>
      <zorder>line</zorder>
      <zorder>stringsHeader</zorder>
      <zorder>editingQuitButton</zorder>
      <zorder>addStringButton</zorder>
      <zorder>stringValueLine</zorder>
+     <zorder>lineEdit</zorder>
     </widget>
    </widget>
   </widget>

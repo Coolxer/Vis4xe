@@ -5,12 +5,13 @@
 #include <QVector>
 #include <QWidget>
 
-#include "mylabel.h"
+#include "draggablelabel.h"
+#include <QtDebug>
 
 class StringsList
 {
 private:
-    QVector <MyLabel*> list;
+    QVector <DraggableLabel*> list;
 
     QWidget* widget;
 public:
@@ -18,8 +19,10 @@ public:
     ~StringsList();
 
     void addString(QString string);
-    void deleteString(MyLabel* label);
-    void changeString(MyLabel* label, QString newString);
+    void deleteString(DraggableLabel* label);
+    void changeString(DraggableLabel* label, QString newString);
+
+    void showList();
 };
 
 #endif // STRINGSLIST_H

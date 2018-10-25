@@ -38,7 +38,8 @@ HEADERS += \
     project.h \
     projectslist.h \
     stringslist.h \
-    mylabel.h
+    mylabel.h \
+    draggablelabel.h
 
 FORMS += \
         mainwindow.ui

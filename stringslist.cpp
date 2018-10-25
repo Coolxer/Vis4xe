@@ -3,6 +3,10 @@
 StringsList::StringsList(QWidget* widget)
 {
     this->widget = widget;
+
+    addString("janusz");
+    addString("lukasz");
+    showList();
 }
 
 StringsList::~StringsList()
@@ -12,18 +16,29 @@ StringsList::~StringsList()
 
 void StringsList::addString(QString string)
 {
-    list.push_back(new MyLabel(widget, string));
-    list.back()->setStyleSheet("MyLabel { border: 2px solid #0099ff; }");
+    list.push_back(new DraggableLabel(widget, string));
+    list.back()->setStyleSheet("DraggableLabel { border: 2px solid #0099ff; font-size: 20px; }");
 }
 
-void StringsList::deleteString(MyLabel* label)
+void StringsList::deleteString(DraggableLabel* label)
 {
-    int index = list.indexOf(label);
+    unsigned short index = list.indexOf(label);
     list.removeAt(index);
 }
 
-void StringsList::changeString(MyLabel* label, QString newString)
+void StringsList::changeString(DraggableLabel* label, QString newString)
 {
-    int index = list.indexOf(label);
+    unsigned short index = list.indexOf(label);
     list[index]->setText(newString);
+}
+
+void StringsList::showList()
+{
+    for(unsigned short i = 0, j = 100; i < list.length(); i++, j+=50)
+    {
+        list[i]->setGeometry(QRect(0, 0, 125, 30));
+        list[i]->setAlignment(Qt::AlignCenter);
+        list[i]->move(820, j);
+        list[i]->show();
+    }
 }

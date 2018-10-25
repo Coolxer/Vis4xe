@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     projectsList = new ProjectsList();
 
+    setAcceptDrops(true);
+
     //QPushButton* button = new QPushButton("elo", this->centralWidget());
 
 }
