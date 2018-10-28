@@ -8,18 +8,26 @@
 class MyLabel : public QLabel
 {
     Q_OBJECT
+
 private:
     QColor color;
     QString string;
+
 public:
-     MyLabel(QWidget* parent = nullptr, QString string = "", QColor color = Qt::red) : QLabel(parent){ this->string = string ; this->color = color; this->setText(this->string); };
+     MyLabel(QWidget* parent = nullptr, QString string = "", QColor color = Qt::red) : QLabel(parent)
+     {
+         this->string = string ;
+         this->color = color;
+         this->setText(this->string);
+     }
+
 protected:
-    void enterEvent(QEvent *ev) override
+    void enterEvent(QEvent *event) override
     {
         setStyleSheet("QLabel { background-color : #ff7733; }");
     }
 
-    void leaveEvent(QEvent *ev) override
+    void leaveEvent(QEvent *event) override
     {
         setStyleSheet("QLabel { background-color : #0099ff; }");
     }

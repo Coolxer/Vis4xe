@@ -24,8 +24,6 @@ Lcd::~Lcd()
 
 void Lcd::initCells()
 {
-
-
     unsigned short m = 0 ;
 
     for(unsigned short i = 0; i < rows; i++)
@@ -39,7 +37,6 @@ void Lcd::initCells()
             cells[m]->setAlignment(Qt::AlignCenter);
 
             cells[m]->move(150 + (25 * j), 200 + (i * 35));
-            //cells[m]->show();
             m++;
         }
     }

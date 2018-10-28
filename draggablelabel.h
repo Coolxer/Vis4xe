@@ -15,20 +15,44 @@ class DraggableLabel : public QLabel
      Q_OBJECT
 
 private:
+    QVector <MyLabel*> cells;
+    QLabel * label;
+
     QPoint offset;
     QPoint lastPosition;
-    QVector <MyLabel*> cells;
+
+    QString text;
 
     unsigned short dropIndex;
 
+    void setUpString()
+    {
+        if(dropIndex + text.length() <= cells.length())
+        {
+            for(int i = 0; i < text.length(); i++)
+            {
+                cells[dropIndex + i]->setText(text.at(i));
+                cells[dropIndex + i]->setStyleSheet("MyLabel { border: 2px solid green; }");
+            }
+
+            this->deleteLater();
+        }
+    }
+
 public:
     DraggableLabel(QWidget* parent, QString string, QVector <MyLabel*> xCells ) : QLabel(parent)
-   {
-       this->setText(string);
+    {
+       text = string;
+       this->setText(text);
        cells = xCells;
        setAutoFillBackground(true);
        setAcceptDrops(true);
-   }
+
+       label = new QLabel(parent);
+       label->setGeometry(800, 100, 10, 30);
+       label->setStyleSheet("QLabel { background-color: red; }");
+       //label->show();
+    }
 
     unsigned short getDroppedIndex() { return dropIndex; };
 
@@ -64,9 +88,13 @@ protected:
                     dropIndex = i;
                     break;
                 }
-            }
+            }      
         }
+
+        setUpString();
    }
+
+
 
 };
 

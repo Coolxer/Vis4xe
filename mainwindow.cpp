@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+    #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -11,9 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     projectsList = new ProjectsList();
 
-    setAcceptDrops(true);
-
-    //QPushButton* button = new QPushButton("elo", this->centralWidget());
+    //setAcceptDrops(true);
 
 }
 

@@ -12,8 +12,6 @@ StringsList::StringsList(QWidget* widget, QVector <MyLabel*> xCells)
     addString("Predkosc");
     showList();
 
-    qDebug()<<"inside stringslist";
-
 }
 
 StringsList::~StringsList()

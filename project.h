@@ -6,6 +6,8 @@
 #include "lcd.h"
 #include "stringslist.h"
 
+#include <QStringList>
+
 class QWidget;
 
 class Project
@@ -15,6 +17,9 @@ private:
 
     Lcd* lcd;
     StringsList* stringsList;
+
+    QStringList placedStrings;
+    QStringList unPlacedStrings;
 public:
     Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
     ~Project();
