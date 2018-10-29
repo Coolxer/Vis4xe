@@ -12,11 +12,13 @@ class MyLabel : public QLabel
 private:
     QColor color;
     QString string;
+    unsigned short id = 0;
 
 public:
-     MyLabel(QWidget* parent = nullptr, QString string = "", QColor color = Qt::red) : QLabel(parent)
+     MyLabel(QWidget* parent = nullptr, QString string = "", unsigned short id = 0, QColor color = Qt::red) : QLabel(parent)
      {
          this->string = string ;
+         this->id = id;
          this->color = color;
          this->setText(this->string);
      }

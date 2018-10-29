@@ -30,16 +30,15 @@ SOURCES += \
     lcd.cpp \
     project.cpp \
     projectslist.cpp \
-    stringslist.cpp
+    unplacedbox.cpp
 
 HEADERS += \
         mainwindow.h \
     lcd.h \
     project.h \
     projectslist.h \
-    stringslist.h \
     mylabel.h \
-    draggablelabel.h
+    unplacedbox.h
 
 FORMS += \
         mainwindow.ui

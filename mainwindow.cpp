@@ -7,9 +7,17 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->statesStackedWidget->setCurrentIndex(0);
+    ui->statesStackedWidget->setCurrentIndex(2);
 
     projectsList = new ProjectsList();
+
+    QString name = ui->nameLineEdit->text();
+    unsigned short rows = ui->rowsLineEdit->text().toInt();
+    unsigned short cols = ui->colsLineEdit->text().toInt();
+
+    project = new Project(name, rows, cols, Qt::red, ui->editPage);
+
+    ui->statesStackedWidget->setCurrentIndex(2);
 
     //setAcceptDrops(true);
 
@@ -29,6 +37,7 @@ void MainWindow::on_addNewButton_clicked()
 
 void MainWindow::on_finalAddButton_clicked()
 {
+    /*
     QString name = ui->nameLineEdit->text();
     unsigned short rows = ui->rowsLineEdit->text().toInt();
     unsigned short cols = ui->colsLineEdit->text().toInt();
@@ -36,6 +45,7 @@ void MainWindow::on_finalAddButton_clicked()
     project = new Project(name, rows, cols, Qt::red, ui->editPage);
 
     ui->statesStackedWidget->setCurrentIndex(2);
+    */
 }
 
 void MainWindow::on_cancelAddingButton_clicked()
