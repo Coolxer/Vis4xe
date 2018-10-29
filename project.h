@@ -22,7 +22,7 @@ private:
     Lcd* lcd;
 
     QStringList placedStrings; //the vector of the strings that are placed in
-    QStringList unPlacedStrings; //the vector of the strings that are not placed in yet
+    //QStringList unPlacedStrings; //the vector of the strings that are not placed in yet
 
     QVector <UnPlacedBox*> unPlacedBoxes; //the vector of of the boxes that are not placed in ( they are on the strings side menu)
 

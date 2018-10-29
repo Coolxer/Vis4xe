@@ -29,7 +29,10 @@ public:
 protected:
     void enterEvent(QEvent *event) override
     {
-        setStyleSheet("QLabel { background-color : #ff7733; }");
+        if(id == -1) //if the cells is empty just style its own
+            setStyleSheet("QLabel { background-color : #ff7733; }");
+        //else
+
     }
 
     void leaveEvent(QEvent *event) override

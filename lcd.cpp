@@ -1,7 +1,8 @@
 #include "lcd.h"
 
-Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget)
+Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget) : QWidget (widget)
 {
+
     this->rows = rows;
     this->cols = cols;
     this->color = color;
@@ -16,6 +17,11 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget
 
     /* ************* */
 
+    layout = new QGridLayout;
+
+    setGeometry(QRect(150, 200, (20 * this->cols) + 63, (30 * this->rows) + 15));
+    setStyleSheet("QWidget{ background-color:  #66c2ff; }");
+
     numberOfCells = rows * cols;
 
     initCells();
@@ -24,10 +30,12 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget
 Lcd::~Lcd()
 {
     delete widget;
+    delete layout;
 }
 
 void Lcd::initCells()
 {
+    /*
     unsigned short m = 0 ;
 
     for(unsigned short i = 0; i < rows; i++)
@@ -44,8 +52,49 @@ void Lcd::initCells()
             m++;
         }
     }
+*/
+    for(unsigned short i = 0; i < rows; i++)
+    {
+        for(unsigned short j = 0; j < cols; j++)
+        {
+            Cell* cell = new Cell(widget, QColor(255, 255, 255, 0));
+            cell->setMinimumSize(20, 30);
+            cell->setMaximumSize(20, 30);
+            cell->setGeometry(QRect(0, 0, 20, 30));
+            cell->setStyleSheet("QLabel { background-color: #0099ff; color: #FFFFFF; font-size: 25px;}");
+            cell->setAlignment(Qt::AlignCenter);
 
+            cells.push_back(cell);
 
+            layout->addWidget(cell, i, j);
+        }
+    }
 
+    this->setContentsMargins(0, 0, 0, 0);
+    setLayout(layout);
+
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setGeometry(QRect(0, 0, cols * 20, rows * 30));
+    layout->setSpacing(0);
+
+}
+
+void Lcd::mousePressEvent(QMouseEvent* event)
+{
+    QPoint pos = event->pos();
+
+    int m = 0;
+
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < cols; j++)
+        {
+            if(pos.x() >= layout->itemAtPosition(i, j)->geometry().x() && pos.x() <= layout->itemAtPosition(i, j)->geometry().x() + layout->itemAtPosition(i, j)->geometry().width())
+                if(pos.y() >= layout->itemAtPosition(i, j)->geometry().y() && pos.y() <= layout->itemAtPosition(i, j)->geometry().y() + layout->itemAtPosition(i, j)->geometry().height())
+                    qDebug()<<m;
+
+            m++;
+        }
+    }
 }
 

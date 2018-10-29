@@ -11,7 +11,12 @@
 
 #include <QMouseEvent>
 
-class Lcd
+#include <QGridLayout>
+
+#include <QPoint>
+
+
+class Lcd : public QWidget
 {
 private:
     unsigned short rows;
@@ -28,7 +33,10 @@ private:
 
     int selectedCell;
 
+    QGridLayout* layout;
 
+protected:
+    void mousePressEvent(QMouseEvent* event);
 public:
     Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
     ~Lcd();
