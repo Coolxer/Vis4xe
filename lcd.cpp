@@ -45,7 +45,7 @@ void Lcd::initCells()
         }
     }
 
-    cells[25]->setText("H");
+
 
 }
 

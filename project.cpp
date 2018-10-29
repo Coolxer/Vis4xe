@@ -20,10 +20,10 @@ void Project::addString(QString string)
 {
     unPlacedStrings.push_back(string);
 
-    if(unPlacedBoxes.length() > 1)
-        unPlacedBoxes.push_back(new UnPlacedBox(this, widget, string, QPoint(unPlacedBoxes.last()->geometry().x(), unPlacedBoxes.last()->geometry().y() + 50)));
+    if(unPlacedBoxes.length() >= 1)
+        unPlacedBoxes.push_back(new UnPlacedBox(this, widget, unPlacedBoxes.length(), string, QPoint(unPlacedBoxes.last()->geometry().x(), unPlacedBoxes.last()->geometry().y() + 50)));
     else
-        unPlacedBoxes.push_back(new UnPlacedBox(this, widget, string, QPoint(820, 100)));
+        unPlacedBoxes.push_back(new UnPlacedBox(this, widget, 0, string, QPoint(820, 100)));
 }
 
 bool Project::check(QPoint point)
@@ -47,7 +47,7 @@ bool Project::check(QPoint point)
     return false;
 }
 
-bool Project::writeOnLcd(QString string, QPoint point)
+bool Project::writeOnLcd(QString string, QPoint point, int id)
 {
     if(check(point))
     {
@@ -56,12 +56,12 @@ bool Project::writeOnLcd(QString string, QPoint point)
             for(int i = 0; i < string.length(); i++)
             {
                 lcd->getCells().at(lcd->getSelectedCell() + i)->setText(string.at(i));
+                lcd->getCells().at(lcd->getSelectedCell() + i)->setId(id);
             }
         }
-        lcd->setSelectedCell(-1);
+        lcd->setSelectedCell(-1); //release the selected cell (reset) after operation confirmed
         return true;
     }
-    else
-        return false;
+   return false;
 }
 

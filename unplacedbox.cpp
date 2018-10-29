@@ -2,9 +2,10 @@
 
 #include "project.h"
 
-UnPlacedBox::UnPlacedBox(Project* project, QWidget* parent, QString text, QPoint pos) : QLabel (parent) //?is this needed?
+UnPlacedBox::UnPlacedBox(Project* project, QWidget* parent, int id, QString text, QPoint pos) : QLabel (parent) //?is this needed?
 {
     this->project = project;
+    this->id = id;
 
     setText(text);
     setGeometry(pos.x(), pos.y(), 100, 30);
@@ -47,5 +48,9 @@ void UnPlacedBox::mouseReleaseEvent(QMouseEvent* event)
 
      QApplication::restoreOverrideCursor();
 
-     project->writeOnLcd(this->text(), lastPosition);
+     if(project->writeOnLcd(this->text(), lastPosition, id))
+     {
+         setVisible(false);
+         grabBox->setVisible(false);
+     }
 }

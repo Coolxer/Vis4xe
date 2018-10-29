@@ -20,13 +20,15 @@ private:
 
     QLabel* grabBox;
 
+    int id;
+
 protected:
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
 public:
-    UnPlacedBox(Project* project, QWidget* parent, QString text, QPoint pos);
+    UnPlacedBox(Project* project, QWidget* parent, int id, QString text, QPoint pos);
     ~UnPlacedBox();
 };
 

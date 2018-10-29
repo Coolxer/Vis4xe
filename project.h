@@ -1,6 +1,7 @@
 #ifndef PROJECT_H
 #define PROJECT_H
 
+#include <QDebug>
 #include <QString>
 
 #include "lcd.h"
@@ -36,7 +37,7 @@ public:
                       // This function is like a slot but not sure its good idea
                       // its adding the inputted string to the unPlacedStrings vector
 
-    bool writeOnLcd(QString string, QPoint point); //the function which is drawing dropped text on LCD
+    bool writeOnLcd(QString string, QPoint point, int id); //the function which is drawing dropped text on LCD
                        //returns true if its succeed (free space)
 
     bool check(QPoint point);
