@@ -7,7 +7,7 @@
 
 #include <QDebug>
 
-#include "mylabel.h"
+#include "Cell.h"
 
 #include <QMouseEvent>
 
@@ -20,24 +20,24 @@ private:
 
     QWidget* widget;
 
-    QVector <MyLabel*> cells;
+    QVector <Cell*> cells;
 
     unsigned short numberOfCells;
 
     void initCells();
 
-    int currentCell = -1;
-
+    int selectedCell;
 
 
 public:
     Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
     ~Lcd();
 
-    QVector <MyLabel*> getCells() { return cells; };
+    QVector <Cell*> getCells() { return cells; };
 
-    void setCurrentCell(int i) { currentCell = i; }; //set the cell which on is dropped the unplacedBox
-    int getCurrentCell() { return currentCell; }; //return the number of current dropped cell // if is none the function return -1
+    void setSelectedCell(int i) { selectedCell = i; };
+    int getSelectedCell() { return selectedCell; };
+
 };
 
 #endif // LCD_H

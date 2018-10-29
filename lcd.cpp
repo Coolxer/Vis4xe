@@ -8,9 +8,13 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget
 
     this->widget = widget;
 
+    /* *********** */
+
     //for not typing in all the time during tests and developing
     this->rows = 4;
     this->cols = 20;
+
+    /* ************* */
 
     numberOfCells = rows * cols;
 
@@ -30,7 +34,7 @@ void Lcd::initCells()
     {
         for(unsigned short j = 0; j < cols; j++)
         {
-            cells.push_back(new MyLabel(widget, "", 0, QColor(255, 255, 255, 0)));
+            cells.push_back(new Cell(widget, QColor(255, 255, 255, 0)));
 
             cells[m]->setGeometry(QRect(0, 0, 20, 30));
             cells[m]->setStyleSheet("QLabel { background-color: #0099ff; color: #FFFFFF; font-size: 25px; }");

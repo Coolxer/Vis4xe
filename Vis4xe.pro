@@ -27,18 +27,18 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    lcd.cpp \
-    project.cpp \
-    projectslist.cpp \
-    unplacedbox.cpp
+        lcd.cpp \
+        project.cpp \
+        projectslist.cpp \
+        unplacedbox.cpp
 
 HEADERS += \
         mainwindow.h \
-    lcd.h \
-    project.h \
-    projectslist.h \
-    mylabel.h \
-    unplacedbox.h
+        lcd.h \
+        project.h \
+        projectslist.h \
+        unplacedbox.h \
+        Cell.h
 
 FORMS += \
         mainwindow.ui

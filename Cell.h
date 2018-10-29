@@ -1,27 +1,30 @@
-#ifndef MYLABEL_H
-#define MYLABEL_H
+#ifndef CELL_H
+#define CELL_H
 
 #include <QLabel>
 #include <QColor>
 #include <QString>
 
-class MyLabel : public QLabel
+class Cell : public QLabel
 {
     Q_OBJECT
 
 private:
     QColor color;
     QString string;
-    unsigned short id = 0;
+
+    int id = -1; //that means the the cell is empty // none string here
 
 public:
-     MyLabel(QWidget* parent = nullptr, QString string = "", unsigned short id = 0, QColor color = Qt::red) : QLabel(parent)
+     Cell(QWidget* parent = nullptr, QColor color = Qt::red) : QLabel(parent)
      {
          this->string = string ;
-         this->id = id;
          this->color = color;
          this->setText(this->string);
      }
+
+     void setId(int id) { this->id = id; };
+     int getId() { return id; };
 
 protected:
     void enterEvent(QEvent *event) override
@@ -35,4 +38,4 @@ protected:
     }
 };
 
-#endif // MYLABEL_H
+#endif // CELL_H

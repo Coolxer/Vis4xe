@@ -30,12 +30,19 @@ bool Project::check(QPoint point)
 {
     for(int i = 0; i < lcd->getCells().length(); i++)
     {
+        // check if the grabBox is over any cell
         if(point.x() >= lcd->getCells().at(i)->geometry().x() && point.x() <= lcd->getCells().at(i)->geometry().x() + lcd->getCells().at(i)->geometry().width())
+        {
             if(point.y() >= lcd->getCells().at(i)->geometry().y() && point.y() <= lcd->getCells().at(i)->geometry().y() + lcd->getCells().at(i)->geometry().height())
             {
-                lcd->setCurrentCell(i);
-                return true;
+                //check if the cell does not have any letter  // is it free?
+                if(lcd->getCells().at(i)->getId() == -1)
+                {
+                    lcd->setSelectedCell(i);
+                    return true;
+                }
             }
+        }
     }
     return false;
 }
@@ -44,14 +51,14 @@ bool Project::writeOnLcd(QString string, QPoint point)
 {
     if(check(point))
     {
-        if(lcd->getCurrentCell() + string.length() <= lcd->getCells().length())
+        if(lcd->getSelectedCell() + string.length() <= lcd->getCells().length())
         {
             for(int i = 0; i < string.length(); i++)
             {
-                lcd->getCells().at(lcd->getCurrentCell() + i)->setText(string.at(i));
+                lcd->getCells().at(lcd->getSelectedCell() + i)->setText(string.at(i));
             }
         }
-        lcd->setCurrentCell(-1);
+        lcd->setSelectedCell(-1);
         return true;
     }
     else
