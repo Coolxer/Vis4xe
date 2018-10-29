@@ -26,7 +26,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent* event);
 
 public:
-    UnPlacedBox(Project* project, QWidget* parent, QString text);
+    UnPlacedBox(Project* project, QWidget* parent, QString text, QPoint pos);
     ~UnPlacedBox();
 };
 

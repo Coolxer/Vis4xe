@@ -25,7 +25,6 @@ private:
 
     QVector <UnPlacedBox*> unPlacedBoxes; //the vector of of the boxes that are not placed in ( they are on the strings side menu)
 
-    void replaceBoxes();
 public:
     Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
     ~Project();

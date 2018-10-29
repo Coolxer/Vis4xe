@@ -28,6 +28,8 @@ private:
 
     int currentCell = -1;
 
+
+
 public:
     Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
     ~Lcd();

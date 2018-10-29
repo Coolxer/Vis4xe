@@ -6,7 +6,6 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
     lcd = new Lcd(rows, cols, color, widget);
 
     addString("elo");
-    replaceBoxes();
 }
 
 Project::~Project()
@@ -14,16 +13,17 @@ Project::~Project()
     delete lcd;
 }
 
-void Project::replaceBoxes()
-{
-    for(int i = 0, j = 100; i < unPlacedBoxes.length(); i++, j+=50)
-        unPlacedBoxes[i]->move(820, j);
-}
+    //for(int i = 0, j = 100; i < unPlacedBoxes.length(); i++, j+=50)
+    //   unPlacedBoxes[i]->move(820, j);
 
 void Project::addString(QString string)
 {
     unPlacedStrings.push_back(string);
-    unPlacedBoxes.push_back(new UnPlacedBox(this, widget, string));
+
+    if(unPlacedBoxes.length() > 1)
+        unPlacedBoxes.push_back(new UnPlacedBox(this, widget, string, QPoint(unPlacedBoxes.last()->geometry().x(), unPlacedBoxes.last()->geometry().y() + 50)));
+    else
+        unPlacedBoxes.push_back(new UnPlacedBox(this, widget, string, QPoint(820, 100)));
 }
 
 bool Project::check(QPoint point)
@@ -34,7 +34,6 @@ bool Project::check(QPoint point)
             if(point.y() >= lcd->getCells().at(i)->geometry().y() && point.y() <= lcd->getCells().at(i)->geometry().y() + lcd->getCells().at(i)->geometry().height())
             {
                 lcd->setCurrentCell(i);
-                //break;
                 return true;
             }
     }
@@ -52,6 +51,7 @@ bool Project::writeOnLcd(QString string, QPoint point)
                 lcd->getCells().at(lcd->getCurrentCell() + i)->setText(string.at(i));
             }
         }
+        lcd->setCurrentCell(-1);
         return true;
     }
     else

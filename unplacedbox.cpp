@@ -2,18 +2,18 @@
 
 #include "project.h"
 
-UnPlacedBox::UnPlacedBox(Project* project, QWidget* parent, QString text) : QLabel (parent) //?is this needed?
+UnPlacedBox::UnPlacedBox(Project* project, QWidget* parent, QString text, QPoint pos) : QLabel (parent) //?is this needed?
 {
     this->project = project;
 
-    this->setText(text);
-    this->setGeometry(0, 0, 100, 25);
-    this->setAlignment(Qt::AlignCenter);
-    this->setStyleSheet("UnPlacedBox{ background-color: red; border: 2px solid red; color: #FFFFFF; }");
+    setText(text);
+    setGeometry(pos.x(), pos.y(), 100, 30);
+    setAlignment(Qt::AlignCenter);
+    setStyleSheet("QLabel{ background-color: #0099ff; color: #FFFFFF; }");
 
     grabBox = new QLabel(parent);
-    grabBox->setGeometry(0, 0, 20, 25);
-    grabBox->setStyleSheet("QLabel{ background-color: green;");
+    grabBox->setGeometry(pos.x() - 5, pos.y(), 20, 30);
+    grabBox->setStyleSheet("QLabel{ background-color: red; }");
 }
 
 UnPlacedBox::~UnPlacedBox()
