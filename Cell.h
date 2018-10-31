@@ -5,15 +5,18 @@
 #include <QColor>
 #include <QString>
 
+#include <QApplication>
+
 class Cell : public QLabel
 {
     Q_OBJECT
 
 private:
-    QColor color;
-    QString string;
+    QColor color; // the color of the cell (inherited(got) from lcd)
+    QString string; //the letter of the QLabel, normally its null = ""
 
-    int id = -1; //that means the the cell is empty // none string here
+    int id = -1;//this variable get you know if it is written to any string
+                //that means the the cell is empty // none string here
 
 public:
      Cell(QWidget* parent = nullptr, QColor color = Qt::red) : QLabel(parent)
@@ -23,21 +26,20 @@ public:
          this->setText(this->string);
      }
 
-     void setId(int id) { this->id = id; };
+     void setId(int id) { this->id = id; }; //setter
      int getId() { return id; };
 
 protected:
     void enterEvent(QEvent *event) override
     {
-        if(id == -1) //if the cells is empty just style its own
-            setStyleSheet("QLabel { background-color : #ff7733; }");
-        //else
-
+        setStyleSheet("QLabel { background-color : #ff7733; }");
+        QApplication::setOverrideCursor(Qt::PointingHandCursor);
     }
 
     void leaveEvent(QEvent *event) override
     {
         setStyleSheet("QLabel { background-color : #0099ff; }");
+        QApplication::restoreOverrideCursor();
     }
 };
 

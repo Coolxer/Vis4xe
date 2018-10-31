@@ -25,6 +25,9 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget
     numberOfCells = rows * cols;
 
     initCells();
+
+    //this->setMouseTracking(true);
+    this->setFocusPolicy(Qt::ClickFocus);
 }
 
 Lcd::~Lcd()
@@ -58,6 +61,7 @@ void Lcd::initCells()
         for(unsigned short j = 0; j < cols; j++)
         {
             Cell* cell = new Cell(widget, QColor(255, 255, 255, 0));
+
             cell->setMinimumSize(20, 30);
             cell->setMaximumSize(20, 30);
             cell->setGeometry(QRect(0, 0, 20, 30));
@@ -70,31 +74,90 @@ void Lcd::initCells()
         }
     }
 
+    for(int i = 0 ; i< 7; i++)
+    {
+        cells[i]->setId(1);
+        cells[i]->setText("a");
+    }
+
     this->setContentsMargins(0, 0, 0, 0);
     setLayout(layout);
 
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setGeometry(QRect(0, 0, cols * 20, rows * 30));
     layout->setSpacing(0);
-
 }
 
 void Lcd::mousePressEvent(QMouseEvent* event)
 {
-    QPoint pos = event->pos();
+    QPoint position = event->pos();
 
-    int m = 0;
-
-    for(int i = 0; i < rows; i++)
+    /*
+    if(editMode != nullptr)
     {
-        for(int j = 0; j < cols; j++)
-        {
-            if(pos.x() >= layout->itemAtPosition(i, j)->geometry().x() && pos.x() <= layout->itemAtPosition(i, j)->geometry().x() + layout->itemAtPosition(i, j)->geometry().width())
-                if(pos.y() >= layout->itemAtPosition(i, j)->geometry().y() && pos.y() <= layout->itemAtPosition(i, j)->geometry().y() + layout->itemAtPosition(i, j)->geometry().height())
-                    qDebug()<<m;
+        delete editMode;
+        editMode = nullptr;
+    }
+    */
 
-            m++;
+    for(int i = 0; i < 80; i++)
+    {
+        if(((position.x() >= cells[i]->x()) && (position.x() <= cells[i]->x() + cells[i]->width())) && ((position.y() >= cells[i]->y()) && (position.y() <= cells[i]->y() + cells[i]->height())))
+        {
+            int id = cells[i]->getId();
+
+            if(id != -1)
+            {
+                for(int i = 0; i <80; i++)
+                {
+                    if(cells[i]->getId() == id)
+                    {
+                        currentString += cells[i]->text();
+                        cellsNumbers.push_back(i);
+                        cells[i]->setStyleSheet("QLabel{background-color: red;}");
+                    }
+                }
+
+                editMode = true;
+
+                //if(editMode == nullptr)
+                //    editMode = new EditMode(this, string);
+            }
+
+            break;
         }
     }
 }
+
+void Lcd::keyPressEvent(QKeyEvent* event)
+{
+    if(editMode)
+    {
+        int direction = 0;
+
+        switch(event->key())
+        {
+        case Qt::Key_Left:
+            direction = -1;
+            break;
+        case Qt::Key_Up:
+            direction = -20;
+            break;
+        case Qt::Key_Down:
+            direction = 20;
+            break;
+        case Qt::Key_Right:
+            direction = 1;
+            break;
+        }
+
+        for(int i = 0 ; i < currentString.length(); i++)
+        {
+            cells[cellsNumbers[i]]->clear();
+            cells[cellsNumbers[i] + direction]->setText(currentString.at(i));
+            cellsNumbers[i] += direction;
+        }
+    }
+}
+
 

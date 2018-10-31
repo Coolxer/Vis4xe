@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     projectsList = new ProjectsList();
 
+
+    // its move there for faster developing ( not needed to click all the time through pages)
     QString name = ui->nameLineEdit->text();
     unsigned short rows = ui->rowsLineEdit->text().toInt();
     unsigned short cols = ui->colsLineEdit->text().toInt();

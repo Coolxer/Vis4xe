@@ -5,8 +5,10 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
     this->widget = widget;
     lcd = new Lcd(rows, cols, color, widget);
 
-    addString("Predkosc"); //added for test
+    addString("Predkosc"); //added this string for tests
     addString("podzielnica");
+    addString("stol");
+    addString("kierunek");
 }
 
 Project::~Project()
@@ -29,11 +31,26 @@ bool Project::check(QPoint point)
     for(int i = 0; i < lcd->getCells().length(); i++)
     {
         // check if the grabBox is over any cell
+        /*
         if(point.x() >= lcd->getCells().at(i)->geometry().x() && point.x() <= lcd->getCells().at(i)->geometry().x() + lcd->getCells().at(i)->geometry().width())
         {
             if(point.y() >= lcd->getCells().at(i)->geometry().y() && point.y() <= lcd->getCells().at(i)->geometry().y() + lcd->getCells().at(i)->geometry().height())
             {
-                //check if the cell does not have any letter  // is it free?
+                //check if the cell does not have any letter  // is it empty?
+                if(lcd->getCells().at(i)->getId() == -1)
+                {
+                    lcd->setSelectedCell(i);
+                    return true;
+                }
+            }
+        }
+        */
+
+        if(point.x() >= lcd->getCells()[i]->x() && point.x() <= lcd->getCells()[i]->x() + lcd->getCells()[i]->width())
+        {
+            if(point.y() >= lcd->getCells()[i]->y() && point.y() <= lcd->getCells()[i]->y() + lcd->getCells()[i]->height())
+            {
+                //check if the cell does not have any letter  // is it empty?
                 if(lcd->getCells().at(i)->getId() == -1)
                 {
                     lcd->setSelectedCell(i);
@@ -53,8 +70,8 @@ bool Project::writeOnLcd(QString string, QPoint point, int id)
         {
             for(int i = 0; i < string.length(); i++)
             {
-                lcd->getCells().at(lcd->getSelectedCell() + i)->setText(string.at(i));
-                lcd->getCells().at(lcd->getSelectedCell() + i)->setId(id);
+                lcd->getCells()[lcd->getSelectedCell() + i]->setText(string.at(i));
+                lcd->getCells()[lcd->getSelectedCell() + i]->setId(id);
             }
         }
         lcd->setSelectedCell(-1); //release the selected cell (reset) after operation confirmed

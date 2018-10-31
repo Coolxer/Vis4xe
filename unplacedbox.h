@@ -15,7 +15,6 @@ private:
     Project* project;
 
     QPoint offset;
-    QPoint currentPosition;
     QPoint lastPosition;
 
     QLabel* grabBox;

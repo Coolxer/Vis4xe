@@ -16,10 +16,10 @@ class QWidget;
 class Project
 {
 private:
-    QWidget* widget; //the pointer to the main widget
+    QWidget* widget; //the pointer to the main widget to draw Lcd, and Unplaced string boxes
     QString name; //name of the project
 
-    Lcd* lcd;
+    Lcd* lcd; //the pointer / dynamic object Lcd
 
     QStringList placedStrings; //the vector of the strings that are placed in
     //QStringList unPlacedStrings; //the vector of the strings that are not placed in yet
@@ -41,6 +41,8 @@ public:
                        //returns true if its succeed (free space)
 
     bool check(QPoint point);
+
+    Lcd* getLcd() { return lcd; };
 };
 
 #endif // PROJECT_H

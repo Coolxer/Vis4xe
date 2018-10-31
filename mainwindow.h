@@ -12,6 +12,8 @@
 #include <QPushButton>
 #include <QGridLayout>
 
+#include <QKeyEvent>
+
 namespace Ui {
 class MainWindow;
 }
@@ -31,10 +33,10 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_addNewButton_clicked();
-    void on_finalAddButton_clicked();
-    void on_cancelAddingButton_clicked();
-    void on_editingQuitButton_clicked();
+    void on_addNewButton_clicked(); //caused after the user clicked the button in the homepage
+    void on_finalAddButton_clicked(); //caused after the user clicked the button in the addpage
+    void on_cancelAddingButton_clicked(); //caused after the user clicked the button in the addpage
+    void on_editingQuitButton_clicked(); //caused after the user clicked the button in the editpage
 
 };
 
