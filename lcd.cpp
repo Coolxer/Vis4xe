@@ -65,6 +65,10 @@ void Lcd::initCells()
             cell->setMinimumSize(20, 30);
             cell->setMaximumSize(20, 30);
             cell->setGeometry(QRect(0, 0, 20, 30));
+
+            //mapps the coordinates of the cell to global numbers
+            //cell->mapToGlobal(cell->pos());
+
             cell->setStyleSheet("QLabel { background-color: #0099ff; color: #FFFFFF; font-size: 25px;}");
             cell->setAlignment(Qt::AlignCenter);
 
@@ -73,6 +77,8 @@ void Lcd::initCells()
             layout->addWidget(cell, i, j);
         }
     }
+
+    qDebug()<<cells[19]->pos();
 
     for(int i = 0 ; i< 7; i++)
     {
@@ -153,9 +159,12 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
         for(int i = 0 ; i < currentString.length(); i++)
         {
-            cells[cellsNumbers[i]]->clear();
-            cells[cellsNumbers[i] + direction]->setText(currentString.at(i));
-            cellsNumbers[i] += direction;
+            if((cellsNumbers[i] + direction < cells.length()) && (cellsNumbers[i] + direction >= 0))
+            {
+                cells[cellsNumbers[i]]->clear();
+                cells[cellsNumbers[i] + direction]->setText(currentString.at(i));
+                cellsNumbers[i] += direction;
+            }
         }
     }
 }

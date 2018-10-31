@@ -58,6 +58,6 @@ void UnPlacedBox::mouseReleaseEvent(QMouseEvent* event)
      {
          //setVisible(false);
          //grabBox->setVisible(false);
-         this->deleteLater();
+         //this->deleteLater();
      }
 }

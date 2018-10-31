@@ -26,19 +26,19 @@ public:
          this->setText(this->string);
      }
 
-     void setId(int id) { this->id = id; }; //setter
+     void setId(int id) { this->id = id; };
      int getId() { return id; };
 
 protected:
     void enterEvent(QEvent *event) override
     {
-        setStyleSheet("QLabel { background-color : #ff7733; }");
+        setStyleSheet("QLabel { background-color : #ff7733; font-size: 25px; }");
         QApplication::setOverrideCursor(Qt::PointingHandCursor);
     }
 
     void leaveEvent(QEvent *event) override
     {
-        setStyleSheet("QLabel { background-color : #0099ff; }");
+        setStyleSheet("QLabel { background-color : #0099ff; font-size: 25px; }");
         QApplication::restoreOverrideCursor();
     }
 };
