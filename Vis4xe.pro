@@ -30,8 +30,7 @@ SOURCES += \
         lcd.cpp \
         project.cpp \
         projectslist.cpp \
-        unplacedbox.cpp \
-    editmode.cpp
+        unplacedbox.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,8 +38,7 @@ HEADERS += \
         project.h \
         projectslist.h \
         unplacedbox.h \
-        Cell.h \
-    editmode.h
+        Cell.h
 
 FORMS += \
         mainwindow.ui

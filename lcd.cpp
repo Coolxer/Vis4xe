@@ -38,24 +38,6 @@ Lcd::~Lcd()
 
 void Lcd::initCells()
 {
-    /*
-    unsigned short m = 0 ;
-
-    for(unsigned short i = 0; i < rows; i++)
-    {
-        for(unsigned short j = 0; j < cols; j++)
-        {
-            cells.push_back(new Cell(widget, QColor(255, 255, 255, 0)));
-
-            cells[m]->setGeometry(QRect(0, 0, 20, 30));
-            cells[m]->setStyleSheet("QLabel { background-color: #0099ff; color: #FFFFFF; font-size: 25px; }");
-            cells[m]->setAlignment(Qt::AlignCenter);
-
-            cells[m]->move(150 + (25 * j), 200 + (i * 35));
-            m++;
-        }
-    }
-*/
     for(unsigned short i = 0; i < rows; i++)
     {
         for(unsigned short j = 0; j < cols; j++)
@@ -66,9 +48,6 @@ void Lcd::initCells()
             cell->setMaximumSize(20, 30);
             cell->setGeometry(QRect(0, 0, 20, 30));
 
-            //mapps the coordinates of the cell to global numbers
-            //cell->mapToGlobal(cell->pos());
-
             cell->setStyleSheet("QLabel { background-color: #0099ff; color: #FFFFFF; font-size: 25px;}");
             cell->setAlignment(Qt::AlignCenter);
 
@@ -76,14 +55,6 @@ void Lcd::initCells()
 
             layout->addWidget(cell, i, j);
         }
-    }
-
-    qDebug()<<cells[19]->pos();
-
-    for(int i = 0 ; i< 7; i++)
-    {
-        cells[i]->setId(1);
-        cells[i]->setText("a");
     }
 
     this->setContentsMargins(0, 0, 0, 0);
@@ -97,14 +68,6 @@ void Lcd::initCells()
 void Lcd::mousePressEvent(QMouseEvent* event)
 {
     QPoint position = event->pos();
-
-    /*
-    if(editMode != nullptr)
-    {
-        delete editMode;
-        editMode = nullptr;
-    }
-    */
 
     for(int i = 0; i < 80; i++)
     {
@@ -126,8 +89,6 @@ void Lcd::mousePressEvent(QMouseEvent* event)
 
                 editMode = true;
 
-                //if(editMode == nullptr)
-                //    editMode = new EditMode(this, string);
             }
 
             break;
