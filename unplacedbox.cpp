@@ -44,11 +44,8 @@ void UnPlacedBox::mouseMoveEvent(QMouseEvent* event)
 void UnPlacedBox::mouseReleaseEvent(QMouseEvent* event)
 {
      //lastPosition = this->mapTo(this->parentWidget(), event->pos());
-     //lastPosition = grabBox->mapTo(project->getLcd(), event->pos());
 
-     //lastPosition = grabBox->mapToGlobal(event->pos());
-     lastPosition = grabBox->mapTo(this->parentWidget(), event->pos());
-     //lastPosition = grabBox->mapFrom(project->getLcd(), event->pos());
+     lastPosition = project->getLcd()->getWidget()->mapTo(this->parentWidget(), lastPosition);
 
      qDebug()<<lastPosition;
 

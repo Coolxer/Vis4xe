@@ -28,8 +28,8 @@ void Project::addString(QString string)
 
 bool Project::check(QPoint point)
 {
-    for(int i = 0; i < lcd->getCells().length(); i++)
-    {
+    //for(int i = 0; i < lcd->getCells().length(); i++)
+    //{
         // check if the grabBox is over any cell
         /*
         if(point.x() >= lcd->getCells().at(i)->geometry().x() && point.x() <= lcd->getCells().at(i)->geometry().x() + lcd->getCells().at(i)->geometry().width())
@@ -46,6 +46,7 @@ bool Project::check(QPoint point)
         }
         */
 
+        /*
         if(point.x() >= lcd->getCells()[i]->x() && point.x() <= lcd->getCells()[i]->x() + lcd->getCells()[i]->width())
         {
             if(point.y() >= lcd->getCells()[i]->y() && point.y() <= lcd->getCells()[i]->y() + lcd->getCells()[i]->height())
@@ -58,12 +59,14 @@ bool Project::check(QPoint point)
                 }
             }
         }
-    }
+        */
+    //}
     return false;
 }
 
 bool Project::writeOnLcd(QString string, QPoint point, int id)
 {
+    /*
     if(check(point))
     {
         if(lcd->getSelectedCell() + string.length() <= lcd->getCells().length())
@@ -76,7 +79,8 @@ bool Project::writeOnLcd(QString string, QPoint point, int id)
         }
         lcd->setSelectedCell(-1); //release the selected cell (reset) after operation confirmed
         return true;
-    }
+    }*/
    return false;
+
 }
 
