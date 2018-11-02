@@ -43,18 +43,14 @@ void UnPlacedBox::mouseMoveEvent(QMouseEvent* event)
 
 void UnPlacedBox::mouseReleaseEvent(QMouseEvent* event)
 {
-     //lastPosition = this->mapTo(this->parentWidget(), event->pos());
-
-     lastPosition = project->getLcd()->getWidget()->mapTo(this->parentWidget(), lastPosition);
-
-     qDebug()<<lastPosition;
+     lastPosition = this->mapToParent(event->pos());
 
      QApplication::restoreOverrideCursor();
 
      if(project->writeOnLcd(this->text(), lastPosition, id))
      {
          //setVisible(false);
-         //grabBox->setVisible(false);
+         grabBox->setVisible(false);
          //this->deleteLater();
      }
 }

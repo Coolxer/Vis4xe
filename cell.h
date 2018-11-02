@@ -8,8 +8,6 @@
 
 #include <QApplication>
 
-//#include "lcd.h"
-
 class Lcd;
 
 class Cell : public QLabel
@@ -38,7 +36,7 @@ public:
     ~Cell();
 
     void setId(int id) { this->id = id; }
-    int getId() { return this->id; }
+    int getId() { return id; }
 
 };
 

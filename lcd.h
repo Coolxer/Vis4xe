@@ -27,7 +27,7 @@ private:
 
     QWidget* widget; //the pointer to main widget which on the lcd is drawing
 
-    unsigned short numberOfCells; //the helping variable to storing number of cells ( rows * cols)
+    int numberOfCells = 0; //the helping variable to storing number of cells ( rows * cols)
 
     void initCells();  //this function creates cells and sets their options, then appends its to vector
 
@@ -35,7 +35,7 @@ private:
 
     int hoveredCell = -1; //the index of the cell which on the mouse is over, normally -1
 
-    QGridLayout* layout; //the layout to cleany keeping the cells in rows and cols
+    int droppedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string
 
     bool editMode = false; //the status of the Edit string mode // edit mode allows to changing the position
                            // of the string that is already placed in lcd or remove it
@@ -48,7 +48,7 @@ private:
     QVector <Cell*> cells;
 
 protected:
-    void mousePressEvent(QMouseEvent* event);
+    //void mousePressEvent(QMouseEvent* event);
     //void mouseMoveEvent(QMouseEvent* event) override; //inside this event the cells are changing colors in the
                                                       //face of cursor and the string that they are written to
     void keyPressEvent(QKeyEvent* event);
@@ -59,13 +59,21 @@ public:
 
     //QVector <Cell*> getCells() { return cells; }; //getter that allows to read cells
 
-    void setSelectedCell(int m); //setter the selectedCell
-    int getSelectedCell() { return selectedCell; } //getter the selectedCell
+    //for editing mode
+    void setSelectedCell(int m);
+    int getSelectedCell() { return selectedCell; }
 
-    void setHoveredCell(int m); //setter the selectedCell
-    int getHoveredCell() { return hoveredCell; } //getter the selectedCell
+    //for just appereance ? and info the user
+    void setHoveredCell(int m);
+    int getHoveredCell() { return hoveredCell; }
 
-    QWidget* getWidget() { return this->widget; }
+    //for drag & drop unplacebox
+    void setDroppedCell(int m) { droppedCell = m; }
+    int getDroppedCell() { return droppedCell; }
+
+    Cell* getCell(int i) { return cells[i]; }
+
+    int getNumberOfCells() { return numberOfCells; }
 };
 
 #endif // LCD_H
