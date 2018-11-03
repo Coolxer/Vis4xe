@@ -47,6 +47,8 @@ private:
 
     QVector <Cell*> cells;
 
+    void cancelEditMode();
+
 protected:
     //void mousePressEvent(QMouseEvent* event);
     //void mouseMoveEvent(QMouseEvent* event) override; //inside this event the cells are changing colors in the

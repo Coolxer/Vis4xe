@@ -73,7 +73,7 @@ void Lcd::keyPressEvent(QKeyEvent* event)
             direction = 1;
             break;
         case Qt::Key_Escape:
-            editMode = false;
+            cancelEditMode();
             break;
         }
 
@@ -82,7 +82,10 @@ void Lcd::keyPressEvent(QKeyEvent* event)
             if((selectedNumbersOfCells[i] + direction < cells.length()) && (selectedNumbersOfCells[i] + direction >= 0))
             {
                 cells[selectedNumbersOfCells[i]]->clear();
+                cells[selectedNumbersOfCells[i]]->setStyleSheet("QLabel { background-color: #0099ff; font-size: 25px; }");
+
                 cells[selectedNumbersOfCells[i] + direction]->setText(selectedString.at(i));
+                cells[selectedNumbersOfCells[i] + direction]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
                 selectedNumbersOfCells[i] += direction;
             }
         }
@@ -99,9 +102,8 @@ void Lcd::setSelectedCell(int m)
     {
         for(int i = 0; i < numberOfCells; i++)
         {
-            int helpId = cells[i]->getId();
-
-            if(id == helpId)
+            //checks if the other cells have got the same id as the selected cell (same string)
+            if(id == cells[i]->getId())
             {
                 selectedString += cells[i]->text();
                 selectedNumbersOfCells.push_back(i);
@@ -116,6 +118,21 @@ void Lcd::setSelectedCell(int m)
 void Lcd::setHoveredCell(int m)
 {
     hoveredCell = m;
+}
+
+void Lcd::cancelEditMode()
+{
+    editMode = false;
+
+    int id = cells[selectedCell]->getId();
+
+    for(int i = 0; i < selectedNumbersOfCells.length(); i++)
+    {
+        cells[selectedNumbersOfCells[i]]->setStyleSheet("QLabel { background-color: #0099ff; font-size: 25px; }");
+    }
+
+    selectedString.clear();
+    selectedNumbersOfCells.clear();
 }
 
 

@@ -32,6 +32,7 @@ bool Project::check(QPoint point)
     {
         Cell* cell = lcd->getCell(i);
 
+        //checks if the mouse during the drop is in coordinates of any cell (did the user drop on the cell or wherever)
         if((mappedPoint.x() >= cell->x()) && (mappedPoint.x() <= cell->x() + cell->width()))
         {
             if((mappedPoint.y() >= cell->y()) && (mappedPoint.y() <= cell->y() + cell->height()))
@@ -42,8 +43,6 @@ bool Project::check(QPoint point)
                     lcd->setDroppedCell(i);
                     return true;
                 }
-
-                qDebug()<<i;
             }
         }
     }
@@ -55,6 +54,7 @@ bool Project::writeOnLcd(QString string, QPoint point, int id)
 {
     if(check(point))
     {
+        //check if its possible to drop this there (overfill cover)
         if(lcd->getDroppedCell() + string.length() <= lcd->getNumberOfCells())
         {
             for(int i = 0; i < string.length(); i++)

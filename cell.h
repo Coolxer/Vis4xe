@@ -13,15 +13,14 @@ class Lcd;
 class Cell : public QLabel
 {
 private:
-    Lcd* lcd;
+    Lcd* lcd; //the pointer to its parent
 
     QColor color; // the color of the cell (inherited(got) from lcd)
     QString string; //the letter of the QLabel, normally its null = ""
 
-    int id = -1;//this variable get you know if it is written to any string
-                    //that means the the cell is empty // none string here
+    int id = -1;//this variable get you know if it is written to any string (-1 mean "empty")
 
-    int index; //this helps to get know on over the cell we are
+    int index; //the index of the cell in the lcd vector (from top-left = 0)
 
 protected:
     void enterEvent(QEvent*);
