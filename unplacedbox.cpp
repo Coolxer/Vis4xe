@@ -49,7 +49,9 @@ void UnPlacedBox::mouseReleaseEvent(QMouseEvent* event)
 
      if(project->writeOnLcd(this->text(), lastPosition, id))
      {
-         //setVisible(false);
+         //this->move(0, 0);
+         //this->grabBox->move(0, 0);
+         setVisible(false);
          grabBox->setVisible(false);
          //this->deleteLater();
      }

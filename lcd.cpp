@@ -75,10 +75,14 @@ void Lcd::keyPressEvent(QKeyEvent* event)
         case Qt::Key_Escape:
             cancelEditMode();
             break;
+        case Qt::Key_Delete:
+            qDebug()<<"you";
         }
 
         for(int i = 0 ; i < selectedNumbersOfCells.length(); i++)
         {
+            //if()
+
             if((selectedNumbersOfCells[i] + direction < cells.length()) && (selectedNumbersOfCells[i] + direction >= 0))
             {
                 cells[selectedNumbersOfCells[i]]->clear();
