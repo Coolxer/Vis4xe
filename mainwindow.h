@@ -16,8 +16,6 @@
 
 #include <QLabel>
 
-#include "filemanager.h"
-
 namespace Ui {
 class MainWindow;
 }

@@ -14,7 +14,15 @@ FileManager::~FileManager()
     delete file;
 }
 
-void FileManager::read()
+void FileManager::shortRead()
+{
+    if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+
+}
+
+void FileManager::read(Project* project)
 {
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
         return;

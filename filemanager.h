@@ -21,11 +21,13 @@ public:
     FileManager(QString name);
     ~FileManager();
 
-    void read();
-    void writeNewProject(Project* project);
-    void removeProject(Project* project);
+    void shortRead(); //read only projects names to show them in the homepage boxes
 
-    bool fileExists();
+    void read(Project* project); //read the selected project
+    void writeNewProject(Project* project); //write the edited project to the file
+    void removeProject(Project* project);   //remove the project from the file
+
+    bool fileExists(); //checks if the file with the path exists
 };
 
 #endif // FILEMANAGER_H
