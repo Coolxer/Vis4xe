@@ -16,6 +16,8 @@
 
 #include <QLabel>
 
+#include "filemanager.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -30,6 +32,8 @@ private:
     ProjectsList* projectsList;
     Project* project;
 
+    FileManager fileManager;
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -40,6 +44,7 @@ private slots:
     void on_cancelAddingButton_clicked(); //caused after the user clicked the button in the addpage
     void on_editingQuitButton_clicked(); //caused after the user clicked the button in the editpage
 
+    void on_addStringButton_clicked();
 };
 
 #endif // MAINWINDOW_H

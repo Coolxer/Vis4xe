@@ -5,14 +5,9 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
     this->widget = widget;
     lcd = new Lcd(rows, cols, color, widget);
 
-    addString("Predkosc"); //added this strings for tests
-    addString("podzielnica");
-    addString("stol");
-    addString("kierunek");
-    addString("przyspieszenie");
-    addString("kroki");
-    addString("stopnie");
-    addString("liczba pior");
+    //addString("Predkosc"); //added this strings for tests
+    //addString("podzielnica");
+
 
     /*
     listWidget = new QListWidget(widget);

@@ -38,7 +38,7 @@ public:
     QString getName() { return name; }; // the latest thing to dispaly also on the home page
 
     void addString(QString string); //the function that will call after click the add button on the strings
-                      // menu. The procedure must get the value of the input fields
+                      // menu. The procedure must get the value of the input field
                       // This function is like a slot but not sure its good idea
                       // its adding the inputted string to the unPlacedStrings vector
 

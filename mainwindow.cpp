@@ -1,4 +1,4 @@
-    #include "mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -59,4 +59,13 @@ void MainWindow::on_cancelAddingButton_clicked()
 void MainWindow::on_editingQuitButton_clicked()
 {
     ui->statesStackedWidget->setCurrentIndex(0);
+}
+
+void MainWindow::on_addStringButton_clicked()
+{
+    QString string = ui->stringValueLine->text();
+
+    //checks if the string is not empty
+    //if(string.length() > 0)
+    project->addString(string);
 }

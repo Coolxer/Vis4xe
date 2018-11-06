@@ -31,7 +31,8 @@ SOURCES += \
         project.cpp \
         projectslist.cpp \
         unplacedbox.cpp \
-    cell.cpp
+    cell.cpp \
+    filemanager.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,7 +40,8 @@ HEADERS += \
         project.h \
         projectslist.h \
         unplacedbox.h \
-    cell.h
+    cell.h \
+    filemanager.h
 
 FORMS += \
         mainwindow.ui
