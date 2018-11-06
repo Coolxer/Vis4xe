@@ -14,6 +14,8 @@
 
 #include <QKeyEvent>
 
+#include <QLabel>
+
 namespace Ui {
 class MainWindow;
 }

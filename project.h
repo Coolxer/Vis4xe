@@ -11,6 +11,9 @@
 
 #include "unplacedbox.h"
 
+#include <QListWidget>
+#include <QListWidgetItem>
+
 class QWidget;
 
 class Project
@@ -26,6 +29,8 @@ private:
 
     QVector <UnPlacedBox*> unPlacedBoxes; //the vector of of the boxes that are not placed in ( they are on the strings side menu)
 
+    QListWidget* listWidget;
+
 public:
     Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
     ~Project();
@@ -37,12 +42,13 @@ public:
                       // This function is like a slot but not sure its good idea
                       // its adding the inputted string to the unPlacedStrings vector
 
-    bool writeOnLcd(QString string, QPoint point, int id); //the function which is drawing dropped text on LCD
-                       //returns true if its succeed (free space)
+    bool writeOnLcd(UnPlacedBox* box); //the function is drawing the text from unplacedBox
 
     bool check(QPoint point);
 
     Lcd* getLcd() { return lcd; };
+
+    void organizeBoxes(UnPlacedBox* box);
 };
 
 #endif // PROJECT_H

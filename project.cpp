@@ -9,17 +9,45 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
     addString("podzielnica");
     addString("stol");
     addString("kierunek");
+    addString("przyspieszenie");
+    addString("kroki");
+    addString("stopnie");
+    addString("liczba pior");
+
+    /*
+    listWidget = new QListWidget(widget);
+    listWidget->setGeometry(810, 100, 142, 350);
+    listWidget->setSpacing(5);
+    */
+
+    /*
+
+    QListWidgetItem* item = new QListWidgetItem(listWidget);
+
+    listWidget->addItem(item);
+
+    listWidget->setItemWidget(item, unPlacedBoxes[0]);
+
+    */
+
+    /*
+    listWidget->addItem(new QListWidgetItem(listWidget));
+    listWidget->item(0)->setSizeHint(QSize(132, 50));
+    listWidget->setItemWidget(listWidget->item(0), unPlacedBoxes[0]);
+    */
 }
 
 Project::~Project()
 {
     delete lcd;
+
+    delete listWidget;
 }
 
 void Project::addString(QString string)
 {
     if(unPlacedBoxes.length() >= 1)
-        unPlacedBoxes.push_back(new UnPlacedBox(this, widget, unPlacedBoxes.length(), string, QPoint(unPlacedBoxes.last()->geometry().x(), unPlacedBoxes.last()->geometry().y() + 50)));
+        unPlacedBoxes.push_back(new UnPlacedBox(this, widget, unPlacedBoxes.length(), string, QPoint(unPlacedBoxes.last()->x(), unPlacedBoxes.last()->y() + 50)));
     else
         unPlacedBoxes.push_back(new UnPlacedBox(this, widget, 0, string, QPoint(820, 100)));
 }
@@ -50,25 +78,54 @@ bool Project::check(QPoint point)
     return false;
 }
 
-bool Project::writeOnLcd(QString string, QPoint point, int id)
+bool Project::writeOnLcd(UnPlacedBox* box)
 {
-    if(check(point))
+    if(check(box->getLastPosition()))
     {
         //check if its possible to drop this there (overfill cover)
-        if(lcd->getDroppedCell() + string.length() <= lcd->getNumberOfCells())
+        if(lcd->getDroppedCell() + box->text().length() <= lcd->getNumberOfCells())
         {
-            for(int i = 0; i < string.length(); i++)
+            bool allCellsEnabled = true;
+
+            for(int i = 0; i < box->text().length(); i++)
             {
-                lcd->getCell(lcd->getDroppedCell() + i)->setText(string.at(i));
-                lcd->getCell(lcd->getDroppedCell() + i)->setId(id);
+                if(lcd->getCell(lcd->getDroppedCell() + i)->getId() != -1)
+                {
+                    allCellsEnabled = false;
+                    break;
+                }
+            }
+
+            if(allCellsEnabled)
+            {
+                for(int i = 0; i < box->text().length(); i++)
+                {
+                    lcd->getCell(lcd->getDroppedCell() + i)->setText(box->text().at(i));
+                    lcd->getCell(lcd->getDroppedCell() + i)->setId(box->getId());
+                    qDebug()<<lcd->getCell(lcd->getDroppedCell() + i)->getId();
+                }
+
+                organizeBoxes(box);
+                lcd->setDroppedCell(-1); //release the selected cell (reset) after operation confirmed
+
+                return true;
             }
         }
-
-        lcd->setDroppedCell(-1); //release the selected cell (reset) after operation confirmed
-        return true;
     }
-
    return false;
+}
 
+void Project::organizeBoxes(UnPlacedBox* box)
+{
+
+    QPoint boxStartPos = box->getStartPosition();
+
+    for(int i = box->getId() + 1; i < unPlacedBoxes.length(); i++)
+    {
+        if(unPlacedBoxes[i]->x() != 0)
+        {
+            unPlacedBoxes[i]->move(unPlacedBoxes[i]->x(), unPlacedBoxes[i]->y() - 50);
+        }
+    }
 }
 

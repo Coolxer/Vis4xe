@@ -14,6 +14,7 @@ class UnPlacedBox : public QLabel
 private:
     Project* project;
 
+    QPoint startPosition;
     QPoint offset;
     QPoint lastPosition;
 
@@ -29,6 +30,11 @@ protected:
 public:
     UnPlacedBox(Project* project, QWidget* parent, int id, QString text, QPoint pos);
     ~UnPlacedBox();
+
+    QPoint getStartPosition() { return startPosition; }
+    QPoint getLastPosition() { return lastPosition; }
+
+    int getId() { return id; }
 };
 
 #endif // UNPLACEDBOX_H

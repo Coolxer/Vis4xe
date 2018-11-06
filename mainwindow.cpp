@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //setAcceptDrops(true);
 
+
 }
 
 MainWindow::~MainWindow()
