@@ -418,12 +418,26 @@ color: #000000;</string>
        <string/>
       </property>
      </widget>
+     <widget class="QPushButton" name="editingQuitWithSaveButton">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>450</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Quit and save</string>
+      </property>
+     </widget>
      <zorder>editingHeader</zorder>
      <zorder>line</zorder>
      <zorder>stringsHeader</zorder>
      <zorder>editingQuitButton</zorder>
      <zorder>addStringButton</zorder>
      <zorder>stringValueLine</zorder>
+     <zorder>editingQuitWithSaveButton</zorder>
     </widget>
    </widget>
   </widget>

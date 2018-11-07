@@ -4,9 +4,6 @@ FileManager::FileManager(QString name)
 {
     file = new QFile(name);
 
-    //if(!fileExists())
-
-
 }
 
 FileManager::~FileManager()
@@ -19,7 +16,10 @@ void FileManager::shortRead()
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
         return;
 
-
+    while(!file->atEnd())
+    {
+        //if(file.getLine == "#name") something like this
+    }
 }
 
 void FileManager::read(Project* project)
@@ -43,6 +43,11 @@ void FileManager::writeNewProject(Project* project)
 
     //write there everything like name, color, cells values
     //out << "The magic number is: " << 49 << "\n";
+}
+
+void FileManager::updateProject(Project* project)
+{
+
 }
 
 void FileManager::removeProject(Project* project)

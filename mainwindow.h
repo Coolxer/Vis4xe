@@ -27,8 +27,7 @@ class MainWindow : public QMainWindow
 private:
     Ui::MainWindow *ui;
 
-    ProjectsList* projectsList;
-    Project* project;
+    ProjectsList projectsList;
 
     FileManager fileManager;
 
@@ -43,6 +42,7 @@ private slots:
     void on_editingQuitButton_clicked(); //caused after the user clicked the button in the editpage
 
     void on_addStringButton_clicked();
+    void on_editingQuitWithSaveButton_clicked();
 };
 
 #endif // MAINWINDOW_H
