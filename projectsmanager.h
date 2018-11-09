@@ -4,29 +4,39 @@
 #include <QVector>
 
 #include "project.h"
+#include "projectnamebox.h"
 
-#include "filemanager.h"
+class QWidget;
 
-class ProjectsList
+
+class ProjectsManager
 {
 private:
-    FileManager fileManager;
     QVector <Project*> list;
-
-    QVector <QString*> names;
 
     int index = -1; //the index of the current selected project // -1 means none
 
+    QWidget* widget;
+
+    QVector <ProjectNameBox*> boxes;
+
 public:
-    ProjectsList();
+    ProjectsManager(){}
+    ProjectsManager(QWidget* widget);
+    ~ProjectsManager();
 
     void addProject(Project* project);
-    void saveProject(Project* project);
     void removeProject(Project* project);
 
     Project* getCurrentProject() { return list[index]; } //returns the pointer to the current project
 
     void setCurrentProject(Project* project); //sets the index of the current project
+
+    QVector <Project*> getList() { return list; }
+
+    QWidget* getWidget() { return widget; }
+
+    QVector <ProjectNameBox*> getBoxes() { return boxes; }
 
 };
 

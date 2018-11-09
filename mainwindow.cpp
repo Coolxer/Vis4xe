@@ -10,11 +10,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statesStackedWidget->setCurrentIndex(0);
 
     //setAcceptDrops(true);
+
+    projectsList = new ProjectsList(ui->editPage);
+    fileManager = new FileManager(projectsList);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete projectsList;
+    delete fileManager;
 }
 
 void MainWindow::on_addNewButton_clicked()
@@ -28,7 +33,7 @@ void MainWindow::on_finalAddButton_clicked()
     unsigned short rows = ui->rowsLineEdit->text().toShort();
     unsigned short cols = ui->colsLineEdit->text().toShort();
 
-    projectsList.addProject(new Project(name, rows, cols, Qt::red, ui->editPage));
+    projectsList->addProject(new Project(name, rows, cols, Qt::red, ui->editPage));
 
     ui->statesStackedWidget->setCurrentIndex(2);
 }

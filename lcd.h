@@ -76,6 +76,9 @@ public:
     Cell* getCell(int i) { return cells[i]; }
 
     int getNumberOfCells() { return numberOfCells; }
+
+    int getRowsAmount() { return rows; }
+    int getColsAmount() { return cols; }
 };
 
 #endif // LCD_H

@@ -124,3 +124,11 @@ void Project::organizeBoxes(UnPlacedBox* box)
     }
 }
 
+void Project::prepareToSave()
+{
+    jsonObject["name"] = name;
+    jsonObject["rows"] = lcd->getRowsAmount();
+    jsonObject["cols"] = lcd->getColsAmount();
+}
+
+

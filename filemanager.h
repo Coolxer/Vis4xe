@@ -1,13 +1,21 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
+#include <QtDebug>
+
 #include <QFile>
 #include <QFileInfo>
 #include <QFileDialog>
 
 #include <QTextStream>
-
 #include <QString>
+
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonArray>
+
+class ProjectsList;
 
 class Project;
 
@@ -15,11 +23,25 @@ class FileManager
 {
 private:
     QFile* file;
-    QString path = "./projects.txt";
+    QFileDialog* fileDialog;
+    QString projectsInfoPath = "C:/Users/lukasz/Desktop/projects.json";
+
+    QJsonDocument doc;
+
+    QByteArray data;
+    QJsonObject obj;
+    QJsonValue value;
+
+    QJsonArray jArray;
+
+    //QJsonDocument doc;
+    //QJsonObject obj;
+
+    ProjectsList* projectsList;
 
 public:
     FileManager(){}
-    FileManager(QString name);
+    FileManager(ProjectsList* projectsList);
     ~FileManager();
 
     void shortRead(); //read only projects names to show them in the homepage boxes

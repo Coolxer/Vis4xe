@@ -5,9 +5,6 @@
 #include <QString>
 #include <QColor>
 
-#include "projectslist.h"
-#include "project.h"
-
 #include <QWidget>
 #include <QPushButton>
 #include <QGridLayout>
@@ -15,6 +12,9 @@
 #include <QKeyEvent>
 
 #include <QLabel>
+
+#include "projectslist.h"
+#include "filemanager.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,9 +27,9 @@ class MainWindow : public QMainWindow
 private:
     Ui::MainWindow *ui;
 
-    ProjectsList projectsList;
+    ProjectsList* projectsList;
 
-    FileManager fileManager;
+    FileManager* fileManager;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

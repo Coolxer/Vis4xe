@@ -8,10 +8,13 @@ class ProjectNameBox : public QLabel
 {
 private:
     int id;
+    QString name;
+    QString path;
 protected:
     void mousePressEvent(QMouseEvent* event);
 public:
-    ProjectNameBox(QWidget* parent, QString text, int id);
+    ProjectNameBox() {}
+    ProjectNameBox(QWidget* parent, QString name, QString path, int id);
 };
 
 #endif // PROJECTNAMEBOX_H

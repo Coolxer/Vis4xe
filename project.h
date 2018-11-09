@@ -14,6 +14,8 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 
+#include <QJsonObject>
+
 class QWidget;
 
 class Project
@@ -30,6 +32,8 @@ private:
     QVector <UnPlacedBox*> unPlacedBoxes; //the vector of of the boxes that are not placed in ( they are on the strings side menu)
 
     QListWidget* listWidget;
+
+    QJsonObject jsonObject;
 
 public:
     Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
@@ -49,6 +53,8 @@ public:
     Lcd* getLcd() { return lcd; };
 
     void organizeBoxes(UnPlacedBox* box);
+
+    void prepareToSave();
 };
 
 #endif // PROJECT_H
