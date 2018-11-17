@@ -1,28 +1,27 @@
 #include "projectsmanager.h"
 
-ProjectsManager::ProjectsManager(QWidget* widget)
+ProjectsManager::ProjectsManager(QWidget* homePage, QWidget* editPage) : fileManager(homePage, editPage)
 {
-    this->widget = widget;
+    this->homePage = homePage;
+    this->editPage = editPage;
+
+    boxes = fileManager.shortRead();
+
+   // for(int i = 0; i <boxes.length(); i++)
+   //     boxes[i]->showPath();
 }
 
 ProjectsManager::~ProjectsManager()
 {
-    delete widget;
+    delete currentProject;
+    delete homePage;
+
+    delete editPage;
 }
 
-void ProjectsManager::addProject(Project* project)
+void ProjectsManager::loadProject(QString path)
 {
-    list.push_back(project);
-}
-
-
-void ProjectsManager::removeProject(Project* project)
-{
-    //fileManager.removeProject(project);
-    //list.removeAt()
-}
-
-void ProjectsManager::setCurrentProject(Project* project)
-{
-    index = list.indexOf(project, 1);
+    qDebug()<<"clicked";
+    //currentProject = fileManager.read(path);
+    fileManager.readProject(path);
 }

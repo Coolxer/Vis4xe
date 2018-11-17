@@ -13,8 +13,7 @@
 
 #include <QLabel>
 
-#include "projectslist.h"
-#include "filemanager.h"
+#include "projectsmanager.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,9 +26,7 @@ class MainWindow : public QMainWindow
 private:
     Ui::MainWindow *ui;
 
-    ProjectsList* projectsList;
-
-    FileManager* fileManager;
+    ProjectsManager* projectsManager;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

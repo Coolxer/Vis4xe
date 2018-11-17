@@ -1,79 +1,77 @@
 #include "filemanager.h"
 
-#include "projectslist.h"
+#include "projectnamebox.h"
+#include "project.h"
 
-FileManager::FileManager(ProjectsList* projectsList)
+FileManager::FileManager(QWidget* homePage, QWidget* editPage)
 {
-    file = new QFile(projectsInfoPath);
-
-    this->projectsList = projectsList;
-
-    //shortRead();
-    if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
-        return;
-
-    data = file->readAll();
-    doc = doc.fromJson(data);
-    obj = doc.object();
-    value = obj.value("projects");
-
-    jArray = value.toArray();
-
-    //QJsonValue value =
-
-    QJsonObject jObj;
-
-    qDebug()<<projectsList->getList().length();
-
-    foreach (const QJsonValue & v, jArray)
-    {
-        jObj = v.toObject();
-        //qDebug()<<v.toObject().value("name");
-        projectsList->getList().push_back(new Project(jObj.value("name").toString(), jObj.value("rows").toInt(), jObj.value("cols").toInt(), QColor(255, 255, 255, 0), projectsList->getWidget()));
-    }
-
-    qDebug()<<projectsList->getList().length();
+    this->homePage = homePage;
+    this->editPage = editPage;
 }
 
 FileManager::~FileManager()
 {
-    delete file;
     delete fileDialog;
-
-    delete projectsList;
+    delete homePage;
+    delete editPage;
 }
 
-/*
-void FileManager::shortRead()
+QVector <ProjectNameBox*> FileManager::shortRead()
 {
-    if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
-        return;
+    QVector <ProjectNameBox*> boxes;
 
-    while(!file->atEnd())
-    {
-        QByteArray line = file->readLine();
-    }
+    projectsFile.setFileName("C:/Users/lukasz/Desktop/projects.json");
+
+    if(!projectsFile.open(QIODevice::ReadOnly | QIODevice::Text))
+        qDebug()<<"failed to open file";
+
+    QByteArray data = projectsFile.readAll();
+
+    projectsFile.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+
+    QJsonArray array = doc.object()["projects"].toArray();
+
+    for(int i = 0; i < array.size(); i++)
+        boxes.push_back(new ProjectNameBox(homePage, array[i].toObject().value("name").toString(), array[i].toObject().value("path").toString(), QPoint(20 + (220) *i, 100)));
+
+    return boxes;
 }
-*/
 
-void FileManager::read(Project* project)
+Project* FileManager::readProject(QString path)
 {
-    if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
-        return;
+    QFile file(path);
+
+    Project* project = nullptr;
+
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+       qDebug()<<"failed to Open file";
     else
-    {
-        QByteArray data = file->readAll();
-        QJsonDocument doc = doc.fromJson(data);
-        QJsonObject obj = doc.object();
-        QJsonValue value = obj.value("projects");
+       qDebug()<<"Opened file";
 
-        QJsonArray jArray = value.toArray();
+    //return nullptr;
 
-        qDebug()<<jArray;
-    }
+    QByteArray data = file.readAll();
+
+    file.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+
+    QJsonObject obj = doc.object();
+
+    QJsonValue name = obj.value("name");
+    QJsonValue rows = obj.value("rows");
+    QJsonValue cols = obj.value("cols");
+    QJsonValue color = obj.value("color");
+
+    QJsonArray cellsArray = obj.value("cells").toArray();
+    QJsonArray unplacedBoxes = obj.value("unplaced").toArray();
+
+    return project;
 }
 
-void FileManager::writeNewProject(Project* project)
+void FileManager::saveProject(Project* project)
 {
     //file = fileDialog->getOpenFileName(projectsList->getWidget(), tr("save project"))
 
@@ -88,23 +86,19 @@ void FileManager::writeNewProject(Project* project)
     */
 }
 
-void FileManager::updateProject(Project* project)
+void FileManager::removeProject(QString path)
 {
 
-}
-
-void FileManager::removeProject(Project* project)
-{
-    if (!file->open(QIODevice::WriteOnly | QIODevice::Text))
-        return;
 }
 
 bool FileManager::fileExists()
 {
-    QFileInfo check_file(projectsInfoPath);
+    /*
+    QFileInfo check_file(path);
 
     if(check_file.exists() && check_file.isFile())
         return true;
 
+    */
     return false;
 }

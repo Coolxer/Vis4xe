@@ -15,42 +15,33 @@
 #include <QJsonValue>
 #include <QJsonArray>
 
-class ProjectsList;
+#include <QVector>
 
+class ProjectNameBox;
 class Project;
 
 class FileManager
 {
 private:
-    QFile* file;
+    QFile projectsFile;
+    QFile currentProjectFile;
     QFileDialog* fileDialog;
-    QString projectsInfoPath = "C:/Users/lukasz/Desktop/projects.json";
 
-    QJsonDocument doc;
-
-    QByteArray data;
-    QJsonObject obj;
-    QJsonValue value;
-
-    QJsonArray jArray;
-
-    //QJsonDocument doc;
-    //QJsonObject obj;
-
-    ProjectsList* projectsList;
+    QWidget* homePage;
+    QWidget* editPage;
 
 public:
     FileManager(){}
-    FileManager(ProjectsList* projectsList);
+    FileManager(QWidget* homePage, QWidget* editPage);
     ~FileManager();
 
-    void shortRead(); //read only projects names to show them in the homepage boxes
-    void read(Project* project); //read the selected project
+    QVector <ProjectNameBox*> shortRead();//read only projects names and paths to show them in the homepage boxes
 
-    void writeNewProject(Project* project); //write the edited project to the file
-    void updateProject(Project* project); //write the edited project to the file
+    Project* readProject(QString path); //read the selected project
 
-    void removeProject(Project* project);   //remove the project from the file
+    void saveProject(Project* project); //write the project to file
+
+    void removeProject(QString path);   //remove the project from the file
 
     bool fileExists(); //checks if the file with the path exists
 };

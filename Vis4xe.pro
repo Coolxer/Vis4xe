@@ -29,21 +29,21 @@ SOURCES += \
         mainwindow.cpp \
         lcd.cpp \
         project.cpp \
-        projectslist.cpp \
         unplacedbox.cpp \
-    cell.cpp \
-    filemanager.cpp \
-    projectnamebox.cpp
+        cell.cpp \
+        filemanager.cpp \
+        projectnamebox.cpp \
+        projectsmanager.cpp
 
 HEADERS += \
         mainwindow.h \
         lcd.h \
         project.h \
-        projectslist.h \
         unplacedbox.h \
-    cell.h \
-    filemanager.h \
-    projectnamebox.h
+        cell.h \
+        filemanager.h \
+        projectnamebox.h \
+        projectsmanager.h
 
 FORMS += \
         mainwindow.ui
