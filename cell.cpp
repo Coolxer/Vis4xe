@@ -9,6 +9,15 @@ Cell::Cell(Lcd* lcd, int index, QColor color) : QLabel(lcd)
     this->color = color;
 }
 
+Cell::Cell(Lcd* lcd, int index, QColor color, int id) : QLabel(lcd)
+{
+    this->lcd = lcd;
+    this->index = index;
+    this->color = color;
+
+    this->id = id;
+}
+
 Cell::~Cell()
 {
     delete lcd;

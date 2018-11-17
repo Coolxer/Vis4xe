@@ -32,6 +32,13 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
     */
 }
 
+Project::Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget, QVector <Cell*> cells, QVector <UnPlacedBox*> unPlacedBoxes)
+{
+    this->widget = widget;
+    this->unPlacedBoxes = unPlacedBoxes;
+    lcd = new Lcd(rows, cols, color, widget, cells);
+}
+
 Project::~Project()
 {
     delete lcd;

@@ -26,6 +26,26 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget
     this->setFocusPolicy(Qt::ClickFocus);
 }
 
+Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget, QVector <Cell*> cells) : QWidget(widget)
+{
+    this->rows = rows;
+    this->cols = cols;
+    this->color = color;
+
+    this->widget = widget;
+
+    this->cells = cells;
+
+    setGeometry(QRect(145, 195, 505, 145));
+    setStyleSheet("QWidget{ background-color:  #66c2ff; }");
+
+    //initCells();
+
+    //this->setMouseTracking(true);
+
+    this->setFocusPolicy(Qt::ClickFocus);
+}
+
 Lcd::~Lcd()
 {
     delete widget;

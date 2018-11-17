@@ -36,7 +36,9 @@ private:
     QJsonObject jsonObject;
 
 public:
+    Project(){};
     Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
+    Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget, QVector <Cell*> cells, QVector <UnPlacedBox*> unPlacedBoxes);
     ~Project();
 
     QString getName() { return name; }; // the latest thing to dispaly also on the home page

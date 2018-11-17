@@ -68,6 +68,21 @@ Project* FileManager::readProject(QString path)
     QJsonArray cellsArray = obj.value("cells").toArray();
     QJsonArray unplacedBoxes = obj.value("unplaced").toArray();
 
+    QVector <Cell*> cells;
+    QVector <UnPlacedBox*> unPlacedBoxes;
+
+    for(int i = 0; i < cellsArray.size(); i++)
+    {
+       cells.push_back(cellsArray[i].toObject().value())
+    }
+
+    for(int i = 0; i < unplacedBoxes.size(); i++)
+    {
+
+    }
+
+    //project = new Project(name.toString(), rows.toInt(), cols.toInt(), color.toString(), editPage);
+
     return project;
 }
 
