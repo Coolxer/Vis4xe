@@ -8,6 +8,7 @@
 #include <QPoint>
 
 class Project;
+class QWidget;
 
 class UnPlacedBox : public QLabel
 {
@@ -20,7 +21,7 @@ private:
 
     QLabel* grabBox;
 
-    int id;
+    int index;
 
 protected:
     void mousePressEvent(QMouseEvent* event);
@@ -34,7 +35,7 @@ public:
     QPoint getStartPosition() { return startPosition; }
     QPoint getLastPosition() { return lastPosition; }
 
-    int getId() { return id; }
+    int getIndex() { return index; }
 };
 
 #endif // UNPLACEDBOX_H

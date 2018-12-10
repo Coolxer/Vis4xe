@@ -9,6 +9,7 @@
 
 #include <QDebug>
 
+class QWidget;
 class ProjectsManager;
 
 class ProjectNameBox : public QLabel

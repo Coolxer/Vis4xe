@@ -2,10 +2,10 @@
 
 #include "project.h"
 
-UnPlacedBox::UnPlacedBox(Project* project, QWidget* parent, int id, QString text, QPoint pos) : QLabel (parent) //?is this needed?
+UnPlacedBox::UnPlacedBox(Project* project, QWidget* parent, int index, QString text, QPoint pos) : QLabel (parent) //?is this needed?
 {
     this->project = project;
-    this->id = id;
+    this->index = index;
     startPosition = pos;
 
     setText(text);
@@ -21,7 +21,7 @@ UnPlacedBox::UnPlacedBox(Project* project, QWidget* parent, int id, QString text
 UnPlacedBox::~UnPlacedBox()
 {
     delete project;
-    //delete grabBox;
+    delete grabBox;
 }
 
 void UnPlacedBox::mousePressEvent(QMouseEvent* event)

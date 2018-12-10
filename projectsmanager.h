@@ -1,12 +1,21 @@
 #ifndef PROJECTSLIST_H
 #define PROJECTSLIST_H
 
+#include <QByteArray>
 #include <QVector>
+
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonValue>
 
 #include "filemanager.h"
 
 #include "project.h"
-#include "projectnamebox.h"
+
+class QWidget;
+class ProjectNameBox;
+class QStackedWidget;
 
 class ProjectsManager
 {
@@ -15,8 +24,7 @@ private:
 
     QWidget* homePage;
     QWidget* editPage;
-
-    int currentProjectIndex = -1; //the index of the current selected project // -1 means none
+    QStackedWidget* stackedWidget;
 
     QVector <ProjectNameBox*> boxes;
 
@@ -24,7 +32,7 @@ private:
 
 public:
     ProjectsManager(){}
-    ProjectsManager(QWidget* homePage, QWidget* editPage);
+    ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedWidget* stackedWidget);
     ~ProjectsManager();
 
     Project* getCurrentProject() { return currentProject; } //returns the pointer to the current project
@@ -32,7 +40,7 @@ public:
     QVector <ProjectNameBox*> getBoxes() { return boxes; }
 
     void loadProject(QString path);
-
+    void createProject(QString name, unsigned short rows, unsigned short cols, QColor color);
 };
 
 #endif // PROJECTSLIST_H

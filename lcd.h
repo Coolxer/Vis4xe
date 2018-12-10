@@ -7,8 +7,6 @@
 
 #include <QDebug>
 
-#include "cell.h"
-
 #include <QMouseEvent>
 
 #include <QGridLayout>
@@ -17,6 +15,7 @@
 
 #include <QKeyEvent>
 
+#include "cell.h"
 
 class Lcd : public QWidget
 {
@@ -24,8 +23,6 @@ private:
     unsigned short rows; //number of lcd rows
     unsigned short cols; //number of lcd cols
     QColor color; //color of the scren ( cells color)
-
-    QWidget* widget; //the pointer to main widget which on the lcd is drawing
 
     int numberOfCells = 0; //the helping variable to storing number of cells ( rows * cols)
 
@@ -58,7 +55,6 @@ protected:
 public:
     Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
     Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget, QVector <Cell*> cells);
-    ~Lcd();
 
     //QVector <Cell*> getCells() { return cells; }; //getter that allows to read cells
 
@@ -80,6 +76,10 @@ public:
 
     int getRowsAmount() { return rows; }
     int getColsAmount() { return cols; }
+
+    void appendCells(QVector<Cell*> cells) { this->cells = cells; }
+
+    void loadCells(QVector<Cell*> cells) { this->cells = cells; }
 };
 
 #endif // LCD_H

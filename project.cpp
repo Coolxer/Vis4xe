@@ -3,55 +3,23 @@
 Project::Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget)
 {
     this->widget = widget;
-    lcd = new Lcd(rows, cols, color, widget);
-
-    //addString("Predkosc"); //added this strings for tests
-    //addString("podzielnica");
-
-
-    /*
-    listWidget = new QListWidget(widget);
-    listWidget->setGeometry(810, 100, 142, 350);
-    listWidget->setSpacing(5);
-    */
-
-    /*
-
-    QListWidgetItem* item = new QListWidgetItem(listWidget);
-
-    listWidget->addItem(item);
-
-    listWidget->setItemWidget(item, unPlacedBoxes[0]);
-
-    */
-
-    /*
-    listWidget->addItem(new QListWidgetItem(listWidget));
-    listWidget->item(0)->setSizeHint(QSize(132, 50));
-    listWidget->setItemWidget(listWidget->item(0), unPlacedBoxes[0]);
-    */
-}
-
-Project::Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget, QVector <Cell*> cells, QVector <UnPlacedBox*> unPlacedBoxes)
-{
-    this->widget = widget;
-    this->unPlacedBoxes = unPlacedBoxes;
-    lcd = new Lcd(rows, cols, color, widget, cells);
+    lcd = new Lcd(rows, cols, color, this->widget);
 }
 
 Project::~Project()
 {
+    delete widget;
     delete lcd;
-
-    delete listWidget;
 }
 
 void Project::addString(QString string)
 {
-    if(unPlacedBoxes.length() >= 1)
+    if(unPlacedBoxes.length() > 0)
         unPlacedBoxes.push_back(new UnPlacedBox(this, widget, unPlacedBoxes.length(), string, QPoint(unPlacedBoxes.last()->x(), unPlacedBoxes.last()->y() + 50)));
     else
         unPlacedBoxes.push_back(new UnPlacedBox(this, widget, 0, string, QPoint(820, 100)));
+
+    unPlacedBoxes.last()->show();
 }
 
 bool Project::check(QPoint point)
@@ -103,7 +71,7 @@ bool Project::writeOnLcd(UnPlacedBox* box)
                 for(int i = 0; i < box->text().length(); i++)
                 {
                     lcd->getCell(lcd->getDroppedCell() + i)->setText(box->text().at(i));
-                    lcd->getCell(lcd->getDroppedCell() + i)->setId(box->getId());
+                    lcd->getCell(lcd->getDroppedCell() + i)->setId(box->getIndex());
                     qDebug()<<lcd->getCell(lcd->getDroppedCell() + i)->getId();
                 }
 
@@ -122,7 +90,7 @@ void Project::organizeBoxes(UnPlacedBox* box)
 
     QPoint boxStartPos = box->getStartPosition();
 
-    for(int i = box->getId() + 1; i < unPlacedBoxes.length(); i++)
+    for(int i = box->getIndex() + 1; i < unPlacedBoxes.length(); i++)
     {
         if(unPlacedBoxes[i]->x() != 0)
         {
@@ -136,6 +104,19 @@ void Project::prepareToSave()
     jsonObject["name"] = name;
     jsonObject["rows"] = lcd->getRowsAmount();
     jsonObject["cols"] = lcd->getColsAmount();
+}
+
+void Project::loadUnplacedBoxes(QVector<UnPlacedBox*> unPlacedBoxes)
+{
+    this->unPlacedBoxes = unPlacedBoxes;
+
+    for(int i = 0; i <unPlacedBoxes.length(); i++)
+        unPlacedBoxes[i]->show();
+}
+
+void Project::loadCells(QVector<Cell*> cells)
+{
+    lcd->loadCells(cells);
 }
 
 

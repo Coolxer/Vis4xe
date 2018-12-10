@@ -9,9 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->statesStackedWidget->setCurrentIndex(0);
 
-    //setAcceptDrops(true);
-
-    projectsManager = new ProjectsManager(ui->homePage, ui->editPage);
+    projectsManager = new ProjectsManager(ui->homePage, ui->editPage, ui->statesStackedWidget);
 }
 
 MainWindow::~MainWindow()
@@ -31,7 +29,10 @@ void MainWindow::on_finalAddButton_clicked()
     unsigned short rows = ui->rowsLineEdit->text().toShort();
     unsigned short cols = ui->colsLineEdit->text().toShort();
 
-    //projectsManager->addProject(new Project(name, rows, cols, Qt::red, ui->editPage));
+    //need to be validators here
+
+    //color there should be a circle switch
+    projectsManager->createProject(name, rows, cols, Qt::red);
 
     ui->statesStackedWidget->setCurrentIndex(2);
 }
@@ -43,12 +44,12 @@ void MainWindow::on_cancelAddingButton_clicked()
 
 void MainWindow::on_editingQuitButton_clicked()
 {
+    projectsManager->getCurrentProject()->del();
     ui->statesStackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::on_editingQuitWithSaveButton_clicked()
 {
-     //projectsList.saveProject()
      ui->statesStackedWidget->setCurrentIndex(0);
 }
 
@@ -57,7 +58,7 @@ void MainWindow::on_addStringButton_clicked()
     QString string = ui->stringValueLine->text();
 
     //checks if the string is not empty
-    //if(string.length() > 0)
-    //project->addString(string);
+    if(string.length() > 0)
+        projectsManager->getCurrentProject()->addString(string);
 }
 

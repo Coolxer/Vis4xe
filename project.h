@@ -7,16 +7,12 @@
 #include "lcd.h"
 #include <QVector>
 
-#include <QStringList>
-
 #include "unplacedbox.h"
-
-#include <QListWidget>
-#include <QListWidgetItem>
 
 #include <QJsonObject>
 
 class QWidget;
+class Cell;
 
 class Project
 {
@@ -26,22 +22,18 @@ private:
 
     Lcd* lcd; //the pointer / dynamic object Lcd
 
-    QStringList placedStrings; //the vector of the strings that are placed in
     //QStringList unPlacedStrings; //the vector of the strings that are not placed in yet
 
     QVector <UnPlacedBox*> unPlacedBoxes; //the vector of of the boxes that are not placed in ( they are on the strings side menu)
 
-    QListWidget* listWidget;
-
     QJsonObject jsonObject;
 
 public:
-    Project(){};
+    Project(){}
     Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
-    Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget, QVector <Cell*> cells, QVector <UnPlacedBox*> unPlacedBoxes);
     ~Project();
 
-    QString getName() { return name; }; // the latest thing to dispaly also on the home page
+    QString getName() { return name;  }// the latest thing to dispaly also on the home page
 
     void addString(QString string); //the function that will call after click the add button on the strings
                       // menu. The procedure must get the value of the input field
@@ -52,11 +44,16 @@ public:
 
     bool check(QPoint point);
 
-    Lcd* getLcd() { return lcd; };
+    Lcd* getLcd() { return lcd; }
 
     void organizeBoxes(UnPlacedBox* box);
 
     void prepareToSave();
+
+    void loadUnplacedBoxes(QVector <UnPlacedBox*> unPlacedBoxes);
+    void loadCells(QVector<Cell*> cells);
+
+    void del() { delete lcd; }
 };
 
 #endif // PROJECT_H

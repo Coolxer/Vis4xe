@@ -2,16 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QWidget>
 #include <QString>
 #include <QColor>
-
-#include <QWidget>
-#include <QPushButton>
-#include <QGridLayout>
-
-#include <QKeyEvent>
-
-#include <QLabel>
 
 #include "projectsmanager.h"
 

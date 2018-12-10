@@ -7,20 +7,38 @@ Cell::Cell(Lcd* lcd, int index, QColor color) : QLabel(lcd)
     this->lcd = lcd;
     this->index = index;
     this->color = color;
+
+    setMinimumSize(20, 30);
+    setMaximumSize(20, 30);
+
+    setAlignment(Qt::AlignCenter);
+
+    QString styles = "QLabel{ background-color: %1; }";
+    setStyleSheet(styles.arg(color.name()));
 }
 
-Cell::Cell(Lcd* lcd, int index, QColor color, int id) : QLabel(lcd)
+Cell::Cell(Lcd* lcd, int index, QColor color, int id, QString value) : QLabel(lcd)
 {
     this->lcd = lcd;
     this->index = index;
     this->color = color;
 
     this->id = id;
+
+    setMinimumSize(20, 30);
+    setMaximumSize(20, 30);
+
+    setAlignment(Qt::AlignCenter);
+
+    QString styles = "QLabel{ background-color: %1; }";
+    setStyleSheet(styles.arg(color.name()));
+
+    setText(value);
 }
 
 Cell::~Cell()
 {
-    delete lcd;
+    //delete lcd;
 }
 
 void Cell::enterEvent(QEvent*)

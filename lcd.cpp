@@ -2,53 +2,21 @@
 
 Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget) : QWidget (widget)
 {
-
     this->rows = rows;
     this->cols = cols;
     this->color = color;
 
-    this->widget = widget;
+    int width = (this->cols * 20) + (this->cols + 1) * 5;
+    int height = (this->rows * 30) + (this->rows + 1) * 5;
 
-    /* *********** */
-
-    //for not typing in all the time during tests and developing
-    this->rows = 4;
-    this->cols = 20;
-
-    /* ************* */
-
-    setGeometry(QRect(145, 195, 505, 145));
-    setStyleSheet("QWidget{ background-color:  #66c2ff; }");
+    setGeometry(QRect(145, 195, width, height));
+    setStyleSheet("QWidget{ background-color:  #FFFFFF; }");
 
     initCells();
 
     //this->setMouseTracking(true);
     this->setFocusPolicy(Qt::ClickFocus);
-}
 
-Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget, QVector <Cell*> cells) : QWidget(widget)
-{
-    this->rows = rows;
-    this->cols = cols;
-    this->color = color;
-
-    this->widget = widget;
-
-    this->cells = cells;
-
-    setGeometry(QRect(145, 195, 505, 145));
-    setStyleSheet("QWidget{ background-color:  #66c2ff; }");
-
-    //initCells();
-
-    //this->setMouseTracking(true);
-
-    this->setFocusPolicy(Qt::ClickFocus);
-}
-
-Lcd::~Lcd()
-{
-    delete widget;
 }
 
 void Lcd::initCells()
@@ -57,14 +25,11 @@ void Lcd::initCells()
     {
         for(int j = 0; j < cols; j++)
         {
-            Cell* cell = new Cell(this, numberOfCells, QColor(255, 255, 255, 0));
+            Cell* cell = new Cell(this, numberOfCells, this->color);
 
-            cell->setMinimumSize(20, 30);
-            cell->setMaximumSize(20, 30);
             cell->setGeometry(QRect((25 * j) + 5, (i * 35) + 5, 20, 30));
 
-            cell->setStyleSheet("QLabel { background-color: #0099ff; color: #FFFFFF; font-size: 25px;}");
-            cell->setAlignment(Qt::AlignCenter);
+            //cell->setStyleSheet("QLabel { color: #FFFFFF; font-size: 25px;}");
 
             cells.push_back(cell);
             numberOfCells++;

@@ -31,7 +31,7 @@ protected:
 public:
     Cell(){}
     Cell(Lcd* lcd, int index, QColor color);
-    Cell(Lcd* lcd, int index, QColor color, int id);
+    Cell(Lcd* lcd, int index, QColor color, int id, QString value);
 
     ~Cell();
 
