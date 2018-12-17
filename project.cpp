@@ -85,6 +85,8 @@ bool Project::writeOnLcd(UnPlacedBox* box)
                 organizeBoxes(box);
                 lcd->setDroppedCell(-1); //release the selected cell (reset) after operation confirmed
 
+                unPlacedBoxes.removeAt(box->getId());
+
                 return true;
             }
         }

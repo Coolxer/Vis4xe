@@ -60,6 +60,9 @@ void MainWindow::on_addStringButton_clicked()
 
     //checks if the string is not empty
     if(string.length() > 0)
+    {
         projectsManager->getCurrentProject()->addString(string);
+        ui->stringValueLine->clear();
+    }
 }
 
