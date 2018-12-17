@@ -120,6 +120,8 @@ void ProjectsManager::saveProject()
 
     doc.setObject(obj);
 
-    fileManager->saveProject(&doc);
+    qDebug()<<currentProject->getName();
+
+    fileManager->saveProject(&doc, currentProject->getName());
 }
 

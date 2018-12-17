@@ -2,6 +2,7 @@
 
 Project::Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget)
 {
+    this->name = name;
     this->widget = widget;
     lcd = new Lcd(rows, cols, color, this->widget);
 }

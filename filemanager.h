@@ -32,7 +32,7 @@ public:
 
     QByteArray readProject(QString path); //read the selected project
 
-    void saveProject(QJsonDocument* project); //write the project to file
+    void saveProject(QJsonDocument* project, QString name); //write the project to file
 
     void removeProject(QString path);   //remove the project from the file
 

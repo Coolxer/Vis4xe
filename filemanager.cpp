@@ -40,10 +40,10 @@ QByteArray FileManager::readProject(QString path)
     return data;
 }
 
-void FileManager::saveProject(QJsonDocument* project)
+void FileManager::saveProject(QJsonDocument* project, QString name)
 {
     QString fileName = QFileDialog::getSaveFileName(widget, "Open File",
-                                                    "screenLcd",
+                                                    name,
                                                     "Json (*.json);;All Files (*)");
     QFile file(fileName);
 

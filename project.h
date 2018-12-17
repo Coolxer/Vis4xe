@@ -33,7 +33,7 @@ public:
     Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
     ~Project();
 
-    QString getName() { return name;  }// the latest thing to dispaly also on the home page
+    QString getName() { return name; }// the latest thing to dispaly also on the home page
     int getRows(){ return lcd->getRowsAmount(); }
     int getCols(){ return lcd->getColsAmount(); }
     QString getColor() { return lcd->getColor().name(); }
