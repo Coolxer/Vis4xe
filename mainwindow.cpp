@@ -50,7 +50,8 @@ void MainWindow::on_editingQuitButton_clicked()
 
 void MainWindow::on_editingQuitWithSaveButton_clicked()
 {
-     ui->statesStackedWidget->setCurrentIndex(0);
+     projectsManager->saveProject();
+     ui->statesStackedWidget->setCurrentIndex(0);   
 }
 
 void MainWindow::on_addStringButton_clicked()

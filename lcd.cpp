@@ -37,6 +37,27 @@ void Lcd::initCells()
     }
 }
 
+void Lcd::organize()
+{
+    int m = 0;
+
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < cols; j++)
+        {
+            cells[m]->setGeometry(QRect((25 * j) + 5, (i * 35) + 5, 20, 30));
+            m++;
+        }
+    }
+
+}
+
+void Lcd::loadCells(QVector <Cell*> cells)
+{
+    this->cells = cells;
+    organize();
+}
+
 void Lcd::keyPressEvent(QKeyEvent* event)
 {
     if(editMode)

@@ -13,15 +13,19 @@
 
 #include <QJsonDocument>
 
+class QWidget;
+
 class FileManager
 {
 private:
     QFile projectsFile;
     QFile currentProjectFile;
-    QFileDialog* fileDialog;
+
+    QWidget* widget;
 
 public:
-    FileManager(){};
+    FileManager();
+    FileManager(QWidget* widget);
     ~FileManager();
 
     QByteArray shortRead();//read only projects names and paths to show them in the homepage boxes

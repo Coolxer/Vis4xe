@@ -8,13 +8,7 @@ Cell::Cell(Lcd* lcd, int index, QColor color) : QLabel(lcd)
     this->index = index;
     this->color = color;
 
-    setMinimumSize(20, 30);
-    setMaximumSize(20, 30);
-
-    setAlignment(Qt::AlignCenter);
-
-    QString styles = "QLabel{ background-color: %1; }";
-    setStyleSheet(styles.arg(color.name()));
+    init();
 }
 
 Cell::Cell(Lcd* lcd, int index, QColor color, int id, QString value) : QLabel(lcd)
@@ -25,15 +19,20 @@ Cell::Cell(Lcd* lcd, int index, QColor color, int id, QString value) : QLabel(lc
 
     this->id = id;
 
+    init();
+
+    setText(value);
+}
+
+void Cell::init()
+{
     setMinimumSize(20, 30);
     setMaximumSize(20, 30);
 
     setAlignment(Qt::AlignCenter);
 
-    QString styles = "QLabel{ background-color: %1; }";
+    QString styles = "QLabel{ background-color: %1; font-size: 25px; }";
     setStyleSheet(styles.arg(color.name()));
-
-    setText(value);
 }
 
 Cell::~Cell()
@@ -51,7 +50,9 @@ void Cell::enterEvent(QEvent*)
 
 void Cell::leaveEvent(QEvent*)
 {
-    setStyleSheet("QLabel { background-color : #0099ff; font-size: 25px; }");
+    QString styles = "QLabel { background-color: %1; font-size: 25px; }";
+    setStyleSheet(styles.arg(color.name()));
+
     QApplication::restoreOverrideCursor();
 }
 

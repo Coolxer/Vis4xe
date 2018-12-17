@@ -52,8 +52,15 @@ bool Project::writeOnLcd(UnPlacedBox* box)
 {
     if(check(box->getLastPosition()))
     {
+        //get the row we are currently in
+        int whichRow = lcd->getDroppedCell() / lcd->getColsAmount();
+
+        whichRow++;
+
         //check if its possible to drop this there (overfill cover)
-        if(lcd->getDroppedCell() + box->text().length() <= lcd->getNumberOfCells())
+        //if(lcd->getDroppedCell() + box->text().length() <= lcd->getNumberOfCells())
+        //checks if the lcd overfill
+        if(lcd->getDroppedCell() < whichRow * lcd->getColsAmount())
         {
             bool allCellsEnabled = true;
 
@@ -71,8 +78,8 @@ bool Project::writeOnLcd(UnPlacedBox* box)
                 for(int i = 0; i < box->text().length(); i++)
                 {
                     lcd->getCell(lcd->getDroppedCell() + i)->setText(box->text().at(i));
-                    lcd->getCell(lcd->getDroppedCell() + i)->setId(box->getIndex());
-                    qDebug()<<lcd->getCell(lcd->getDroppedCell() + i)->getId();
+                    lcd->getCell(lcd->getDroppedCell() + i)->setId(box->getId());
+                    //qDebug()<<lcd->getCell(lcd->getDroppedCell() + i)->getId();
                 }
 
                 organizeBoxes(box);
@@ -87,23 +94,17 @@ bool Project::writeOnLcd(UnPlacedBox* box)
 
 void Project::organizeBoxes(UnPlacedBox* box)
 {
-
+    /*
     QPoint boxStartPos = box->getStartPosition();
 
-    for(int i = box->getIndex() + 1; i < unPlacedBoxes.length(); i++)
+    for(int i = box->getId() + 1; i < unPlacedBoxes.length(); i++)
     {
         if(unPlacedBoxes[i]->x() != 0)
         {
             unPlacedBoxes[i]->move(unPlacedBoxes[i]->x(), unPlacedBoxes[i]->y() - 50);
         }
     }
-}
-
-void Project::prepareToSave()
-{
-    jsonObject["name"] = name;
-    jsonObject["rows"] = lcd->getRowsAmount();
-    jsonObject["cols"] = lcd->getColsAmount();
+    */
 }
 
 void Project::loadUnplacedBoxes(QVector<UnPlacedBox*> unPlacedBoxes)

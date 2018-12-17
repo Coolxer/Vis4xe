@@ -1,8 +1,13 @@
 #include "filemanager.h"
 
+FileManager::FileManager(QWidget* widget)
+{
+   this->widget = widget;
+}
+
 FileManager::~FileManager()
 {
-    delete fileDialog;
+
 }
 
 QByteArray FileManager::shortRead()
@@ -37,12 +42,10 @@ QByteArray FileManager::readProject(QString path)
 
 void FileManager::saveProject(QJsonDocument* project)
 {
-    //open fileWindow to select the path
-    /*               */
-
-    QString path = "randomowe.json";
-
-    QFile file(path);
+    QString fileName = QFileDialog::getSaveFileName(widget, "Open File",
+                                                    "screenLcd",
+                                                    "Json (*.json);;All Files (*)");
+    QFile file(fileName);
 
     if(!file.open(QFile::WriteOnly))
         qDebug()<<"failed to Open file";

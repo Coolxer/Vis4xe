@@ -34,6 +34,9 @@ public:
     ~Project();
 
     QString getName() { return name;  }// the latest thing to dispaly also on the home page
+    int getRows(){ return lcd->getRowsAmount(); }
+    int getCols(){ return lcd->getColsAmount(); }
+    QString getColor() { return lcd->getColor().name(); }
 
     void addString(QString string); //the function that will call after click the add button on the strings
                       // menu. The procedure must get the value of the input field
@@ -48,12 +51,14 @@ public:
 
     void organizeBoxes(UnPlacedBox* box);
 
-    void prepareToSave();
-
     void loadUnplacedBoxes(QVector <UnPlacedBox*> unPlacedBoxes);
     void loadCells(QVector<Cell*> cells);
 
     void del() { delete lcd; }
+
+    int getNumberOfUnplacedBoxes(){ return unPlacedBoxes.length(); }
+
+    UnPlacedBox* getUnplacedBox(int i) { return unPlacedBoxes[i]; }
 };
 
 #endif // PROJECT_H

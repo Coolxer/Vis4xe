@@ -28,6 +28,8 @@ private:
 
     void initCells();  //this function creates cells and sets their options, then appends its to vector
 
+    void organize();
+
     int selectedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string, normally is -1
 
     int hoveredCell = -1; //the index of the cell which on the mouse is over, normally -1
@@ -76,10 +78,11 @@ public:
 
     int getRowsAmount() { return rows; }
     int getColsAmount() { return cols; }
+    QColor getColor() { return color; }
 
     void appendCells(QVector<Cell*> cells) { this->cells = cells; }
 
-    void loadCells(QVector<Cell*> cells) { this->cells = cells; }
+    void loadCells(QVector<Cell*> cells);
 };
 
 #endif // LCD_H

@@ -12,7 +12,9 @@ ProjectsManager::ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedW
     this->editPage = editPage;
     this->stackedWidget = stackedWidget;
 
-    QByteArray data = fileManager.shortRead();
+    fileManager = new FileManager(editPage);
+
+    QByteArray data = fileManager->shortRead();
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
 
@@ -32,11 +34,12 @@ ProjectsManager::~ProjectsManager()
     delete stackedWidget;
 
     delete currentProject;
+    delete fileManager;
 }
 
 void ProjectsManager::loadProject(QString path)
 {
-    QByteArray data = fileManager.readProject(path);
+    QByteArray data = fileManager->readProject(path);
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
     QJsonObject obj = doc.object();
@@ -60,9 +63,9 @@ void ProjectsManager::loadProject(QString path)
     for(int i = 0; i < unplacedBoxesArray.size(); i++)
     {
         if(i > 0)
-            unPlacedBoxes.push_back(new UnPlacedBox(currentProject, editPage, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("text").toString(), QPoint(820, unPlacedBoxes.last()->y() + 50)));
+            unPlacedBoxes.push_back(new UnPlacedBox(currentProject, editPage, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(820, unPlacedBoxes.last()->y() + 50)));
         else
-            unPlacedBoxes.push_back(new UnPlacedBox(currentProject, editPage, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("text").toString(), QPoint(820, 100)));
+            unPlacedBoxes.push_back(new UnPlacedBox(currentProject, editPage, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(820, 100)));
     }
 
     currentProject->loadCells(cells);
@@ -74,5 +77,49 @@ void ProjectsManager::loadProject(QString path)
 void ProjectsManager::createProject(QString name, unsigned short rows, unsigned short cols, QColor color)
 {
     currentProject = new Project(name, rows, cols, color, editPage);
+}
+
+void ProjectsManager::saveProject()
+{
+    QJsonDocument doc;
+
+    QJsonObject obj;
+
+
+    QJsonArray cells;
+    QJsonArray unPlacedBoxes;
+
+    QString idStr("id");
+    QString valueStr("value");
+
+    for(int i = 0; i < currentProject->getLcd()->getNumberOfCells(); i++)
+    {
+        QJsonObject cell;
+        cell.insert(idStr, QJsonValue(currentProject->getLcd()->getCell(i)->getId()));
+        cell.insert(valueStr, QJsonValue(currentProject->getLcd()->getCell(i)->getValue()));
+
+        cells.push_back(QJsonValue(cell));
+    }
+
+    for(int i = 0; i < currentProject->getNumberOfUnplacedBoxes(); i++)
+    {
+        QJsonObject unPlacedBox;
+        unPlacedBox.insert(idStr, QJsonValue(currentProject->getUnplacedBox(i)->getId()));
+        unPlacedBox.insert(valueStr, QJsonValue(currentProject->getUnplacedBox(i)->getValue()));
+
+        unPlacedBoxes.push_back(QJsonValue(unPlacedBox));
+    }
+
+    obj.insert(QString("name"), QJsonValue(currentProject->getName()));
+    obj.insert(QString("rows"), QJsonValue(currentProject->getRows()));
+    obj.insert(QString("cols"), QJsonValue(currentProject->getCols()));
+    obj.insert(QString("color"), QJsonValue(currentProject->getColor()));
+
+    obj.insert(QString("cells"), QJsonValue(cells));
+    obj.insert(QString("unPlacedBoxes"), QJsonValue(unPlacedBoxes));
+
+    doc.setObject(obj);
+
+    fileManager->saveProject(&doc);
 }
 

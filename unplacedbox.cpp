@@ -2,10 +2,10 @@
 
 #include "project.h"
 
-UnPlacedBox::UnPlacedBox(Project* project, QWidget* parent, int index, QString text, QPoint pos) : QLabel (parent) //?is this needed?
+UnPlacedBox::UnPlacedBox(Project* project, QWidget* parent, int id, QString text, QPoint pos) : QLabel (parent) //?is this needed?
 {
     this->project = project;
-    this->index = index;
+    this->id = id;
     startPosition = pos;
 
     setText(text);

@@ -20,7 +20,7 @@ class QStackedWidget;
 class ProjectsManager
 {
 private:
-    FileManager fileManager;
+    FileManager* fileManager;
 
     QWidget* homePage;
     QWidget* editPage;
@@ -41,6 +41,7 @@ public:
 
     void loadProject(QString path);
     void createProject(QString name, unsigned short rows, unsigned short cols, QColor color);
+    void saveProject();
 };
 
 #endif // PROJECTSLIST_H

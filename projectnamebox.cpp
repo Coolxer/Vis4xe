@@ -23,7 +23,7 @@ void ProjectNameBox::init(ProjectsManager* projectsManager)
     this->projectsManager = projectsManager;
 }
 
-void ProjectNameBox::mousePressEvent(QMouseEvent* event)
+void ProjectNameBox::mousePressEvent(QMouseEvent*)
 {
     //open the edit mode with the correct / selected this project
     projectsManager->loadProject(path);

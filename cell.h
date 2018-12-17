@@ -22,6 +22,8 @@ private:
 
     int index; //the index of the cell in the lcd vector (from top-left = 0)
 
+    void init();
+
 protected:
     void enterEvent(QEvent*);
     void leaveEvent(QEvent*);
@@ -37,6 +39,8 @@ public:
 
     void setId(int id) { this->id = id; }
     int getId() { return id; }
+
+    QString getValue() { return text(); }
 
 };
 

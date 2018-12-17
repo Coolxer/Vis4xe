@@ -21,7 +21,7 @@ private:
 
     QLabel* grabBox;
 
-    int index;
+    int id;
 
 protected:
     void mousePressEvent(QMouseEvent* event);
@@ -35,7 +35,9 @@ public:
     QPoint getStartPosition() { return startPosition; }
     QPoint getLastPosition() { return lastPosition; }
 
-    int getIndex() { return index; }
+    int getId() { return id; }
+    QString getValue() { return text(); }
+
 };
 
 #endif // UNPLACEDBOX_H
