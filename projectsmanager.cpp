@@ -12,19 +12,9 @@ ProjectsManager::ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedW
     this->editPage = editPage;
     this->stackedWidget = stackedWidget;
 
-    fileManager = new FileManager(editPage);
+    fileManager = new FileManager();
 
-    QByteArray data = fileManager->shortRead();
-
-    QJsonDocument doc = QJsonDocument::fromJson(data);
-
-    QJsonArray array = doc.object()["projects"].toArray();
-
-    for(int i = 0; i < array.size(); i++)
-    {
-        boxes.push_back(new ProjectNameBox(homePage, array[i].toObject().value("name").toString(), array[i].toObject().value("path").toString(), QPoint(20 + (220) *i, 100)));
-        boxes[i]->init(this);
-    }
+    readBoxes();
 }
 
 ProjectsManager::~ProjectsManager()
@@ -35,6 +25,58 @@ ProjectsManager::~ProjectsManager()
 
     delete currentProject;
     delete fileManager;
+}
+
+void ProjectsManager::readBoxes()
+{
+    QByteArray data = fileManager->shortRead();
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+
+    QJsonArray boxesArray = doc.object()["projects"].toArray();
+
+    int r = boxesArray.size() / 3;
+
+    if(boxesArray.size() % 3 != 0)
+        r++;
+
+    int lastItemColumn = boxesArray.size() % 3;
+
+    if(lastItemColumn == 0)
+        lastItemColumn = 3;
+
+    if(r == 1)
+    {
+        if(lastItemColumn == 1)
+            lastItemColumn = 2;
+        else if (lastItemColumn == 2)
+            lastItemColumn = 1;
+    }
+
+    int c = 3;
+
+    if(boxesArray.size() < c)
+        c = lastItemColumn;
+
+    int m = 0;
+
+    qDebug()<<boxesArray.size();
+    qDebug()<<"r"<<r;
+    qDebug()<<"c"<<c;
+
+    for(int i = 0; i < r; i++)
+    {
+        if(i == r-1)
+            c = lastItemColumn;
+
+        for(int j = 0; j < c; j++)
+        {
+            boxes.push_back(new ProjectNameBox(homePage, boxesArray[m].toObject().value("name").toString(), boxesArray[i].toObject().value("path").toString(), QPoint(100 + (260 *j), (120 * i) + 100)));
+            boxes[m]->init(this);
+
+            m++;
+        }
+    }
 }
 
 void ProjectsManager::loadProject(QString path)
@@ -85,7 +127,6 @@ void ProjectsManager::saveProject()
 
     QJsonObject obj;
 
-
     QJsonArray cells;
     QJsonArray unPlacedBoxes;
 
@@ -120,8 +161,9 @@ void ProjectsManager::saveProject()
 
     doc.setObject(obj);
 
-    qDebug()<<currentProject->getName();
 
-    fileManager->saveProject(&doc, currentProject->getName());
+   // ProjectNameBox* box = new ProjectNameBox(homePage, currentProject->getName(), fileManager->saveProject(&doc, currentProject->getName()), point);
+
+    //boxes.push_back(box);
 }
 

@@ -1,8 +1,8 @@
 #include "filemanager.h"
 
-FileManager::FileManager(QWidget* widget)
+FileManager::FileManager()
 {
-   this->widget = widget;
+
 }
 
 FileManager::~FileManager()
@@ -40,10 +40,10 @@ QByteArray FileManager::readProject(QString path)
     return data;
 }
 
-void FileManager::saveProject(QJsonDocument* project, QString name)
+QString FileManager::saveProject(QJsonDocument* project, QString projectName)
 {
     QString fileName = QFileDialog::getSaveFileName(widget, "Open File",
-                                                    name,
+                                                   projectName,
                                                     "Json (*.json);;All Files (*)");
     QFile file(fileName);
 
@@ -53,6 +53,17 @@ void FileManager::saveProject(QJsonDocument* project, QString name)
         qDebug()<<"Opened file";
 
     file.write(project->toJson());
+
+    file.close();
+
+    if(!projectsFile.open(QIODevice::ReadWrite))
+        qDebug()<<"failed opened the file";
+
+
+
+    return fileName;
+
+
 }
 
 void FileManager::removeProject(QString path)

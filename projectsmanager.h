@@ -13,8 +13,8 @@
 
 #include "project.h"
 
-class QWidget;
 class ProjectNameBox;
+class QWidget;
 class QStackedWidget;
 
 class ProjectsManager
@@ -29,6 +29,8 @@ private:
     QVector <ProjectNameBox*> boxes;
 
     Project* currentProject = nullptr;
+
+    void readBoxes();
 
 public:
     ProjectsManager(){}
