@@ -11,6 +11,9 @@
 
 #include <QJsonObject>
 
+#include <QTableWidget>
+#include <QTableWidgetItem>
+
 class QWidget;
 class Cell;
 
@@ -27,6 +30,8 @@ private:
     QVector <UnPlacedBox*> unPlacedBoxes; //the vector of of the boxes that are not placed in ( they are on the strings side menu)
 
     QJsonObject jsonObject;
+
+    QTableWidget tableWidget;
 
 public:
     Project(){}
