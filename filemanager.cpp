@@ -40,11 +40,8 @@ QByteArray FileManager::readProject(QString path)
     return data;
 }
 
-QString FileManager::saveProject(QJsonDocument* project, QString projectName)
+void FileManager::saveProject(QJsonDocument project, QJsonDocument projectsList, QString fileName)
 {
-    QString fileName = QFileDialog::getSaveFileName(widget, "Open File",
-                                                   projectName,
-                                                    "Json (*.json);;All Files (*)");
     QFile file(fileName);
 
     if(!file.open(QFile::WriteOnly))
@@ -52,7 +49,7 @@ QString FileManager::saveProject(QJsonDocument* project, QString projectName)
      else
         qDebug()<<"Opened file";
 
-    file.write(project->toJson());
+    file.write(project.toJson());
 
     file.close();
 
@@ -60,8 +57,7 @@ QString FileManager::saveProject(QJsonDocument* project, QString projectName)
         qDebug()<<"failed opened the file";
 
 
-
-    return fileName;
+    projectsFile.write(projectsList.toJson());
 
 
 }

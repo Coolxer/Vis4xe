@@ -29,6 +29,10 @@ void MainWindow::on_finalAddButton_clicked()
     unsigned short rows = ui->rowsLineEdit->text().toShort();
     unsigned short cols = ui->colsLineEdit->text().toShort();
 
+    ui->nameLineEdit->clear();
+    ui->rowsLineEdit->clear();
+    ui->colsLineEdit->clear();
+
     //need to be validators here
 
     //color there should be a circle switch
@@ -44,13 +48,14 @@ void MainWindow::on_cancelAddingButton_clicked()
 
 void MainWindow::on_editingQuitButton_clicked()
 {
-    projectsManager->getCurrentProject()->del();
+    projectsManager->releaseProject();
     ui->statesStackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::on_editingQuitWithSaveButton_clicked()
 {
      projectsManager->saveProject();
+     projectsManager->releaseProject();
      ui->statesStackedWidget->setCurrentIndex(0);   
 }
 

@@ -29,11 +29,13 @@ ProjectsManager::~ProjectsManager()
 
 void ProjectsManager::readBoxes()
 {
+    boxes.clear();
+
     QByteArray data = fileManager->shortRead();
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
 
-    QJsonArray boxesArray = doc.object()["projects"].toArray();
+    boxesArray = doc.object()["projects"].toArray();
 
     int r = boxesArray.size() / 3;
 
@@ -59,10 +61,6 @@ void ProjectsManager::readBoxes()
         c = lastItemColumn;
 
     int m = 0;
-
-    qDebug()<<boxesArray.size();
-    qDebug()<<"r"<<r;
-    qDebug()<<"c"<<c;
 
     for(int i = 0; i < r; i++)
     {
@@ -161,9 +159,26 @@ void ProjectsManager::saveProject()
 
     doc.setObject(obj);
 
+    QString fileName = QFileDialog::getSaveFileName(editPage, "Open File",
+                                                   currentProject->getName(),
+                                                    "Json (*.json);;All Files (*)");
 
-   // ProjectNameBox* box = new ProjectNameBox(homePage, currentProject->getName(), fileManager->saveProject(&doc, currentProject->getName()), point);
+    QJsonDocument doc2;
+    QJsonObject obj2;
+    QJsonObject item;
 
-    //boxes.push_back(box);
+    item.insert(QString("name"), QJsonValue(currentProject->getName()));
+    item.insert(QString("path"), QJsonValue(fileName));
+
+    boxesArray.push_back(item);
+
+    obj2.insert(QString("projects"), boxesArray);
+
+    doc2.setObject(obj2);
+
+    fileManager->saveProject(doc, doc2, fileName);
+
+    readBoxes();
+
 }
 

@@ -13,6 +13,8 @@
 
 #include "project.h"
 
+#include <QFileDialog>
+
 class ProjectNameBox;
 class QWidget;
 class QStackedWidget;
@@ -30,6 +32,8 @@ private:
 
     Project* currentProject = nullptr;
 
+    QJsonArray boxesArray;
+
     void readBoxes();
 
 public:
@@ -44,6 +48,8 @@ public:
     void loadProject(QString path);
     void createProject(QString name, unsigned short rows, unsigned short cols, QColor color);
     void saveProject();
+
+    void releaseProject() { delete currentProject; currentProject = nullptr; }
 };
 
 #endif // PROJECTSLIST_H

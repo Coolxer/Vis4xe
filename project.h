@@ -54,8 +54,6 @@ public:
     void loadUnplacedBoxes(QVector <UnPlacedBox*> unPlacedBoxes);
     void loadCells(QVector<Cell*> cells);
 
-    void del() { delete lcd; }
-
     int getNumberOfUnplacedBoxes(){ return unPlacedBoxes.length(); }
 
     UnPlacedBox* getUnplacedBox(int i) { return unPlacedBoxes[i]; }

@@ -9,7 +9,7 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
 
 Project::~Project()
 {
-    delete widget;
+    //delete widget;
     delete lcd;
 }
 
