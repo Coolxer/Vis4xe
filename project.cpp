@@ -16,7 +16,7 @@ Project::~Project()
 void Project::addString(QString string)
 {
     if(unPlacedBoxes.length() > 0)
-        unPlacedBoxes.push_back(new UnPlacedBox(this, widget, unPlacedBoxes.length(), string, QPoint(unPlacedBoxes.last()->x(), unPlacedBoxes.last()->y() + 50)));
+        unPlacedBoxes.push_back(new UnPlacedBox(this, widget, unPlacedBoxes.length(), string, QPoint(unPlacedBoxes.last()->x(), unPlacedBoxes.last()->y() + 40)));
     else
         unPlacedBoxes.push_back(new UnPlacedBox(this, widget, 0, string, QPoint(820, 100)));
 

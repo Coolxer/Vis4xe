@@ -9,7 +9,7 @@ UnPlacedBox::UnPlacedBox(Project* project, QWidget* parent, int id, QString text
     startPosition = pos;
 
     setText(text);
-    setGeometry(startPosition.x(), startPosition.y(), 100, 30);
+    setGeometry(startPosition.x(), startPosition.y(), 120, 30);
     setAlignment(Qt::AlignCenter);
     setStyleSheet("QLabel{ background-color: #0099ff; color: #FFFFFF; }");
 
