@@ -52,7 +52,7 @@ void Lcd::organize()
 
 }
 
-void Lcd::loadCells(QVector <Cell*> cells)
+void Lcd::loadCellsFromFile(QVector <Cell*> cells)
 {
     this->cells = cells;
     organize();
@@ -148,11 +148,6 @@ void Lcd::setSelectedCell(int m)
         }
         editMode = true;
     }
-}
-
-void Lcd::setHoveredCell(int m)
-{
-    hoveredCell = m;
 }
 
 void Lcd::cancelEditMode()

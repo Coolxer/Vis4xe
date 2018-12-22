@@ -19,7 +19,7 @@ private:
     QPoint offset;
     QPoint lastPosition;
 
-    QLabel* grabBox;
+    QLabel* delBox;
 
     int id;
 

@@ -42,8 +42,6 @@ Cell::~Cell()
 
 void Cell::enterEvent(QEvent*)
 {
-    lcd->setHoveredCell(index);
-
     setStyleSheet("QLabel { background-color : #ff7733; font-size: 25px; }");
     QApplication::setOverrideCursor(Qt::PointingHandCursor);
 }

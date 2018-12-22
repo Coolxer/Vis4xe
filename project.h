@@ -5,14 +5,7 @@
 #include <QString>
 
 #include "lcd.h"
-#include <QVector>
-
-#include "unplacedbox.h"
-
-#include <QJsonObject>
-
-#include <QTableWidget>
-#include <QTableWidgetItem>
+#include "stringslistwidget.h"
 
 class QWidget;
 class Cell;
@@ -24,14 +17,7 @@ private:
     QString name; //name of the project
 
     Lcd* lcd; //the pointer / dynamic object Lcd
-
-    //QStringList unPlacedStrings; //the vector of the strings that are not placed in yet
-
-    QVector <UnPlacedBox*> unPlacedBoxes; //the vector of of the boxes that are not placed in ( they are on the strings side menu)
-
-    QJsonObject jsonObject;
-
-    QTableWidget tableWidget;
+    StringsListWidget* stringsWidget;
 
 public:
     Project(){}
@@ -39,29 +25,17 @@ public:
     ~Project();
 
     QString getName() { return name; }// the latest thing to dispaly also on the home page
-    int getRows(){ return lcd->getRowsAmount(); }
-    int getCols(){ return lcd->getColsAmount(); }
-    QString getColor() { return lcd->getColor().name(); }
-
-    void addString(QString string); //the function that will call after click the add button on the strings
-                      // menu. The procedure must get the value of the input field
-                      // This function is like a slot but not sure its good idea
-                      // its adding the inputted string to the unPlacedStrings vector
-
-    bool writeOnLcd(UnPlacedBox* box); //the function is drawing the text from unplacedBox
-
-    bool check(QPoint point);
 
     Lcd* getLcd() { return lcd; }
+    StringsListWidget* getStringsWidget() { return stringsWidget; }
 
-    void organizeBoxes(UnPlacedBox* box);
+
+    bool check(QPoint point);
+    bool writeOnLcd(UnPlacedBox* box); //the function is drawing the text from unplacedBox
+
 
     void loadUnplacedBoxes(QVector <UnPlacedBox*> unPlacedBoxes);
     void loadCells(QVector<Cell*> cells);
-
-    int getNumberOfUnplacedBoxes(){ return unPlacedBoxes.length(); }
-
-    UnPlacedBox* getUnplacedBox(int i) { return unPlacedBoxes[i]; }
 };
 
 #endif // PROJECT_H

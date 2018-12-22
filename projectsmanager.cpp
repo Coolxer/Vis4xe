@@ -19,10 +19,6 @@ ProjectsManager::ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedW
 
 ProjectsManager::~ProjectsManager()
 {
-    delete homePage;
-    delete editPage;
-    delete stackedWidget;
-
     delete currentProject;
     delete fileManager;
 }
@@ -140,19 +136,19 @@ void ProjectsManager::saveProject()
         cells.push_back(QJsonValue(cell));
     }
 
-    for(int i = 0; i < currentProject->getNumberOfUnplacedBoxes(); i++)
+    for(int i = 0; i < currentProject->getStringsWidget()->getAmount(); i++)
     {
         QJsonObject unPlacedBox;
-        unPlacedBox.insert(idStr, QJsonValue(currentProject->getUnplacedBox(i)->getId()));
-        unPlacedBox.insert(valueStr, QJsonValue(currentProject->getUnplacedBox(i)->getValue()));
+        unPlacedBox.insert(idStr, QJsonValue(currentProject->getStringsWidget()->getBox(i)->getId()));
+        unPlacedBox.insert(valueStr, QJsonValue(currentProject->getStringsWidget()->getBox(i)->getValue()));
 
         unPlacedBoxes.push_back(QJsonValue(unPlacedBox));
     }
 
     obj.insert(QString("name"), QJsonValue(currentProject->getName()));
-    obj.insert(QString("rows"), QJsonValue(currentProject->getRows()));
-    obj.insert(QString("cols"), QJsonValue(currentProject->getCols()));
-    obj.insert(QString("color"), QJsonValue(currentProject->getColor()));
+    obj.insert(QString("rows"), QJsonValue(currentProject->getLcd()->getRows()));
+    obj.insert(QString("cols"), QJsonValue(currentProject->getLcd()->getCols()));
+    obj.insert(QString("color"), QJsonValue(currentProject->getLcd()->getColor()));
 
     obj.insert(QString("cells"), QJsonValue(cells));
     obj.insert(QString("unPlacedBoxes"), QJsonValue(unPlacedBoxes));

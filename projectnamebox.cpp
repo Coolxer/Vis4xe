@@ -15,7 +15,7 @@ ProjectNameBox::ProjectNameBox(QWidget* parent, QString name, QString path, QPoi
 
 ProjectNameBox::~ProjectNameBox()
 {
-    delete projectsManager;
+
 }
 
 void ProjectNameBox::init(ProjectsManager* projectsManager)

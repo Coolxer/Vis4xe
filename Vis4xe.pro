@@ -33,7 +33,8 @@ SOURCES += \
         cell.cpp \
         filemanager.cpp \
         projectnamebox.cpp \
-        projectsmanager.cpp
+        projectsmanager.cpp \
+    stringslistwidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -43,7 +44,8 @@ HEADERS += \
         cell.h \
         filemanager.h \
         projectnamebox.h \
-        projectsmanager.h
+        projectsmanager.h \
+    stringslistwidget.h
 
 FORMS += \
         mainwindow.ui

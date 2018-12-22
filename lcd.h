@@ -64,10 +64,6 @@ public:
     void setSelectedCell(int m);
     int getSelectedCell() { return selectedCell; }
 
-    //for just appereance ? and info the user
-    void setHoveredCell(int m);
-    int getHoveredCell() { return hoveredCell; }
-
     //for drag & drop unplacebox
     void setDroppedCell(int m) { droppedCell = m; }
     int getDroppedCell() { return droppedCell; }
@@ -76,13 +72,14 @@ public:
 
     int getNumberOfCells() { return numberOfCells; }
 
-    int getRowsAmount() { return rows; }
-    int getColsAmount() { return cols; }
-    QColor getColor() { return color; }
+    int getRows(){ return rows; }
+    int getCols(){ return cols; }
+    QString getColor() { return color.name(); }
+
 
     void appendCells(QVector<Cell*> cells) { this->cells = cells; }
 
-    void loadCells(QVector<Cell*> cells);
+    void loadCellsFromFile(QVector<Cell*> cells);
 };
 
 #endif // LCD_H
