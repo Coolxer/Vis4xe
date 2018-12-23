@@ -5,7 +5,7 @@ StringsListWidget::StringsListWidget(Project* project, QWidget* widget): QWidget
     this->project = project;
 
     setGeometry(806, 5, 150, 360);
-    setStyleSheet("QWidget{ background-color: green; }");
+    //setStyleSheet("QWidget{ background-color: green; }");
 
 }
 

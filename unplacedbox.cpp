@@ -15,6 +15,12 @@ UnPlacedBox::UnPlacedBox(Project* project, QWidget* listWidget, int id, QString 
     setAlignment(Qt::AlignCenter);
     setStyleSheet("QLabel{ background-color: #0099ff; color: #FFFFFF; }");
 
+    dragBox = new QLabel(project->getContainer());
+    dragBox->setGeometry(770, startPosition.y() + 5, 30, 30);
+    dragBox->setStyleSheet("QLabel{ background-color: #0099ff; border-radius: 15px; }");
+    dragBox->setAlignment(Qt::AlignCenter);
+    dragBox->show();
+
     delBox = new QLabel(listWidget);
     delBox->setGeometry(startPosition.x() + 110, startPosition.y(), 30, 30);
     delBox->setStyleSheet("QLabel{ background-color: #FF0000; text-align: center; font-size: 25px; }");
@@ -25,6 +31,7 @@ UnPlacedBox::UnPlacedBox(Project* project, QWidget* listWidget, int id, QString 
 
 UnPlacedBox::~UnPlacedBox()
 {
+    delete dragBox;
     delete delBox;
 }
 
