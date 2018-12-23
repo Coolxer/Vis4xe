@@ -9,7 +9,7 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget
     int width = (this->cols * 20) + (this->cols + 1) * 5;
     int height = (this->rows * 30) + (this->rows + 1) * 5;
 
-    setGeometry(QRect(145, 195, width, height));
+    setGeometry(QRect((widget->width() - 160)/2 - width/2, widget->height()/2 - height/2, width, height));
     setStyleSheet("QWidget{ background-color:  #FFFFFF; }");
 
     initCells();

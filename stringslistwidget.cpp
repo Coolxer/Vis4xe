@@ -1,10 +1,10 @@
 #include "stringslistwidget.h"
 
-StringsListWidget::StringsListWidget(Project* project, QWidget* widget): QWidget (widget)
+StringsListWidget::StringsListWidget(Project* project, QWidget* widget): QWidget(widget)
 {
     this->project = project;
 
-    setGeometry(806, 93, 150, 360);
+    setGeometry(806, 5, 150, 360);
     setStyleSheet("QWidget{ background-color: green; }");
 
 }

@@ -3,14 +3,19 @@
 Project::Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget)
 {
     this->name = name;
-    this->widget = widget;
 
-    lcd = new Lcd(rows, cols, color, widget);
-    stringsWidget = new StringsListWidget(this, widget);
+    container = new QWidget(widget);
+
+    container->setGeometry(0, 60, 960, 400);
+
+    lcd = new Lcd(rows, cols, color, container);
+
+    stringsWidget = new StringsListWidget(this, container);
 }
 
 Project::~Project()
 {
+    delete container;
     delete lcd;
     delete stringsWidget;
 }
@@ -72,7 +77,6 @@ bool Project::writeOnLcd(UnPlacedBox* box)
                 {
                     lcd->getCell(lcd->getDroppedCell() + i)->setText(box->text().at(i));
                     lcd->getCell(lcd->getDroppedCell() + i)->setId(box->getId());
-                    //qDebug()<<lcd->getCell(lcd->getDroppedCell() + i)->getId();
                 }
 
                 lcd->setDroppedCell(-1); //release the selected cell (reset) after operation confirm

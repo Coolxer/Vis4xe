@@ -7,6 +7,8 @@
 #include <QString>
 #include <QPoint>
 
+#include <QtDebug>
+
 class Project;
 class QWidget;
 
@@ -14,14 +16,18 @@ class UnPlacedBox : public QLabel
 {
 private:
     Project* project;
+    QWidget* listWidget;
 
     QPoint startPosition;
     QPoint offset;
     QPoint lastPosition;
 
+    QLabel* dragBox;
     QLabel* delBox;
 
     int id;
+
+    bool insideList = true;
 
 protected:
     void mousePressEvent(QMouseEvent* event);
@@ -29,7 +35,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent* event);
 
 public:
-    UnPlacedBox(Project* project, QWidget* parent, int id, QString text, QPoint pos);
+    UnPlacedBox(Project* project, QWidget* widget, int id, QString text, QPoint pos);
     ~UnPlacedBox();
 
     QPoint getStartPosition() { return startPosition; }
