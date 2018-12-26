@@ -1,16 +1,14 @@
 #ifndef UNPLACEDBOX_H
 #define UNPLACEDBOX_H
 
-#include <QApplication>
-#include <QMouseEvent>
 #include <QLabel>
 #include <QString>
 #include <QPoint>
 
 #include <QtDebug>
 
-#include <QDrag>
-#include <QMimeData>
+#include "dragbox.h"
+#include "delbox.h"
 
 class Project;
 class QWidget;
@@ -21,32 +19,22 @@ private:
     Project* project;
     QWidget* listWidget;
 
-    QPoint startPosition;
-    QPoint offset;
-    QPoint lastPosition;
+    DragBox* dragBox;
+    DelBox* delBox;
 
-    QLabel* stringBox;
-    QLabel* delBox;
+    QPoint startPosition;
 
     int id;
-
-protected:
-    void mousePressEvent(QMouseEvent* event);
-    void mouseMoveEvent(QMouseEvent* event);
-    void mouseReleaseEvent(QMouseEvent* event);
-
-    void enterEvent(QEvent*);
-    void leaveEvent(QEvent*);
 
 public:
     UnPlacedBox(Project* project, int id, QString text, QPoint pos);
     ~UnPlacedBox();
 
-    QPoint getStartPosition() { return startPosition; }
-    QPoint getLastPosition() { return lastPosition; }
-
     int getId() { return id; }
     QString getValue() { return text(); }
+
+    void checkDrop(QPoint point);
+    void remove();
 
 };
 

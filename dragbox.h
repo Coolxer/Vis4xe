@@ -2,17 +2,31 @@
 #define DRAGBOX_H
 
 #include <QLabel>
+#include <QPoint>
+
+#include <QMouseEvent>
+#include <QApplication>
+
+class UnPlacedBox;
 
 class DragBox : public QLabel
 {
 private:
+    UnPlacedBox* unPlacedBox;
 
-protected:
+    QPoint startPosition;
+    QPoint offset;
+    QPoint lastPosition;
+
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
+
+    void enterEvent(QEvent*);
+    void leaveEvent(QEvent*);
 public:
-    DragBox();
+    DragBox(){}
+    DragBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos);
 };
 
 #endif // DRAGBOX_H

@@ -35,7 +35,8 @@ SOURCES += \
         projectnamebox.cpp \
         projectsmanager.cpp \
     stringslistwidget.cpp \
-    dragbox.cpp
+    dragbox.cpp \
+    delbox.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,7 +48,8 @@ HEADERS += \
         projectnamebox.h \
         projectsmanager.h \
     stringslistwidget.h \
-    dragbox.h
+    dragbox.h \
+    delbox.h
 
 FORMS += \
         mainwindow.ui
