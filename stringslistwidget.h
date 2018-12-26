@@ -11,17 +11,16 @@
 
 class Project;
 
-class StringsListWidget : public QWidget
+class StringsListWidget
 {
 private:
-    QWidget* widget;
     Project* project;
 
     QVector <UnPlacedBox*> boxes;
 
 public:
     StringsListWidget(){}
-    StringsListWidget(Project* project, QWidget* widget);
+    StringsListWidget(Project* project);
 
     ~StringsListWidget();
 

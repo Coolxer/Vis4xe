@@ -99,9 +99,9 @@ void ProjectsManager::loadProject(QString path)
     for(int i = 0; i < unplacedBoxesArray.size(); i++)
     {
         if(i > 0)
-            unPlacedBoxes.push_back(new UnPlacedBox(currentProject, editPage, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(820, unPlacedBoxes.last()->y() + 50)));
+            unPlacedBoxes.push_back(new UnPlacedBox(currentProject, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(820, unPlacedBoxes.last()->y() + 50)));
         else
-            unPlacedBoxes.push_back(new UnPlacedBox(currentProject, editPage, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(820, 100)));
+            unPlacedBoxes.push_back(new UnPlacedBox(currentProject, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(820, 100)));
     }
 
     currentProject->loadCells(cells);

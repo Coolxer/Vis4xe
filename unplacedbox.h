@@ -9,6 +9,9 @@
 
 #include <QtDebug>
 
+#include <QDrag>
+#include <QMimeData>
+
 class Project;
 class QWidget;
 
@@ -22,20 +25,21 @@ private:
     QPoint offset;
     QPoint lastPosition;
 
-    QLabel* dragBox;
+    QLabel* stringBox;
     QLabel* delBox;
 
     int id;
-
-    bool insideList = true;
 
 protected:
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
 
+    void enterEvent(QEvent*);
+    void leaveEvent(QEvent*);
+
 public:
-    UnPlacedBox(Project* project, QWidget* widget, int id, QString text, QPoint pos);
+    UnPlacedBox(Project* project, int id, QString text, QPoint pos);
     ~UnPlacedBox();
 
     QPoint getStartPosition() { return startPosition; }

@@ -34,7 +34,8 @@ SOURCES += \
         filemanager.cpp \
         projectnamebox.cpp \
         projectsmanager.cpp \
-    stringslistwidget.cpp
+    stringslistwidget.cpp \
+    dragbox.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
         filemanager.h \
         projectnamebox.h \
         projectsmanager.h \
-    stringslistwidget.h
+    stringslistwidget.h \
+    dragbox.h
 
 FORMS += \
         mainwindow.ui

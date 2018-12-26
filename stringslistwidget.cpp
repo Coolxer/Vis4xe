@@ -1,12 +1,8 @@
 #include "stringslistwidget.h"
 
-StringsListWidget::StringsListWidget(Project* project, QWidget* widget): QWidget(widget)
+StringsListWidget::StringsListWidget(Project* project)
 {
     this->project = project;
-
-    setGeometry(806, 5, 150, 360);
-    //setStyleSheet("QWidget{ background-color: green; }");
-
 }
 
 StringsListWidget::~StringsListWidget()
@@ -17,9 +13,9 @@ StringsListWidget::~StringsListWidget()
 void StringsListWidget::addStringWidget(QString name)
 {
     if(boxes.length() > 0)
-        boxes.push_back(new UnPlacedBox(project, this, boxes.length(), name, QPoint(5, boxes.last()->y() + 40)));
+        boxes.push_back(new UnPlacedBox(project, boxes.length(), name, QPoint(770, boxes.last()->y() + 40)));
     else
-        boxes.push_back(new UnPlacedBox(project, this, 0, name, QPoint(5, 5)));
+        boxes.push_back(new UnPlacedBox(project, 0, name, QPoint(770, 5)));
 
     boxes.last()->show();
 }

@@ -2,28 +2,27 @@
 
 #include "project.h"
 
-UnPlacedBox::UnPlacedBox(Project* project, QWidget* listWidget, int id, QString text, QPoint pos) : QLabel (listWidget)
+UnPlacedBox::UnPlacedBox(Project* project, int id, QString text, QPoint pos) : QLabel (project->getContainer())
 {
     this->project = project;
-    this->listWidget = listWidget;
     this->id = id;
 
     startPosition = pos;
 
-    setText(text);
-    setGeometry(startPosition.x(), startPosition.y(), 110, 30);
+    setGeometry(startPosition.x(), startPosition.y(), 30, 30);
+    setStyleSheet("QLabel{border: 3px solid #0099ff; border-radius: 15px; }");
     setAlignment(Qt::AlignCenter);
-    setStyleSheet("QLabel{ background-color: #0099ff; color: #FFFFFF; }");
 
-    dragBox = new QLabel(project->getContainer());
-    dragBox->setGeometry(770, startPosition.y() + 5, 30, 30);
-    dragBox->setStyleSheet("QLabel{ background-color: #0099ff; border-radius: 15px; }");
-    dragBox->setAlignment(Qt::AlignCenter);
-    dragBox->show();
+    stringBox = new QLabel(project->getContainer());
+    stringBox->setGeometry(startPosition.x() + 40, startPosition.y(), 110, 30);
+    stringBox->setText(text);
+    stringBox->setStyleSheet("QLabel{border: 3px solid #0099ff; color: #FFFFFF; }");
+    stringBox->setAlignment(Qt::AlignCenter);
+    stringBox->show();
 
-    delBox = new QLabel(listWidget);
-    delBox->setGeometry(startPosition.x() + 110, startPosition.y(), 30, 30);
-    delBox->setStyleSheet("QLabel{ background-color: #FF0000; text-align: center; font-size: 25px; }");
+    delBox = new QLabel(project->getContainer());
+    delBox->setGeometry(startPosition.x() + 155, startPosition.y(), 30, 30);
+    delBox->setStyleSheet("QLabel{border: 3px solid #FF0000 ; text-align: center; font-size: 25px; color: #FFFFFF; }");
     delBox->setText("X");
     delBox->setAlignment(Qt::AlignCenter);
     delBox->show();
@@ -31,53 +30,65 @@ UnPlacedBox::UnPlacedBox(Project* project, QWidget* listWidget, int id, QString 
 
 UnPlacedBox::~UnPlacedBox()
 {
-    delete dragBox;
+    delete stringBox;
     delete delBox;
 }
 
 void UnPlacedBox::mousePressEvent(QMouseEvent* event)
 {
-     if(event->buttons() == Qt::LeftButton)
-     {
-         if((event->pos().x() >= delBox->pos().x()) && (event->pos().x() <= delBox->pos().x() + 30))
-         {
-            if((event->pos().y() >= delBox->pos().y()) && (event->pos().y() <= delBox->pos().y() + 30))
-            {
-                project->getStringsWidget()->deleteStringWidget(id);
-                deleteLater();
-            }
-         }
+    qDebug()<<"pressed";
+
+    offset = event->pos();
+    QApplication::setOverrideCursor(Qt::PointingHandCursor);
+
+    if(event->buttons() == Qt::LeftButton)
+    {
+        if((event->pos().x() >= delBox->pos().x()) && (event->pos().x() <= delBox->pos().x() + 30))
+        {
+           if((event->pos().y() >= delBox->pos().y()) && (event->pos().y() <= delBox->pos().y() + 30))
+           {
+               project->getStringsWidget()->deleteStringWidget(id);
+
+               setVisible(false);
+               stringBox->setVisible(false);
+               delBox->setVisible(false);
+
+               deleteLater();
+           }
+        }
+         /*
          else
          {
              offset = event->pos();
              QApplication::setOverrideCursor(Qt::PointingHandCursor);
          }
+         */
+
+
+
+         /*
+         if(delBox->geometry().contains(event->pos()))
+         {
+             project->getStringsWidget()->deleteStringWidget(id);
+
+             setVisible(false);
+             stringBox->setVisible(false);
+             delBox->setVisible(false);
+
+             deleteLater();
+         }
+         */
      }
 }
 
 void UnPlacedBox::mouseMoveEvent(QMouseEvent* event)
 {
-     if(event->buttons() == Qt::LeftButton)
-     {
-         move(mapToParent(event->pos() - offset));
-         delBox->move(mapToParent(QPoint(pos().x() + 110, pos().y())));
-
-         QPoint point = pos();
-
-         if(pos().x() < 0 && insideList == true)
-         {
-             setParent(project->getContainer());
-             move(799, pos().y());
-             show();
-
-             insideList = false;
-         }
-     }
+    if(event->buttons() == Qt::LeftButton)
+        move(mapToParent(event->pos() - offset));
 }
 
 void UnPlacedBox::mouseReleaseEvent(QMouseEvent* event)
 {
-
     lastPosition = mapToParent(event->pos());
 
     QApplication::restoreOverrideCursor();
@@ -86,15 +97,27 @@ void UnPlacedBox::mouseReleaseEvent(QMouseEvent* event)
     {
         //this->move(0, 0);
         //this->grabBox->move(0, 0);
+
         setVisible(false);
+        stringBox->setVisible(false);
         delBox->setVisible(false);
+
     }
     else
-    {
-        setParent(listWidget);
         move(startPosition);
-        delBox->move(startPosition.x() + 110, startPosition.y());
-        show();
-        insideList = true;
-    }
 }
+
+void UnPlacedBox::enterEvent(QEvent*)
+{
+    setStyleSheet("QLabel{ background-color: #0099ff; border-radius: 15px;}");
+    stringBox->setStyleSheet("QLabel{background-color: #0099ff; color: #FFFFFF; }");
+    QApplication::setOverrideCursor(Qt::PointingHandCursor);
+}
+
+void UnPlacedBox::leaveEvent(QEvent*)
+{
+    setStyleSheet("QLabel{border: 3px solid #0099ff; border-radius: 15px; }");
+    stringBox->setStyleSheet("QLabel{border: 3px solid #0099ff; color: #FFFFFF; }");
+    QApplication::restoreOverrideCursor();
+}
+

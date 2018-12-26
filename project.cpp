@@ -10,14 +10,14 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
 
     lcd = new Lcd(rows, cols, color, container);
 
-    stringsWidget = new StringsListWidget(this, container);
+    stringsWidget = new StringsListWidget(this);
 }
 
 Project::~Project()
 {
-    delete container;
     delete lcd;
     delete stringsWidget;
+    delete container;
 }
 
 bool Project::check(QPoint point)

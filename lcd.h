@@ -58,6 +58,7 @@ public:
     Lcd(){}
     Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
     Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget, QVector <Cell*> cells);
+    ~Lcd(){}
 
     //QVector <Cell*> getCells() { return cells; }; //getter that allows to read cells
 
