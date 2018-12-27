@@ -10,6 +10,8 @@ DragBox::DragBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos): QLabel(
     setGeometry(pos.x(), pos.y(), 30, 30);
     setStyleSheet("QLabel{border: 3px solid #0099ff; border-radius: 15px; }");
     setAlignment(Qt::AlignCenter);
+
+    show();
 }
 
 void DragBox::mousePressEvent(QMouseEvent* event)
@@ -29,7 +31,9 @@ void DragBox::mouseReleaseEvent(QMouseEvent* event)
     lastPosition = mapToParent(event->pos());
     QApplication::restoreOverrideCursor();
 
-    unPlacedBox->checkDrop(lastPosition);
+
+    if(unPlacedBox->checkDrop(lastPosition))
+        setVisible(false);
 }
 
 void DragBox::enterEvent(QEvent*)

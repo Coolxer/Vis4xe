@@ -15,8 +15,12 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
 
 Project::~Project()
 {
+    lcd->setVisible(false);
     delete lcd;
+
     delete stringsWidget;
+
+    container->setVisible(false);
     delete container;
 }
 
@@ -48,7 +52,7 @@ bool Project::check(QPoint point)
 
 bool Project::writeOnLcd(UnPlacedBox* box)
 {
-    if(check(box->getLastPosition()))
+    if(check(box->getDragBoxPoint()))
     {
         //get the row we are currently in
         int whichRow = lcd->getDroppedCell() / lcd->getCols();

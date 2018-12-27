@@ -10,6 +10,8 @@ DelBox::DelBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos): QLabel(pa
     setStyleSheet("QLabel{border: 3px solid #FF0000; font-size: 25px; color: #FFFFFF; }");
     setText("X");
     setAlignment(Qt::AlignCenter);
+
+    show();
 }
 
 void DelBox::mousePressEvent(QMouseEvent* event)

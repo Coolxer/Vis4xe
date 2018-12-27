@@ -7,7 +7,11 @@ StringsListWidget::StringsListWidget(Project* project)
 
 StringsListWidget::~StringsListWidget()
 {
-
+    for(int i = 0; i < boxes.length(); i++)
+    {
+        boxes.at(i)->setVisible(false);
+        boxes.removeAt(i);
+    }
 }
 
 void StringsListWidget::addStringWidget(QString name)
@@ -22,6 +26,7 @@ void StringsListWidget::addStringWidget(QString name)
 
 void StringsListWidget::deleteStringWidget(int id)
 {
+    delete boxes.at(id);
     boxes.removeAt(id);
 }
 

@@ -23,6 +23,7 @@ private:
     DelBox* delBox;
 
     QPoint startPosition;
+    QPoint dragBoxPoint;
 
     int id;
 
@@ -33,8 +34,10 @@ public:
     int getId() { return id; }
     QString getValue() { return text(); }
 
-    void checkDrop(QPoint point);
+    bool checkDrop(QPoint point);
     void remove();
+
+    QPoint getDragBoxPoint() { return dragBoxPoint; }
 
 };
 

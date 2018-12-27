@@ -8,8 +8,8 @@ UnPlacedBox::UnPlacedBox(Project* project, int id, QString text, QPoint pos): QL
     this->id = id;
     startPosition = pos;
 
-    dragBox = new DragBox(, project->getContainer(), QPoint(pos.x() -40, pos.y()));
-    delBox = new DelBox(, project->getContainer(), QPoint(pos.x() + 110, pos.y()));
+    dragBox = new DragBox(this, project->getContainer(), QPoint(pos.x() -40, pos.y()));
+    delBox = new DelBox(this, project->getContainer(), QPoint(pos.x() + 110, pos.y()));
 
     setGeometry(pos.x(), pos.y(), 110, 30);
     setStyleSheet("QLabel{border: 3px solid #0099ff; color: #FFFFFF; }");
@@ -19,24 +19,35 @@ UnPlacedBox::UnPlacedBox(Project* project, int id, QString text, QPoint pos): QL
 
 UnPlacedBox::~UnPlacedBox()
 {
+    setVisible(false);
+
+    dragBox->setVisible(false);
     delete dragBox;
+
+    delBox->setVisible(false);
     delete delBox;
 }
 
-void UnPlacedBox::checkDrop(QPoint point)
+bool UnPlacedBox::checkDrop(QPoint point)
 {
+    dragBoxPoint = point;
+
     if(project->writeOnLcd(this))
     {
         setVisible(false);
         dragBox->setVisible(false);
         delBox->setVisible(false);
+
+        return true;
     }
-    else
-        dragBox->move()
+
+    return false;
 }
 
 void UnPlacedBox::remove()
 {
+    setVisible(false);
+    dragBox->setVisible(false);
 
 }
 
