@@ -38,7 +38,6 @@ public:
     void remove();
 
     QPoint getDragBoxPoint() { return dragBoxPoint; }
-
 };
 
 #endif // UNPLACEDBOX_H

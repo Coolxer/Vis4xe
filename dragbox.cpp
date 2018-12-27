@@ -39,11 +39,13 @@ void DragBox::mouseReleaseEvent(QMouseEvent* event)
 void DragBox::enterEvent(QEvent*)
 {
     setStyleSheet("QLabel{ background-color: #0099ff; border-radius: 15px;}");
+    unPlacedBox->setStyleSheet("QLabel{ background-color: #0099ff; color: #FFFFFF; }");
     QApplication::setOverrideCursor(Qt::PointingHandCursor);
 }
 
 void DragBox::leaveEvent(QEvent*)
 {
     setStyleSheet("QLabel{border: 3px solid #0099ff; border-radius: 15px; }");
+    unPlacedBox->setStyleSheet("QLabel{border: 3px solid #0099ff; color: #FFFFFF; }");
     QApplication::restoreOverrideCursor();
 }
