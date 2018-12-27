@@ -318,9 +318,9 @@ background-color: #0099ff</string>
      <widget class="QLabel" name="stringsHeader">
       <property name="geometry">
        <rect>
-        <x>800</x>
+        <x>770</x>
         <y>0</y>
-        <width>160</width>
+        <width>190</width>
         <height>60</height>
        </rect>
       </property>
@@ -400,7 +400,7 @@ color: #000000;</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>801</width>
+        <width>770</width>
         <height>60</height>
        </rect>
       </property>
