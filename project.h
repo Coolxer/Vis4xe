@@ -9,11 +9,14 @@
 
 #include <QWidget>
 
+#include <QLabel>
+
 class Cell;
 
 class Project
 {
 private:
+    QLabel* projectNameBox;
     QWidget* container;
     QString name; //name of the project
 

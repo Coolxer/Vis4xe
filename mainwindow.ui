@@ -339,11 +339,14 @@ font-size: 20px;</string>
      <widget class="QPushButton" name="editingQuitButton">
       <property name="geometry">
        <rect>
-        <x>680</x>
+        <x>650</x>
         <y>500</y>
         <width>75</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #FFFFFF;</string>
       </property>
       <property name="text">
        <string>Quit</string>
@@ -352,7 +355,7 @@ font-size: 20px;</string>
      <widget class="QPushButton" name="addStringButton">
       <property name="geometry">
        <rect>
-        <x>840</x>
+        <x>828</x>
         <y>500</y>
         <width>80</width>
         <height>23</height>
@@ -368,7 +371,7 @@ font-size: 20px;</string>
      <widget class="QLineEdit" name="stringValueLine">
       <property name="geometry">
        <rect>
-        <x>820</x>
+        <x>808</x>
         <y>470</y>
         <width>120</width>
         <height>20</height>
@@ -385,11 +388,14 @@ color: #000000;</string>
      <widget class="QPushButton" name="editingQuitWithSaveButton">
       <property name="geometry">
        <rect>
-        <x>680</x>
+        <x>650</x>
         <y>470</y>
         <width>75</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #FFFFFF;</string>
       </property>
       <property name="text">
        <string>Quit and save</string>

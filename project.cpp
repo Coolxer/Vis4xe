@@ -4,6 +4,8 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
 {
     this->name = name;
 
+    projectNameBox = new QLabel(widget);
+
     container = new QWidget(widget);
 
     container->setGeometry(0, 60, 960, 400);
@@ -11,10 +13,19 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
     lcd = new Lcd(rows, cols, color, container);
 
     stringsWidget = new StringsListWidget(this);
+
+    projectNameBox->setGeometry(480, 3, 120, 54);
+    projectNameBox->setStyleSheet("QLabel{ font-family: Vladimir Script; font-size: 32px; color: #FF0000; }");
+    projectNameBox->setText(name);
+    projectNameBox->setAlignment(Qt::AlignCenter);
+    projectNameBox->show();
 }
 
 Project::~Project()
 {
+    projectNameBox->setVisible(false);
+    delete projectNameBox;
+
     lcd->setVisible(false);
     delete lcd;
 

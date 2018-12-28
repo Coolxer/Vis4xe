@@ -31,9 +31,10 @@ void DragBox::mouseReleaseEvent(QMouseEvent* event)
     lastPosition = mapToParent(event->pos());
     QApplication::restoreOverrideCursor();
 
-
     if(unPlacedBox->checkDrop(lastPosition))
         setVisible(false);
+    else
+        move(startPosition);
 }
 
 void DragBox::enterEvent(QEvent*)
@@ -46,6 +47,6 @@ void DragBox::enterEvent(QEvent*)
 void DragBox::leaveEvent(QEvent*)
 {
     setStyleSheet("QLabel{border: 3px solid #0099ff; border-radius: 15px; }");
-    unPlacedBox->setStyleSheet("QLabel{border: 3px solid #0099ff; color: #FFFFFF; }");
+    unPlacedBox->setStyleSheet("QLabel{border: 3px solid #FFFFFF; color: #FFFFFF; }");
     QApplication::restoreOverrideCursor();
 }

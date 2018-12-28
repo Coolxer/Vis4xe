@@ -30,6 +30,6 @@ void DelBox::enterEvent(QEvent*)
 void DelBox::leaveEvent(QEvent*)
 {
     setStyleSheet("QLabel{ border: 3px solid #FF0000; border-radius: 15px; font-size: 16px; color: #FFFFFF; }");
-    unPlacedBox->setStyleSheet("QLabel{ border: 3px solid #0099ff; color: #FFFFFF; }");
+    unPlacedBox->setStyleSheet("QLabel{ border: 3px solid #FFFFFF; color: #FFFFFF; }");
     QApplication::restoreOverrideCursor();
 }

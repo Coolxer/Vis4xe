@@ -12,7 +12,7 @@ UnPlacedBox::UnPlacedBox(Project* project, int id, QString text, QPoint pos): QL
     delBox = new DelBox(this, project->getContainer(), QPoint(pos.x() + 115, pos.y()));
 
     setGeometry(pos.x(), pos.y(), 110, 30);
-    setStyleSheet("QLabel{border: 3px solid #0099ff; color: #FFFFFF; }");
+    setStyleSheet("QLabel{border: 3px solid #FFFFFF; color: #FFFFFF; }");
     setText(text);
     setAlignment(Qt::AlignCenter);
 }
