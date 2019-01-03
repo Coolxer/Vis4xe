@@ -24,7 +24,7 @@ private:
     unsigned short cols; //number of lcd cols
     QColor color; //color of the scren ( cells color)
 
-    int numberOfCells = 0; //the helping variable to storing number of cells ( rows * cols)
+    int numberOfCells = 0; //rows * cols
 
     void initCells();  //this function creates cells and sets their options, then appends its to vector
 
@@ -44,7 +44,12 @@ private:
     QVector <int> selectedNumbersOfCells; //the vector that is keeping the the cells number that are together connected
                                 //with one id // using for edit mode
 
+    QVector <int> operationCells;
+
     QVector <Cell*> cells;
+
+    void cancelChanges();
+    void acceptChanges();
 
     void cancelEditMode();
 
