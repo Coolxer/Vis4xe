@@ -132,8 +132,8 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 }
 
 void Lcd::setSelectedCell(int m)
-{
-    int id = cells[selectedCell]->getId();
+{   
+    int id = cells[m]->getId();
 
     if(id != -1)
     {
