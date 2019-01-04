@@ -6,6 +6,8 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget
     this->cols = cols;
     this->color = color;
 
+    numberOfCells = rows * cols;
+
     int width = (this->cols * 20) + (this->cols + 1) * 5;
     int height = (this->rows * 30) + (this->rows + 1) * 5;
 
@@ -142,7 +144,7 @@ void Lcd::setSelectedCell(int m)
         for(int i = 0; i < numberOfCells; i++)
         {
             //checks if the other cells have got the same id as the selected cell (same string)
-            if(id == cells[i]->getId())
+            if(cells[i]->getId() == id)
             {
                 selectedString += cells[i]->text();
                 selectedNumbersOfCells.push_back(i);

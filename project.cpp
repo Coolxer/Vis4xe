@@ -39,6 +39,8 @@ bool Project::check(QPoint point)
 {
     QPoint mappedPoint = lcd->mapFromParent(point);
 
+    qDebug()<<lcd->getNumberOfCells();
+
     for(int i = 0; i < lcd->getNumberOfCells(); i++)
     {
         Cell* cell = lcd->getCell(i);

@@ -24,7 +24,7 @@ private:
     unsigned short cols; //number of lcd cols
     QColor color; //color of the scren ( cells color)
 
-    int numberOfCells = 0; //rows * cols
+    int numberOfCells; //rows * cols
 
     void initCells();  //this function creates cells and sets their options, then appends its to vector
 
@@ -53,10 +53,6 @@ private:
 
     void cancelEditMode();
 
-protected:
-    //void mousePressEvent(QMouseEvent* event);
-    //void mouseMoveEvent(QMouseEvent* event) override; //inside this event the cells are changing colors in the
-                                                      //face of cursor and the string that they are written to
     void keyPressEvent(QKeyEvent* event);
 
 public:

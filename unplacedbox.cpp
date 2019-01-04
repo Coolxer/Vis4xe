@@ -48,6 +48,5 @@ void UnPlacedBox::remove()
 {
     setVisible(false);
     dragBox->setVisible(false);
-
 }
 
