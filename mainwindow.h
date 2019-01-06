@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QString>
+
+#include <QColorDialog>
 #include <QColor>
 
 #include "projectsmanager.h"
@@ -21,6 +23,8 @@ private:
 
     ProjectsManager* projectsManager;
 
+    QColor color;
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -33,6 +37,7 @@ private slots:
 
     void on_addStringButton_clicked();
     void on_editingQuitWithSaveButton_clicked();
+    void on_colorButton_clicked();
 };
 
 #endif // MAINWINDOW_H

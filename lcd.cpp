@@ -26,11 +26,9 @@ void Lcd::initCells()
     {
         for(int j = 0; j < cols; j++)
         {
-            Cell* cell = new Cell(this, numberOfCells, this->color);
+            Cell* cell = new Cell(this, numberOfCells, color);
 
             cell->setGeometry(QRect((25 * j) + 5, (i * 35) + 5, 20, 30));
-
-            //cell->setStyleSheet("QLabel { color: #FFFFFF; font-size: 25px;}");
 
             cells.push_back(cell);
             numberOfCells++;

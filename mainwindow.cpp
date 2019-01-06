@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->statesStackedWidget->setCurrentIndex(0);
 
+    setStyleSheet("QColorDialog{ background-color; #FFFFFF; }");
+
     projectsManager = new ProjectsManager(ui->homePage, ui->editPage, ui->statesStackedWidget);
 }
 
@@ -36,7 +38,7 @@ void MainWindow::on_finalAddButton_clicked()
     //need to be validators here
 
     //color there should be a circle switch
-    projectsManager->createProject(name, rows, cols, Qt::red);
+    projectsManager->createProject(name, rows, cols, color);
 
     ui->statesStackedWidget->setCurrentIndex(2);
 }
@@ -68,6 +70,18 @@ void MainWindow::on_addStringButton_clicked()
     {
         projectsManager->getCurrentProject()->getStringsWidget()->addStringWidget(string);
         ui->stringValueLine->clear();
+    }
+}
+
+void MainWindow::on_colorButton_clicked()
+{
+    QColor c = QColorDialog::getColor(Qt::white, this, "Choose main color");
+
+    if(c.isValid())
+    {
+        color = c;
+        QString style = "QPushButton{ background-color: %1;}";
+        ui->colorButton->setStyleSheet(style.arg(color.name()));
     }
 }
 

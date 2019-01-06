@@ -51,7 +51,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="homePage">
      <widget class="QLabel" name="projectNameLabel">
@@ -288,7 +288,7 @@ background-color: #0099ff</string>
       <property name="geometry">
        <rect>
         <x>400</x>
-        <y>360</y>
+        <y>460</y>
         <width>161</width>
         <height>41</height>
        </rect>
@@ -311,6 +311,40 @@ background-color: #0099ff</string>
       </property>
       <property name="text">
        <string>Cancel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="nameLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>360</y>
+        <width>160</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #FFFFFF;
+font-size: 20px;
+background-color: #0099ff</string>
+      </property>
+      <property name="text">
+       <string>Main color</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="colorButton">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>410</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>

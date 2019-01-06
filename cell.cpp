@@ -42,7 +42,12 @@ Cell::~Cell()
 
 void Cell::enterEvent(QEvent*)
 {
-    setStyleSheet("QLabel { background-color : #ff7733; font-size: 25px; }");
+    int r, g, b;
+    qDebug()<<color.rgb();
+
+    QString style = "QLabel { background-color : %1; font-size: 25px; }";
+
+    //setStyleSheet(style.arg());
     QApplication::setOverrideCursor(Qt::PointingHandCursor);
 }
 
