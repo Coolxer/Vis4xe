@@ -25,7 +25,7 @@ private:
 
 public:
     Project(){}
-    Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
+    Project(QString name, unsigned short rows, unsigned short cols, QWidget* widget);
     ~Project();
 
     QString getName() { return name; }// the latest thing to display also on the home page

@@ -1,12 +1,9 @@
 #include "lcd.h"
 
-Lcd::Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget) : QWidget (widget)
+Lcd::Lcd(unsigned short rows, unsigned short cols, QWidget* widget) : QWidget (widget)
 {
     this->rows = rows;
     this->cols = cols;
-    this->color = color;
-
-    numberOfCells = rows * cols;
 
     int width = (this->cols * 20) + (this->cols + 1) * 5;
     int height = (this->rows * 30) + (this->rows + 1) * 5;
@@ -26,7 +23,7 @@ void Lcd::initCells()
     {
         for(int j = 0; j < cols; j++)
         {
-            Cell* cell = new Cell(this, numberOfCells, color);
+            Cell* cell = new Cell(this, numberOfCells);
 
             cell->setGeometry(QRect((25 * j) + 5, (i * 35) + 5, 20, 30));
 
@@ -71,10 +68,10 @@ void Lcd::keyPressEvent(QKeyEvent* event)
             direction = -1;
             break;
         case Qt::Key_Up:
-            direction = -rows;
+            direction = -cols;
             break;
         case Qt::Key_Down:
-            direction = rows;
+            direction = cols;
             break;
         case Qt::Key_Right:
             direction = 1;
@@ -94,12 +91,50 @@ void Lcd::keyPressEvent(QKeyEvent* event)
         {
             int id = cells[selectedCell]->getId();
 
-            if(direction != 1)
+            if(direction == 1)
             {
-                for(int i = 0; i < operationCells.length(); i++)
+                int currentRow = (operationCells[0] / cols) + 1;
+
+                if((operationCells[operationCells.length() - 1] < (cols * currentRow) -1))
                 {
-                    if((operationCells[i] + direction < cells.length()) && (operationCells[i] + direction >= 0))
+                    cells[operationCells[0]]->clear();
+                    cells[operationCells[0]]->setStyleSheet("QLabel { background-color: #0099ff; font-size: 25px; }");
+                    cells[operationCells[0]]->setId(-1);
+
+                    for(int i = 0, m = 0; i < operationCells.length(); i++, m++)
                     {
+                        operationCells[i] += direction;
+
+                        cells[operationCells[i]]->setText(selectedString.at(m));
+                        cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
+                        cells[operationCells[i]]->setId(id);
+                    }
+                }
+            }
+            else
+            {
+                int currentRow = (operationCells[0] / cols);
+
+                bool allowToMove = false;
+
+                if(direction == -1)
+                {
+
+                    if(operationCells[0] > currentRow * cols)
+                        allowToMove = true;
+                }
+                else
+                {
+
+                    if((currentRow > 0) && (operationCells[0] + direction < rows * cols))
+                        allowToMove = true;
+                }
+
+                if(allowToMove)
+                {
+                    for(int i = 0; i < operationCells.length(); i++)
+                    {
+
                         cells[operationCells[i]]->clear();
                         cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #0099ff; font-size: 25px; }");
                         cells[operationCells[i]]->setId(-1);
@@ -110,21 +145,6 @@ void Lcd::keyPressEvent(QKeyEvent* event)
                         cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
                         cells[operationCells[i]]->setId(id);
                     }
-                }
-            }
-            else
-            {
-                cells[operationCells[0]]->clear();
-                cells[operationCells[0]]->setStyleSheet("QLabel { background-color: #0099ff; font-size: 25px; }");
-                cells[operationCells[0]]->setId(-1);
-
-                for(int i = 0, m = 0; i < operationCells.length(); i++, m++)
-                {
-                    operationCells[i] += 1; //direction;
-
-                    cells[operationCells[i]]->setText(selectedString.at(m));
-                    cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
-                    cells[operationCells[i]]->setId(id);
                 }
             }
         }
@@ -145,12 +165,12 @@ void Lcd::setSelectedCell(int m)
             if(cells[i]->getId() == id)
             {
                 selectedString += cells[i]->text();
-                selectedNumbersOfCells.push_back(i);
+                operationCells.push_back(i);
                 cells[i]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
             }
         }
 
-        operationCells = selectedNumbersOfCells;
+        selectedNumbersOfCells = operationCells;
         editMode = true;
     }
 }
@@ -163,26 +183,24 @@ void Lcd::cancelChanges()
         cells[operationCells[i]]->setId(-1);
 
         cells[selectedNumbersOfCells[i]]->setText(selectedString.at(i));
-        cells[selectedNumbersOfCells[i]]->setId(cells[selectedCell]->getId());
+        cells[selectedNumbersOfCells[i]]->setId(cells[selectedCell]->getId());    
     }
 
-    cancelEditMode();
+    exitEditMode();
 }
 
 void Lcd::acceptChanges()
 {
-    cancelEditMode();
+    exitEditMode();
 }
 
-void Lcd::cancelEditMode()
+void Lcd::exitEditMode()
 {
     editMode = false;
+    selectedCell = -1;
 
     for(int i = 0; i < selectedNumbersOfCells.length(); i++)
-    {
-        QString styles = "QLabel{ background-color: %1; font-size: 25px; }";
-        cells[selectedNumbersOfCells[i]]->setStyleSheet(styles.arg(color.name()));
-    }
+        cells[operationCells[i]]->setStyleSheet("QLabel{ background-color: #0099ff; font-size: 25px; }");
 
     selectedString.clear();
     selectedNumbersOfCells.clear();

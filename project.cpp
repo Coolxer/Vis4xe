@@ -1,6 +1,6 @@
 #include "project.h"
 
-Project::Project(QString name, unsigned short rows, unsigned short cols, QColor color, QWidget* widget)
+Project::Project(QString name, unsigned short rows, unsigned short cols, QWidget* widget)
 {
     this->name = name;
 
@@ -10,7 +10,7 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QColor 
 
     container->setGeometry(0, 60, 960, 400);
 
-    lcd = new Lcd(rows, cols, color, container);
+    lcd = new Lcd(rows, cols, container);
 
     stringsWidget = new StringsListWidget(this);
 
@@ -38,8 +38,6 @@ Project::~Project()
 bool Project::check(QPoint point)
 {
     QPoint mappedPoint = lcd->mapFromParent(point);
-
-    qDebug()<<lcd->getNumberOfCells();
 
     for(int i = 0; i < lcd->getNumberOfCells(); i++)
     {

@@ -46,7 +46,7 @@ public:
     QVector <ProjectNameBox*> getBoxes() { return boxes; }
 
     void loadProject(QString path);
-    void createProject(QString name, unsigned short rows, unsigned short cols, QColor color);
+    void createProject(QString name, unsigned short rows, unsigned short cols);
     void saveProject();
 
     void releaseProject() { delete currentProject; currentProject = nullptr; }

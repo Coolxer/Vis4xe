@@ -1,7 +1,6 @@
 #ifndef LCD_H
 #define LCD_H
 
-#include <QColor>
 #include <QWidget>
 #include <QVector>
 
@@ -22,9 +21,8 @@ class Lcd : public QWidget
 private:
     unsigned short rows; //number of lcd rows
     unsigned short cols; //number of lcd cols
-    QColor color; //color of the scren ( cells color)
 
-    int numberOfCells; //rows * cols
+    int numberOfCells = 0; //rows * cols
 
     void initCells();  //this function creates cells and sets their options, then appends its to vector
 
@@ -51,14 +49,14 @@ private:
     void cancelChanges();
     void acceptChanges();
 
-    void cancelEditMode();
+    void exitEditMode();
 
     void keyPressEvent(QKeyEvent* event);
 
 public:
     Lcd(){}
-    Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget);
-    //Lcd(unsigned short rows, unsigned short cols, QColor color, QWidget* widget, QVector <Cell*> cells);
+    Lcd(unsigned short rows, unsigned short cols, QWidget* widget);
+    //Lcd(unsigned short rows, unsigned short cols, QWidget* widget, QVector <Cell*> cells);
     ~Lcd(){}
 
     //QVector <Cell*> getCells() { return cells; }; //getter that allows to read cells
@@ -77,12 +75,12 @@ public:
 
     int getRows(){ return rows; }
     int getCols(){ return cols; }
-    QString getColor() { return color.name(); }
-
 
     void appendCells(QVector<Cell*> cells) { this->cells = cells; }
 
     void loadCellsFromFile(QVector<Cell*> cells);
+
+    bool editEnabled() { return editMode; };
 };
 
 #endif // LCD_H

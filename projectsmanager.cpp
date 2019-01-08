@@ -91,10 +91,10 @@ void ProjectsManager::loadProject(QString path)
     QVector <Cell*> cells;
     QVector <UnPlacedBox*> unPlacedBoxes;
 
-    currentProject = new Project(name.toString(), rows.toInt(), cols.toInt(), color.toString(), editPage);
+    currentProject = new Project(name.toString(), rows.toInt(), cols.toInt(), editPage);
 
     for(int i = 0; i < cellsArray.size(); i++)
-        cells.push_back(new Cell(currentProject->getLcd(), i, color.toString(), cellsArray[i].toObject().value("id").toInt(), cellsArray[i].toObject().value("value").toString()));
+        cells.push_back(new Cell(currentProject->getLcd(), i, cellsArray[i].toObject().value("id").toInt(), cellsArray[i].toObject().value("value").toString()));
 
     for(int i = 0; i < unplacedBoxesArray.size(); i++)
     {
@@ -110,9 +110,9 @@ void ProjectsManager::loadProject(QString path)
     stackedWidget->setCurrentIndex(2);
 }
 
-void ProjectsManager::createProject(QString name, unsigned short rows, unsigned short cols, QColor color)
+void ProjectsManager::createProject(QString name, unsigned short rows, unsigned short cols)
 {
-    currentProject = new Project(name, rows, cols, color, editPage);
+    currentProject = new Project(name, rows, cols, editPage);
 }
 
 void ProjectsManager::saveProject()
@@ -148,7 +148,6 @@ void ProjectsManager::saveProject()
     obj.insert(QString("name"), QJsonValue(currentProject->getName()));
     obj.insert(QString("rows"), QJsonValue(currentProject->getLcd()->getRows()));
     obj.insert(QString("cols"), QJsonValue(currentProject->getLcd()->getCols()));
-    obj.insert(QString("color"), QJsonValue(currentProject->getLcd()->getColor()));
 
     obj.insert(QString("cells"), QJsonValue(cells));
     obj.insert(QString("unPlacedBoxes"), QJsonValue(unPlacedBoxes));
