@@ -30,6 +30,8 @@ private:
 
     int selectedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string, normally is -1
 
+    int currentId = -1;
+
     int hoveredCell = -1; //the index of the cell which on the mouse is over, normally -1
 
     int droppedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string

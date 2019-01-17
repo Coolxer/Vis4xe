@@ -89,8 +89,6 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
         if(direction != 0)
         {
-            int id = cells[selectedCell]->getId();
-
             if(direction == 1)
             {
                 int currentRow = (operationCells[0] / cols) + 1;
@@ -107,7 +105,7 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
                         cells[operationCells[i]]->setText(selectedString.at(m));
                         cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
-                        cells[operationCells[i]]->setId(id);
+                        cells[operationCells[i]]->setId(currentId);
                     }
                 }
             }
@@ -119,14 +117,15 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
                 if(direction == -1)
                 {
-
                     if(operationCells[0] > currentRow * cols)
                         allowToMove = true;
                 }
                 else
                 {
+                    if(direction == cols && operationCells[0] + direction < rows*cols && currentRow < rows )
+                        allowToMove = true;
 
-                    if((currentRow > 0) && (operationCells[0] + direction < rows * cols))
+                    else if (direction == -cols && operationCells[0] + direction > 0  && currentRow > 0)
                         allowToMove = true;
                 }
 
@@ -143,7 +142,7 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
                         cells[operationCells[i]]->setText(selectedString.at(i));
                         cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
-                        cells[operationCells[i]]->setId(id);
+                        cells[operationCells[i]]->setId(currentId);
                     }
                 }
             }
@@ -152,17 +151,17 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 }
 
 void Lcd::setSelectedCell(int m)
-{   
-    int id = cells[m]->getId();
+{
+    currentId = cells[m]->getId();
 
-    if(id != -1)
+    if(currentId != -1)
     {
         selectedCell = m;
 
         for(int i = 0; i < numberOfCells; i++)
         {
             //checks if the other cells have got the same id as the selected cell (same string)
-            if(cells[i]->getId() == id)
+            if(cells[i]->getId() == currentId)
             {
                 selectedString += cells[i]->text();
                 operationCells.push_back(i);
@@ -171,6 +170,7 @@ void Lcd::setSelectedCell(int m)
         }
 
         selectedNumbersOfCells = operationCells;
+
         editMode = true;
     }
 }
@@ -183,9 +183,8 @@ void Lcd::cancelChanges()
         cells[operationCells[i]]->setId(-1);
 
         cells[selectedNumbersOfCells[i]]->setText(selectedString.at(i));
-        cells[selectedNumbersOfCells[i]]->setId(cells[selectedCell]->getId());    
+        cells[selectedNumbersOfCells[i]]->setId(currentId);
     }
-
     exitEditMode();
 }
 
@@ -198,6 +197,7 @@ void Lcd::exitEditMode()
 {
     editMode = false;
     selectedCell = -1;
+    currentId = -1;
 
     for(int i = 0; i < selectedNumbersOfCells.length(); i++)
         cells[operationCells[i]]->setStyleSheet("QLabel{ background-color: #0099ff; font-size: 25px; }");
