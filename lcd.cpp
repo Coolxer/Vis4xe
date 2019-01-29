@@ -79,6 +79,9 @@ void Lcd::keyPressEvent(QKeyEvent* event)
         case Qt::Key_Escape:
             cancelChanges();
             break;
+        case Qt::Key_Return:
+            acceptChanges();
+            break;
         case Qt::Key_Enter:
             acceptChanges();
             break;
@@ -125,7 +128,7 @@ void Lcd::keyPressEvent(QKeyEvent* event)
                     if(direction == cols && operationCells[0] + direction < rows*cols && currentRow < rows )
                         allowToMove = true;
 
-                    else if (direction == -cols && operationCells[0] + direction > 0  && currentRow > 0)
+                    else if (direction == -cols && operationCells[0] + direction >= 0  && currentRow > 0)
                         allowToMove = true;
                 }
 
@@ -205,6 +208,14 @@ void Lcd::exitEditMode()
     selectedString.clear();
     selectedNumbersOfCells.clear();
     operationCells.clear();
+}
+
+void Lcd::unpin()
+{
+    //for(int i = 0; i <)
+
+
+    exitEditMode();
 }
 
 

@@ -55,6 +55,8 @@ private:
 
     void keyPressEvent(QKeyEvent* event);
 
+    void unpin();
+
 public:
     Lcd(){}
     Lcd(unsigned short rows, unsigned short cols, QWidget* widget);
