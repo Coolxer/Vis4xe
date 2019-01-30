@@ -27,6 +27,8 @@ private:
 public:
     DragBox(){}
     DragBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos);
+
+    void reset();
 };
 
 #endif // DRAGBOX_H

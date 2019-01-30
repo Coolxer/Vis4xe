@@ -10,7 +10,7 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QWidget
 
     container->setGeometry(0, 60, 960, 400);
 
-    lcd = new Lcd(rows, cols, container);
+    lcd = new Lcd(rows, cols, container, this);
 
     stringsWidget = new StringsListWidget(this);
 

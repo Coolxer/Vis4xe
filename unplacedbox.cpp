@@ -34,9 +34,7 @@ bool UnPlacedBox::checkDrop(QPoint point)
 
     if(project->writeOnLcd(this))
     {
-        setVisible(false);
-        dragBox->setVisible(false);
-        delBox->setVisible(false);
+        show(false);
 
         return true;
     }
@@ -48,5 +46,20 @@ void UnPlacedBox::remove()
 {
     setVisible(false);
     dragBox->setVisible(false);
+}
+
+void UnPlacedBox::show(bool x)
+{
+    setVisible(x);
+    dragBox->setVisible(x);
+    delBox->setVisible(x);
+}
+
+void UnPlacedBox::reset()
+{
+    move(startPosition);
+    dragBox->reset();
+    delBox->reset();
+    show(true);
 }
 

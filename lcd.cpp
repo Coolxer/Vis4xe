@@ -1,9 +1,13 @@
 #include "lcd.h"
 
-Lcd::Lcd(unsigned short rows, unsigned short cols, QWidget* widget) : QWidget (widget)
+#include "project.h"
+#include "unplacedbox.h"
+
+Lcd::Lcd(unsigned short rows, unsigned short cols, QWidget* widget, Project* project) : QWidget (widget)
 {
     this->rows = rows;
     this->cols = cols;
+    this->project = project;
 
     int width = (this->cols * 20) + (this->cols + 1) * 5;
     int height = (this->rows * 30) + (this->rows + 1) * 5;
@@ -12,6 +16,8 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QWidget* widget) : QWidget (w
     setStyleSheet("QWidget{ background-color:  #FFFFFF; }");
 
     initCells();
+
+    uBox = nullptr;
 
     //this->setMouseTracking(true);
     this->setFocusPolicy(Qt::ClickFocus);
@@ -86,7 +92,7 @@ void Lcd::keyPressEvent(QKeyEvent* event)
             acceptChanges();
             break;
         case Qt::Key_Delete:
-            qDebug()<<"you";
+            unpin();
             break;
         }
 
@@ -98,18 +104,23 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
                 if((operationCells[operationCells.length() - 1] < (cols * currentRow) -1))
                 {
-                    cells[operationCells[0]]->clear();
-                    cells[operationCells[0]]->setStyleSheet("QLabel { background-color: #0099ff; font-size: 25px; }");
-                    cells[operationCells[0]]->setId(-1);
-
-                    for(int i = 0, m = 0; i < operationCells.length(); i++, m++)
+                    if(cells[operationCells[operationCells.length() - 1] + 1]->getId() == -1)
                     {
-                        operationCells[i] += direction;
+                        cells[operationCells[0]]->clear();
+                        cells[operationCells[0]]->setStyleSheet("QLabel { background-color: #0099ff; font-size: 25px; }");
+                        cells[operationCells[0]]->setId(-1);
 
-                        cells[operationCells[i]]->setText(selectedString.at(m));
-                        cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
-                        cells[operationCells[i]]->setId(currentId);
+                        for(int i = 0, m = 0; i < operationCells.length(); i++, m++)
+                        {
+                            operationCells[i]++;
+
+                            cells[operationCells[i]]->setText(selectedString.at(m));
+                            cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
+                            cells[operationCells[i]]->setId(currentId);
+                        }
                     }
+                    else
+                        qDebug()<<"blocked";
                 }
             }
             else
@@ -121,15 +132,41 @@ void Lcd::keyPressEvent(QKeyEvent* event)
                 if(direction == -1)
                 {
                     if(operationCells[0] > currentRow * cols)
-                        allowToMove = true;
+                    {
+                        if(cells[operationCells[0] -1]->getId() == -1)
+                            allowToMove = true;
+                    }
                 }
                 else
                 {
+                    // + cols
                     if(direction == cols && operationCells[0] + direction < rows*cols && currentRow < rows )
+                    {
                         allowToMove = true;
+                        for(int i=0; i<selectedString.length(); i++)
+                        {
+                            if(cells[operationCells[i] + direction]->getId() != -1)
+                            {
+                                allowToMove = false;
+                                break;
+                            }
+                        }
+
+                    }
 
                     else if (direction == -cols && operationCells[0] + direction >= 0  && currentRow > 0)
+                    {
                         allowToMove = true;
+
+                        for(int i=0; i<selectedString.length(); i++)
+                        {
+                            if(cells[operationCells[i] + direction]->getId() != -1)
+                            {
+                                allowToMove = false;
+                                break;
+                            }
+                        }
+                    }
                 }
 
                 if(allowToMove)
@@ -155,26 +192,43 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
 void Lcd::setSelectedCell(int m)
 {
-    currentId = cells[m]->getId();
-
-    if(currentId != -1)
+    if(selectedCell == -1)
     {
-        selectedCell = m;
+        currentId = cells[m]->getId();
 
-        for(int i = 0; i < numberOfCells; i++)
+        if(currentId != -1)
         {
-            //checks if the other cells have got the same id as the selected cell (same string)
-            if(cells[i]->getId() == currentId)
+            selectedCell = m;
+
+            for(int i = 0; i < numberOfCells; i++)
             {
-                selectedString += cells[i]->text();
-                operationCells.push_back(i);
-                cells[i]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
+                //checks if the other cells have got the same id as the selected cell (same string)
+                if(cells[i]->getId() == currentId)
+                {
+                    selectedString += cells[i]->text();
+                    operationCells.push_back(i);
+                    cells[i]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
+                }
             }
+
+            UnPlacedBox* b;
+
+            for(int i = 0; i <project->getStringsWidget()->getAmount(); i++)
+            {
+                b = project->getStringsWidget()->getBox(i);
+
+                if(b->getId() == currentId)
+                {
+                    uBox = b;
+                    break;
+                }
+
+            }
+
+            selectedNumbersOfCells = operationCells;
+
+            editMode = true;
         }
-
-        selectedNumbersOfCells = operationCells;
-
-        editMode = true;
     }
 }
 
@@ -212,8 +266,13 @@ void Lcd::exitEditMode()
 
 void Lcd::unpin()
 {
-    //for(int i = 0; i <)
+    uBox->reset();
 
+    for(int i=0; i<selectedString.length(); i++)
+    {
+        cells[operationCells[i]]->clear();
+        cells[operationCells[i]]->setId(-1);
+    }
 
     exitEditMode();
 }

@@ -5,6 +5,7 @@
 DelBox::DelBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos): QLabel(parent)
 {
     this->unPlacedBox = unPlacedBox;
+    startPosition = pos;
 
     setGeometry(pos.x(), pos.y(), 30, 30);
     setStyleSheet("QLabel{border: 3px solid #FF0000; border-radius: 15px; font-size: 16px; color: #FFFFFF; }");
@@ -32,4 +33,9 @@ void DelBox::leaveEvent(QEvent*)
     setStyleSheet("QLabel{ border: 3px solid #FF0000; border-radius: 15px; font-size: 16px; color: #FFFFFF; }");
     unPlacedBox->setStyleSheet("QLabel{ border: 3px solid #FFFFFF; color: #FFFFFF; }");
     QApplication::restoreOverrideCursor();
+}
+
+void DelBox::reset()
+{
+    move(startPosition);
 }

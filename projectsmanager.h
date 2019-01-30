@@ -1,6 +1,7 @@
 #ifndef PROJECTSLIST_H
 #define PROJECTSLIST_H
 
+#include <QFileDialog>
 #include <QByteArray>
 #include <QVector>
 
@@ -12,8 +13,6 @@
 #include "filemanager.h"
 
 #include "project.h"
-
-#include <QFileDialog>
 
 class ProjectNameBox;
 class QWidget;

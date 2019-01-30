@@ -16,6 +16,9 @@
 
 #include "cell.h"
 
+class Project;
+class UnPlacedBox;
+
 class Lcd : public QWidget
 {
 private:
@@ -48,6 +51,9 @@ private:
 
     QVector <Cell*> cells;
 
+    Project* project;
+    UnPlacedBox* uBox;
+
     void cancelChanges();
     void acceptChanges();
 
@@ -59,7 +65,7 @@ private:
 
 public:
     Lcd(){}
-    Lcd(unsigned short rows, unsigned short cols, QWidget* widget);
+    Lcd(unsigned short rows, unsigned short cols, QWidget* widget, Project* project);
     //Lcd(unsigned short rows, unsigned short cols, QWidget* widget, QVector <Cell*> cells);
     ~Lcd(){}
 

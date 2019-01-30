@@ -40,6 +40,7 @@ public:
     void loadCells(QVector<Cell*> cells);
 
     QWidget* getContainer() { return container; }
+
 };
 
 #endif // PROJECT_H

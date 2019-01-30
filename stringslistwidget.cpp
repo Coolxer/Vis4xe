@@ -21,7 +21,7 @@ void StringsListWidget::addStringWidget(QString name)
     else
         boxes.push_back(new UnPlacedBox(project, 0, name, QPoint(810, 5)));
 
-    boxes.last()->show();
+    boxes.last()->show(true);
 }
 
 void StringsListWidget::deleteStringWidget(int id)

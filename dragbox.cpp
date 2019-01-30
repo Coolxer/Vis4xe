@@ -50,3 +50,8 @@ void DragBox::leaveEvent(QEvent*)
     unPlacedBox->setStyleSheet("QLabel{border: 3px solid #FFFFFF; color: #FFFFFF; }");
     QApplication::restoreOverrideCursor();
 }
+
+void DragBox::reset()
+{
+    move(startPosition);
+}
