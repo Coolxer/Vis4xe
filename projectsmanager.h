@@ -27,6 +27,8 @@ private:
     QWidget* editPage;
     QStackedWidget* stackedWidget;
 
+    QStackedWidget* prList;
+
     QVector <ProjectNameBox*> boxes;
 
     Project* currentProject = nullptr;
@@ -37,14 +39,14 @@ private:
 
 public:
     ProjectsManager(){}
-    ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedWidget* stackedWidget);
+    ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedWidget* stackedWidget, QStackedWidget* prList);
     ~ProjectsManager();
 
     Project* getCurrentProject() { return currentProject; } //returns the pointer to the current project
 
     QVector <ProjectNameBox*> getBoxes() { return boxes; }
 
-    void loadProject(QString path);
+    void loadProject(ProjectNameBox* box, QString path);
     void createProject(QString name, unsigned short rows, unsigned short cols);
     void saveProject();
 

@@ -12,14 +12,21 @@ FileManager::~FileManager()
 
 QByteArray FileManager::shortRead()
 {
+    QByteArray data = nullptr;
+
     projectsFile.setFileName("C:/Users/lukasz/Desktop/projects.json");
 
-    if(!projectsFile.open(QIODevice::ReadOnly | QIODevice::Text))
-        qDebug()<<"failed to open file";
+    if(projectsFile.exists())
+    {
 
-    QByteArray data = projectsFile.readAll();
+        if(!projectsFile.open(QIODevice::ReadOnly | QIODevice::Text))
+            qDebug()<<"failed to open file";
 
-    projectsFile.close();
+        data = projectsFile.readAll();
+
+        projectsFile.close();
+
+    }
 
     return data;
 }
@@ -27,15 +34,17 @@ QByteArray FileManager::shortRead()
 QByteArray FileManager::readProject(QString path)
 {
     QFile file(path);
+    QByteArray data = nullptr;
 
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-       qDebug()<<"failed to Open file";
-    else
-       qDebug()<<"Opened file";
+    if (file.exists())
+    {
+        if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+           qDebug()<<"Opened file";
 
-    QByteArray data = file.readAll();
+        data = file.readAll();
 
-    file.close();
+        file.close();
+    }
 
     return data;
 }
@@ -53,13 +62,15 @@ void FileManager::saveProject(QJsonDocument project, QJsonDocument projectsList,
 
     file.close();
 
-    if(!projectsFile.open(QIODevice::ReadWrite))
-        qDebug()<<"failed opened the file";
+    if (projectsFile.exists())
+    {
+        if(!projectsFile.open(QIODevice::ReadWrite))
+            qDebug()<<"failed opened the file";
 
+        projectsFile.write(projectsList.toJson());
 
-    projectsFile.write(projectsList.toJson());
-
-
+        projectsFile.close();
+    }
 }
 
 void FileManager::removeProject(QString path)

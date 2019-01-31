@@ -51,7 +51,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="homePage">
      <widget class="QLabel" name="projectNameLabel">
@@ -84,7 +84,7 @@ background-color: #0099ff</string>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="projectsList"/>
       <widget class="QWidget" name="noProjectsInfo">
@@ -122,9 +122,19 @@ font-size: 20px;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-radius:  50%;
-background-color: #0099ff;
-font-size: 30px;</string>
+       <string notr="true">#addNewButton
+{
+	border-radius:  50%;
+	border: 3px solid #0099ff;
+	color: #0099ff;
+	font-size: 30px;
+}
+
+#addNewButton:hover
+{
+	background-color: #0099ff;
+	color:#333333;
+}</string>
       </property>
       <property name="text">
        <string>New</string>
@@ -164,7 +174,7 @@ background-color: #0099ff</string>
       <property name="styleSheet">
        <string notr="true">color: #FFFFFF;
 font-size: 20px;
-background-color: #0099ff</string>
+background-color: #0099ff;</string>
       </property>
       <property name="text">
        <string>Name</string>
@@ -284,33 +294,187 @@ background-color: #0099ff</string>
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
+     <widget class="QPushButton" name="cancelAddingButton">
+      <property name="geometry">
+       <rect>
+        <x>860</x>
+        <y>500</y>
+        <width>80</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#cancelAddingButton
+{
+	border: 2px solid red;
+	color: red;
+    border-radius:15px;
+
+}
+
+#cancelAddingButton:hover
+{
+	background-color: red;
+	color: #333333;
+}</string>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
      <widget class="QPushButton" name="finalAddButton">
       <property name="geometry">
        <rect>
         <x>400</x>
-        <y>360</y>
-        <width>161</width>
-        <height>41</height>
+        <y>380</y>
+        <width>160</width>
+        <height>101</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>-1</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #00cc00;</string>
+       <string notr="true">#finalAddButton
+{
+	border-radius:  50%;
+	border: 3px solid #0099ff;
+	color: #0099ff;
+	font-size: 30px;
+}
+
+#finalAddButton:hover
+{
+	background-color: #0099ff;
+	color:#333333;
+}</string>
       </property>
       <property name="text">
        <string>Add</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="cancelAddingButton">
+     <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>830</x>
-        <y>460</y>
-        <width>75</width>
-        <height>23</height>
+        <x>415</x>
+        <y>350</y>
+        <width>47</width>
+        <height>13</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: #FFFFFF;</string>
+      </property>
       <property name="text">
-       <string>Cancel</string>
+       <string>&lt;1, 28&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>505</x>
+        <y>350</y>
+        <width>47</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #FFFFFF;</string>
+      </property>
+      <property name="text">
+       <string>&lt;1, 10&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="name_alert">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>190</y>
+        <width>221</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>221</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>221</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: red;
+font-size: 16px;</string>
+      </property>
+      <property name="text">
+       <string>You have to type project name</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="cols_alert">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>320</y>
+        <width>231</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>231</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>231</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: red;
+font-size: 16px;</string>
+      </property>
+      <property name="text">
+       <string>Cols must be between 1 and 28</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rows_alert">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>320</y>
+        <width>231</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>231</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>231</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: red;
+font-size: 16px;</string>
+      </property>
+      <property name="text">
+       <string>Rows must be between 1 and 10</string>
       </property>
      </widget>
     </widget>
@@ -339,14 +503,28 @@ font-size: 20px;</string>
      <widget class="QPushButton" name="editingQuitButton">
       <property name="geometry">
        <rect>
-        <x>650</x>
-        <y>500</y>
-        <width>75</width>
-        <height>23</height>
+        <x>490</x>
+        <y>470</y>
+        <width>150</width>
+        <height>60</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #FFFFFF;</string>
+       <string notr="true">#editingQuitButton
+{
+	border: 2px solid red;
+	color: red;
+	border-radius:30px;
+	font-size:20px;
+}
+
+
+#editingQuitButton:hover
+{
+	background-color: red;
+	color: #333333;
+}
+</string>
       </property>
       <property name="text">
        <string>Quit</string>
@@ -355,14 +533,27 @@ font-size: 20px;</string>
      <widget class="QPushButton" name="addStringButton">
       <property name="geometry">
        <rect>
-        <x>828</x>
+        <x>825</x>
         <y>500</y>
         <width>80</width>
-        <height>23</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #FFFFFF;</string>
+       <string notr="true">#addStringButton
+{
+	border: 2px solid #0099ff;
+	color: #0099ff;
+    border-radius:15px;
+}
+
+
+#addStringButton:hover
+{
+	background-color: #0099ff;
+	color: #333333;
+}
+</string>
       </property>
       <property name="text">
        <string>Add</string>
@@ -371,11 +562,23 @@ font-size: 20px;</string>
      <widget class="QLineEdit" name="stringValueLine">
       <property name="geometry">
        <rect>
-        <x>808</x>
+        <x>810</x>
         <y>470</y>
-        <width>120</width>
+        <width>110</width>
         <height>20</height>
        </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>110</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>110</width>
+        <height>20</height>
+       </size>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: #FFFFFF;
@@ -384,21 +587,38 @@ color: #000000;</string>
       <property name="text">
        <string/>
       </property>
+      <property name="maxLength">
+       <number>28</number>
+      </property>
      </widget>
      <widget class="QPushButton" name="editingQuitWithSaveButton">
       <property name="geometry">
        <rect>
-        <x>650</x>
+        <x>160</x>
         <y>470</y>
-        <width>75</width>
-        <height>23</height>
+        <width>150</width>
+        <height>60</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #FFFFFF;</string>
+       <string notr="true">#editingQuitWithSaveButton
+{
+	border: 2px solid #00cc00;
+	color: #00cc00;
+	border-radius:30;
+	font-size: 20px
+}
+
+
+#editingQuitWithSaveButton:hover
+{
+	background-color: #00cc00;
+	color: #333333;
+}
+</string>
       </property>
       <property name="text">
-       <string>Quit and save</string>
+       <string>save and quit</string>
       </property>
      </widget>
      <widget class="QLabel" name="label">

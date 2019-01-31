@@ -9,7 +9,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->statesStackedWidget->setCurrentIndex(0);
 
-    projectsManager = new ProjectsManager(ui->homePage, ui->editPage, ui->statesStackedWidget);
+    ui->name_alert->setVisible(false);
+    ui->cols_alert->setVisible(false);
+    ui->rows_alert->setVisible(false);
+
+    projectsManager = new ProjectsManager(ui->homePage, ui->editPage, ui->statesStackedWidget, ui->projectsExists);
 }
 
 MainWindow::~MainWindow()
@@ -29,17 +33,51 @@ void MainWindow::on_finalAddButton_clicked()
     unsigned short rows = ui->rowsLineEdit->text().toShort();
     unsigned short cols = ui->colsLineEdit->text().toShort();
 
-    ui->nameLineEdit->clear();
-    ui->rowsLineEdit->clear();
-    ui->colsLineEdit->clear();
+    bool valid = true;
+
+    if(name.isEmpty())
+    {
+        ui->name_alert->setVisible(true);
+        valid = false;
+    }
+    else
+        ui->name_alert->setVisible(false);
+
+    if(cols < 1 || cols > 28 || cols - int(cols) !=0)
+    {
+        ui->cols_alert->setVisible(true);
+        valid = false;
+    }
+    else
+         ui->cols_alert->setVisible(false);
+
+    if(rows <= 0 || rows > 10 || rows - int(rows) !=0)
+    {
+        ui->rows_alert->setVisible(true);
+        valid = false;
+    }
+    else
+        ui->rows_alert->setVisible(false);
 
     //need to be validators here
 
-    //color there should be a circle switch
-    projectsManager->createProject(name, rows, cols);
+    if(valid)
+    {
+        projectsManager->createProject(name, rows, cols);
+        ui->statesStackedWidget->setCurrentIndex(2);
 
-    ui->statesStackedWidget->setCurrentIndex(2);
+        ui->nameLineEdit->clear();
+        ui->rowsLineEdit->clear();
+        ui->colsLineEdit->clear();
+
+        ui->name_alert->setVisible(false);
+        ui->cols_alert->setVisible(false);
+        ui->rows_alert->setVisible(false);
+
+        ui->stringValueLine->setMaxLength(cols);
+    }
 }
+
 
 void MainWindow::on_cancelAddingButton_clicked()
 {
