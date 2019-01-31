@@ -70,7 +70,7 @@ void ProjectsManager::readBoxes()
 
                 for(int j = 0; j < c; j++)
                 {
-                    boxes.push_back(new ProjectNameBox(homePage, boxesArray[m].toObject().value("name").toString(), boxesArray[m].toObject().value("path").toString(), QPoint(100 + (260 *j), (120 * i) + 100)));
+                    boxes.push_back(new ProjectNameBox(homePage, boxesArray[m].toObject().value("name").toString(), boxesArray[m].toObject().value("path").toString(), QPoint(120 + (260 *j), (120 * i) + 100)));
                     boxes[m]->init(this);
 
                     m++;

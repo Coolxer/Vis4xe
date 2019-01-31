@@ -13,7 +13,7 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QWidget* widget, Project* pro
     int height = (this->rows * 30) + (this->rows + 1) * 5;
 
     setGeometry(QRect((widget->width() - 160)/2 - width/2, widget->height()/2 - height/2, width, height));
-    setStyleSheet("QWidget{ background-color:  #FFFFFF; }");
+    setStyleSheet("QWidget{ background-color: #262626; }");
 
     initCells();
 

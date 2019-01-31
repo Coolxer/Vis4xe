@@ -41,7 +41,7 @@ void Cell::enterEvent(QEvent*)
 {
     if(!lcd->editEnabled())
     {
-        setStyleSheet("QLabel { background-color : #006bb3; font-size: 25px; }");
+        setStyleSheet("QLabel { background-color : #ff8000; font-size: 25px; }");
         QApplication::setOverrideCursor(Qt::PointingHandCursor);
     }
 }

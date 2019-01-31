@@ -63,12 +63,20 @@
         <height>60</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Tw Cen MT Condensed,Extra 12</family>
+        <pointsize>-1</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
-       <string notr="true">font-size: 50px;
-background-color: #0099ff</string>
+       <string notr="true">font-size: 44px;
+background-color: #0099ff;
+color: #333333;
+font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;</string>
       </property>
       <property name="text">
-       <string>Vis4xe</string>
+       <string>HomePage</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -107,32 +115,61 @@ font-size: 20px;</string>
        </widget>
       </widget>
      </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>35</y>
+        <width>130</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #0099ff;
+font-size:20px;
+border-radius: 25px;</string>
+      </property>
+      <property name="text">
+       <string>Vis4xe</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
      <widget class="QPushButton" name="addNewButton">
       <property name="geometry">
        <rect>
-        <x>430</x>
-        <y>430</y>
-        <width>100</width>
-        <height>100</height>
+        <x>355</x>
+        <y>450</y>
+        <width>250</width>
+        <height>250</height>
        </rect>
       </property>
       <property name="font">
        <font>
+        <family>Tw Cen MT Condensed,Extra 12</family>
         <pointsize>-1</pointsize>
        </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">#addNewButton
 {
-	border-radius:  50%;
-	border: 3px solid #0099ff;
-	color: #0099ff;
-	font-size: 30px;
+	border-radius:  125px;
+	border: 3px solid #00b300;
+	color: #00b300;
+	font-size: 56px;
+	text-align:top;
+	padding-top:20px;
+
+font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;
 }
 
 #addNewButton:hover
 {
-	background-color: #0099ff;
+	background-color: #00b300;
 	color:#333333;
 }</string>
       </property>
@@ -151,9 +188,17 @@ font-size: 20px;</string>
         <height>60</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Tw Cen MT Condensed,Extra 12</family>
+        <pointsize>-1</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
-       <string notr="true">font-size: 30px;
-background-color: #0099ff</string>
+       <string notr="true">font-size: 44px;
+background-color: #0099ff;
+color: #333333;
+font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;</string>
       </property>
       <property name="text">
        <string>Adding Project</string>
@@ -325,34 +370,36 @@ background-color: #0099ff</string>
      <widget class="QPushButton" name="finalAddButton">
       <property name="geometry">
        <rect>
-        <x>400</x>
-        <y>380</y>
-        <width>160</width>
-        <height>101</height>
+        <x>420</x>
+        <y>390</y>
+        <width>120</width>
+        <height>120</height>
        </rect>
       </property>
       <property name="font">
        <font>
+        <family>Tw Cen MT Condensed,Extra 12</family>
         <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="styleSheet">
        <string notr="true">#finalAddButton
 {
-	border-radius:  50%;
-	border: 3px solid #0099ff;
-	color: #0099ff;
-	font-size: 30px;
+	border-radius:  60px;
+	border: 3px solid #00b300;
+	color: #00b300;
+	font-size: 44px;
+	font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;
 }
 
 #finalAddButton:hover
 {
-	background-color: #0099ff;
+	background-color: #00b300;
 	color:#333333;
 }</string>
       </property>
       <property name="text">
-       <string>Add</string>
+       <string>+</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_3">
@@ -413,7 +460,8 @@ background-color: #0099ff</string>
       </property>
       <property name="styleSheet">
        <string notr="true">color: red;
-font-size: 16px;</string>
+font-size: 16px;
+</string>
       </property>
       <property name="text">
        <string>You have to type project name</string>
@@ -477,6 +525,27 @@ font-size: 16px;</string>
        <string>Rows must be between 1 and 10</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>35</y>
+        <width>130</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #0099ff;
+font-size:20px;
+border-radius: 25px;</string>
+      </property>
+      <property name="text">
+       <string>Vis4xe</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="editPage">
      <widget class="QLabel" name="stringsHeader">
@@ -489,9 +558,10 @@ font-size: 16px;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border: 3px solid #0099ff;
-color: #0099ff;
-font-size: 20px;</string>
+       <string notr="true">color: #333333;
+font-size: 36px;
+background-color: #0099ff;
+font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;</string>
       </property>
       <property name="text">
        <string>Strings</string>
@@ -503,7 +573,7 @@ font-size: 20px;</string>
      <widget class="QPushButton" name="editingQuitButton">
       <property name="geometry">
        <rect>
-        <x>490</x>
+        <x>330</x>
         <y>470</y>
         <width>150</width>
         <height>60</height>
@@ -533,10 +603,10 @@ font-size: 20px;</string>
      <widget class="QPushButton" name="addStringButton">
       <property name="geometry">
        <rect>
-        <x>825</x>
-        <y>500</y>
-        <width>80</width>
-        <height>30</height>
+        <x>600</x>
+        <y>470</y>
+        <width>150</width>
+        <height>60</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -544,9 +614,9 @@ font-size: 20px;</string>
 {
 	border: 2px solid #0099ff;
 	color: #0099ff;
-    border-radius:15px;
+	border-radius:30px;
+	font-size:20px;
 }
-
 
 #addStringButton:hover
 {
@@ -562,27 +632,28 @@ font-size: 20px;</string>
      <widget class="QLineEdit" name="stringValueLine">
       <property name="geometry">
        <rect>
-        <x>810</x>
-        <y>470</y>
-        <width>110</width>
-        <height>20</height>
+        <x>780</x>
+        <y>485</y>
+        <width>171</width>
+        <height>30</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>110</width>
-        <height>20</height>
+        <width>10</width>
+        <height>10</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>110</width>
-        <height>20</height>
+        <width>300</width>
+        <height>200</height>
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #FFFFFF;
-color: #000000;</string>
+       <string notr="true">background-color: #333333;
+color: #0099ff;
+border: 2px solid #0099ff;</string>
       </property>
       <property name="text">
        <string/>
@@ -594,7 +665,7 @@ color: #000000;</string>
      <widget class="QPushButton" name="editingQuitWithSaveButton">
       <property name="geometry">
        <rect>
-        <x>160</x>
+        <x>60</x>
         <y>470</y>
         <width>150</width>
         <height>60</height>
@@ -632,8 +703,8 @@ color: #000000;</string>
       </property>
       <property name="font">
        <font>
-        <family>Vladimir Script</family>
-        <pointsize>32</pointsize>
+        <family>Tw Cen MT Condensed,Extra 12</family>
+        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -642,6 +713,9 @@ border-bottom: 3px solid #0099ff;
 border-left: 3px solid #0099ff;
 
 color: #FFFFFF;
+
+font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;
+font-size:44px;
 </string>
       </property>
       <property name="text">
@@ -651,6 +725,35 @@ color: #FFFFFF;
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>120</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #333333;
+font-size:20px;
+border-radius: 20px;
+background-color:#0099ff</string>
+      </property>
+      <property name="text">
+       <string>Vis4xe</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <zorder>stringsHeader</zorder>
+     <zorder>label</zorder>
+     <zorder>label_7</zorder>
+     <zorder>editingQuitWithSaveButton</zorder>
+     <zorder>editingQuitButton</zorder>
+     <zorder>stringValueLine</zorder>
+     <zorder>addStringButton</zorder>
     </widget>
    </widget>
   </widget>
