@@ -15,7 +15,7 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QWidget
     stringsWidget = new StringsListWidget(this);
 
     projectNameBox->setGeometry(480, 3, 120, 54);
-    projectNameBox->setStyleSheet("QLabel{ font-family: Vladimir Script; font-size: 32px; color: #FF0000; }");
+    projectNameBox->setStyleSheet("QLabel{ font-family: Bradley Hand ITC; font-size: 32px; color: #FF0000; }");
     projectNameBox->setText(name);
     projectNameBox->setAlignment(Qt::AlignCenter);
     projectNameBox->show();

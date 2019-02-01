@@ -44,8 +44,7 @@ bool UnPlacedBox::checkDrop(QPoint point)
 
 void UnPlacedBox::remove()
 {
-    setVisible(false);
-    dragBox->setVisible(false);
+    project->getStringsWidget()->deleteStringWidget(id);
 }
 
 void UnPlacedBox::show(bool x)

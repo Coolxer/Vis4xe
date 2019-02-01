@@ -43,7 +43,7 @@ void MainWindow::on_finalAddButton_clicked()
     else
         ui->name_alert->setVisible(false);
 
-    if(cols < 1 || cols > 28 || cols - int(cols) !=0)
+    if(cols < 1 || cols > 24 || cols - int(cols) !=0)
     {
         ui->cols_alert->setVisible(true);
         valid = false;
@@ -110,3 +110,7 @@ void MainWindow::on_addStringButton_clicked()
 }
 
 
+void MainWindow::on_openProjectButton_clicked()
+{
+    projectsManager->loadProject();
+}

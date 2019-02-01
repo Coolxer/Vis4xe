@@ -17,7 +17,6 @@ DelBox::DelBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos): QLabel(pa
 
 void DelBox::mousePressEvent(QMouseEvent* event)
 {
-    setVisible(false);
     unPlacedBox->remove();
 }
 

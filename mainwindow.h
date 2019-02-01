@@ -32,6 +32,7 @@ private slots:
 
     void on_addStringButton_clicked();
     void on_editingQuitWithSaveButton_clicked();
+    void on_openProjectButton_clicked();
 };
 
 #endif // MAINWINDOW_H

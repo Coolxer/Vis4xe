@@ -38,12 +38,21 @@ void ProjectsManager::readBoxes()
 
         if(boxesArray.size() > 0 )
         {
-            int r = boxesArray.size() / 3;
+            int firstElement = 0;
+            int count = boxesArray.size();
 
-            if(boxesArray.size() % 3 != 0)
+            if(boxesArray.size() > 9)
+            {
+                firstElement = boxesArray.size() - 9;
+                count = 9;
+            }
+
+            int r = count / 3;
+
+            if(count % 3 != 0)
                 r++;
 
-            int lastItemColumn = boxesArray.size() % 3;
+            int lastItemColumn = count % 3;
 
             if(lastItemColumn == 0)
                 lastItemColumn = 3;
@@ -58,7 +67,7 @@ void ProjectsManager::readBoxes()
 
             int c = 3;
 
-            if(boxesArray.size() < c)
+            if(count< c)
                 c = lastItemColumn;
 
             int m = 0;
@@ -70,10 +79,11 @@ void ProjectsManager::readBoxes()
 
                 for(int j = 0; j < c; j++)
                 {
-                    boxes.push_back(new ProjectNameBox(homePage, boxesArray[m].toObject().value("name").toString(), boxesArray[m].toObject().value("path").toString(), QPoint(120 + (260 *j), (120 * i) + 100)));
+                    boxes.push_back(new ProjectNameBox(homePage, boxesArray[firstElement].toObject().value("name").toString(), boxesArray[m].toObject().value("path").toString(), QPoint(120 + (260 *j), (120 * i) + 100)));
                     boxes[m]->init(this);
 
                     m++;
+                    firstElement++;
                 }
             }
             prList->setCurrentIndex(0);
@@ -126,8 +136,56 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
     {
         box->hide();
         delete box;
+        boxes.removeLast();
+
+        if(boxes.length() <= 0 )
+            prList->setCurrentIndex(1);
     }
 
+}
+
+void ProjectsManager::loadProject()
+{
+    QString path = QFileDialog::getOpenFileName(editPage, "Open File",
+                                                   "",
+                                                    "Json (*.json);;All Files (*)");
+
+    QByteArray data = fileManager->readProject(path);
+
+    if(data != nullptr)
+    {
+        QJsonDocument doc = QJsonDocument::fromJson(data);
+        QJsonObject obj = doc.object();
+
+        QJsonValue name = obj.value("name");
+        QJsonValue rows = obj.value("rows");
+        QJsonValue cols = obj.value("cols");
+        QJsonValue color = obj.value("color");
+
+        QJsonArray cellsArray = obj.value("cells").toArray();
+        QJsonArray unplacedBoxesArray = obj.value("unPlacedBoxes").toArray();
+
+        QVector <Cell*> cells;
+        QVector <UnPlacedBox*> unPlacedBoxes;
+
+        currentProject = new Project(name.toString(), rows.toInt(), cols.toInt(), editPage);
+
+        for(int i = 0; i < cellsArray.size(); i++)
+            cells.push_back(new Cell(currentProject->getLcd(), i, cellsArray[i].toObject().value("id").toInt(), cellsArray[i].toObject().value("value").toString()));
+
+        for(int i = 0; i < unplacedBoxesArray.size(); i++)
+        {
+            if(i > 0)
+                unPlacedBoxes.push_back(new UnPlacedBox(currentProject, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(810, unPlacedBoxes.last()->y() + 40)));
+            else
+                unPlacedBoxes.push_back(new UnPlacedBox(currentProject, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(810, 5)));
+        }
+
+        currentProject->loadCells(cells);
+        currentProject->loadUnplacedBoxes(unPlacedBoxes);
+
+        stackedWidget->setCurrentIndex(2);
+    }
 }
 
 void ProjectsManager::createProject(QString name, unsigned short rows, unsigned short cols)

@@ -8,7 +8,7 @@ DragBox::DragBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos): QLabel(
 
     startPosition = pos;
     setGeometry(pos.x(), pos.y(), 30, 30);
-    setStyleSheet("QLabel{border: 3px solid #0099ff; border-radius: 15px; }");
+    setStyleSheet("QLabel{border: 3px solid #00b300; border-radius: 15px; }");
     setAlignment(Qt::AlignCenter);
 
     show();
@@ -39,14 +39,14 @@ void DragBox::mouseReleaseEvent(QMouseEvent* event)
 
 void DragBox::enterEvent(QEvent*)
 {
-    setStyleSheet("QLabel{ background-color: #0099ff; border-radius: 15px;}");
-    unPlacedBox->setStyleSheet("QLabel{ background-color: #0099ff; color: #FFFFFF; }");
+    setStyleSheet("QLabel{ background-color: #00b300; border-radius: 15px;}");
+    unPlacedBox->setStyleSheet("QLabel{ background-color: #00b300; color: #FFFFFF; }");
     QApplication::setOverrideCursor(Qt::PointingHandCursor);
 }
 
 void DragBox::leaveEvent(QEvent*)
 {
-    setStyleSheet("QLabel{border: 3px solid #0099ff; border-radius: 15px; }");
+    setStyleSheet("QLabel{border: 3px solid #00b300; border-radius: 15px; }");
     unPlacedBox->setStyleSheet("QLabel{border: 3px solid #FFFFFF; color: #FFFFFF; }");
     QApplication::restoreOverrideCursor();
 }

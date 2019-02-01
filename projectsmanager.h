@@ -47,6 +47,7 @@ public:
     QVector <ProjectNameBox*> getBoxes() { return boxes; }
 
     void loadProject(ProjectNameBox* box, QString path);
+    void loadProject();
     void createProject(QString name, unsigned short rows, unsigned short cols);
     void saveProject();
 

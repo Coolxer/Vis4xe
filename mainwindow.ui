@@ -51,7 +51,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="homePage">
      <widget class="QLabel" name="projectNameLabel">
@@ -92,7 +92,7 @@ font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;</string>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="projectsList"/>
       <widget class="QWidget" name="noProjectsInfo">
@@ -175,6 +175,35 @@ font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;
       </property>
       <property name="text">
        <string>New</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="openProjectButton">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>35</y>
+        <width>130</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#openProjectButton
+{
+	border-radius:  25px;
+	color: #0099ff;
+	font-size: 26px;
+	font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;
+}
+
+#openProjectButton:hover
+{
+	border:3px solid #333333;
+	background-color: #0099ff;
+	color:#333333;
+}</string>
+      </property>
+      <property name="text">
+       <string>Open</string>
       </property>
      </widget>
     </widget>
@@ -339,34 +368,6 @@ background-color: #0099ff</string>
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="cancelAddingButton">
-      <property name="geometry">
-       <rect>
-        <x>860</x>
-        <y>500</y>
-        <width>80</width>
-        <height>30</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">#cancelAddingButton
-{
-	border: 2px solid red;
-	color: red;
-    border-radius:15px;
-
-}
-
-#cancelAddingButton:hover
-{
-	background-color: red;
-	color: #333333;
-}</string>
-      </property>
-      <property name="text">
-       <string>Cancel</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="finalAddButton">
       <property name="geometry">
        <rect>
@@ -415,7 +416,7 @@ background-color: #0099ff</string>
        <string notr="true">color: #FFFFFF;</string>
       </property>
       <property name="text">
-       <string>&lt;1, 28&gt;</string>
+       <string>&lt;1, 24&gt;</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_4">
@@ -493,7 +494,7 @@ font-size: 16px;
 font-size: 16px;</string>
       </property>
       <property name="text">
-       <string>Cols must be between 1 and 28</string>
+       <string>Cols must be between 1 and 24</string>
       </property>
      </widget>
      <widget class="QLabel" name="rows_alert">
@@ -544,6 +545,49 @@ border-radius: 25px;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="cancelAddingButton">
+      <property name="geometry">
+       <rect>
+        <x>885</x>
+        <y>465</y>
+        <width>150</width>
+        <height>150</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Tw Cen MT Condensed,Extra 12</family>
+        <pointsize>-1</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#cancelAddingButton
+{
+	border-radius:  75px;
+	border: 3px solid red;
+	color: red;
+	font-size: 26px;
+	text-align:left;
+    text-align:top;	
+	padding-top: 30px;
+    padding-left:-65px;
+
+font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;
+}
+
+#cancelAddingButton:hover
+{
+	background-color: red;
+	color:#333333;
+}</string>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
       </property>
      </widget>
     </widget>
@@ -652,7 +696,7 @@ font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: #333333;
-color: #0099ff;
+color: #ffffff;
 border: 2px solid #0099ff;</string>
       </property>
       <property name="text">
@@ -689,7 +733,7 @@ border: 2px solid #0099ff;</string>
 </string>
       </property>
       <property name="text">
-       <string>save and quit</string>
+       <string>Save and quit</string>
       </property>
      </widget>
      <widget class="QLabel" name="label">
