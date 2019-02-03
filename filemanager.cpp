@@ -122,11 +122,10 @@ void FileManager::saveProject(QJsonDocument project, QJsonDocument projectsList,
 
     for(int i = 0; i < cellsArray.size(); i++)
     {
-        if(cellsArray[i].toObject().value("id").toInt() != -1)
-        {
-            int row = i / cols ;
-            int col = i - (row * cols);
+        QJsonObject o = cellsArray[i].toObject();
 
+        if(o.value("id").toInt() != -1)
+        {
             do
             {
                if(cellsArray[i].toObject().value("id").toInt() == -1)
@@ -138,7 +137,7 @@ void FileManager::saveProject(QJsonDocument project, QJsonDocument projectsList,
 
             }while(1);
 
-            out<<"\nlcd.setCursor("<<col<<','<<row<<");";
+            //out<<"\nlcd.setCursor("<<o.value("")<<','<<row<<");";
             out<<"\nlcd.print(\""<<current<<"\");";
 
             current = "";

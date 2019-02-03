@@ -2,23 +2,20 @@
 #define FILEMANAGER_H
 
 #include <QtDebug>
+#include <QString>
 
 #include <QFile>
 #include <QFileInfo>
 #include <QFileDialog>
+#include <QDir>
 
 #include <QTextStream>
-#include <QString>
 #include <QByteArray>
 
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonValue>
-
-#include <QDir>
-
-#include <QTextStream>
 
 class QWidget;
 
@@ -32,7 +29,7 @@ public:
     FileManager();
     ~FileManager();
 
-    QByteArray shortRead();//read only projects names and paths to show them in the homepage boxes
+    QByteArray shortRead();//read only projects names and paths to show them in the homepage's boxes
 
     QByteArray readProject(QString path); //read the selected project
 

@@ -1,18 +1,12 @@
 #ifndef LCD_H
 #define LCD_H
 
-#include <QWidget>
-#include <QVector>
-
 #include <QDebug>
-
-#include <QMouseEvent>
-
-#include <QGridLayout>
-
-#include <QPoint>
-
 #include <QKeyEvent>
+#include <QMouseEvent>
+#include <QVector>
+#include <QWidget>
+
 
 #include "cell.h"
 
@@ -25,7 +19,7 @@ private:
     unsigned short rows; //number of lcd rows
     unsigned short cols; //number of lcd cols
 
-    int numberOfCells = 0; //rows * cols
+    int numberOfCells;; //rows * cols
 
     void initCells();  //this function creates cells and sets their options, then appends its to vector
 

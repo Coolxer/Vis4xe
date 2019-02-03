@@ -1,11 +1,9 @@
 #ifndef DRAGBOX_H
 #define DRAGBOX_H
 
-#include <QLabel>
-#include <QPoint>
-
-#include <QMouseEvent>
 #include <QApplication>
+#include <QMouseEvent>
+#include <QLabel>
 
 class UnPlacedBox;
 

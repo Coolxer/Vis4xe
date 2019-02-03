@@ -1,11 +1,9 @@
 #ifndef DELBOX_H
 #define DELBOX_H
 
+#include <QApplication>
 #include <QLabel>
 #include <QPoint>
-
-#include <QMouseEvent>
-#include <QApplication>
 
 class UnPlacedBox;
 
