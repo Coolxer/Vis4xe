@@ -12,6 +12,13 @@
 #include <QByteArray>
 
 #include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
+
+#include <QDir>
+
+#include <QTextStream>
 
 class QWidget;
 

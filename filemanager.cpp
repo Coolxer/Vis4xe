@@ -51,16 +51,104 @@ QByteArray FileManager::readProject(QString path)
 
 void FileManager::saveProject(QJsonDocument project, QJsonDocument projectsList, QString fileName)
 {
-    QFile file(fileName);
+    QFile vFile;
+    QFile aFile;
+    QDir dir;
 
-    if(!file.open(QFile::WriteOnly))
+    QString sDir="";
+
+    QString vName = "";
+    QString aName = "";
+
+    for(int i = 0; i <= fileName.length() - 6; i++)
+        sDir += fileName[i];
+
+    int x = 0;
+
+    //vName
+    for(int i = fileName.length() -1; i>=0; i--)
+    {
+        if(fileName[i] == '/')
+            break;
+
+        x++;
+    }
+
+    int k = fileName.length() - 1 - x;
+
+    for(int i = k; i<=fileName.length()-1; i++)
+        vName += fileName[i];
+
+
+    //aName
+    for(int i = 0; i <= vName.length() - 1; i++)
+    {
+        if(vName[i] == '.')
+            break;
+
+        aName += vName[i];
+    }
+
+    aName += ".txt";
+
+    dir.mkdir(sDir);
+    vFile.setFileName(sDir + vName);
+    aFile.setFileName(sDir + aName);
+
+
+    if(!vFile.open(QFile::WriteOnly))
         qDebug()<<"failed to Open file";
-     else
-        qDebug()<<"Opened file";
 
-    file.write(project.toJson());
+    vFile.write(project.toJson());
 
-    file.close();
+    vFile.close();
+
+    if(!aFile.open(QFile::WriteOnly| QIODevice::Text))
+        qDebug()<<"failed to Open file";
+
+
+    QJsonObject obj = project.object();
+
+    int rows = obj.value("rows").toInt();
+    int cols = obj.value("cols").toInt();
+
+    QJsonArray cellsArray = obj.value("cells").toArray();
+
+    QTextStream out(&aFile);
+
+    QString current = "";
+
+    out<<"lcd.begin("<<cols<<','<<rows<<");\n";
+
+    for(int i = 0; i < cellsArray.size(); i++)
+    {
+        if(cellsArray[i].toObject().value("id").toInt() != -1)
+        {
+            int row = i / cols ;
+            int col = i - (row * cols);
+
+            do
+            {
+               if(cellsArray[i].toObject().value("id").toInt() == -1)
+                   break;
+
+               current += cellsArray[i].toObject().value("value").toString();
+
+               i++;
+
+            }while(1);
+
+            out<<"\nlcd.setCursor("<<col<<','<<row<<");";
+            out<<"\nlcd.print(\""<<current<<"\");";
+
+            current = "";
+
+            out<<"\n";
+        }
+    }
+
+
+    aFile.close();
 
     if (projectsFile.exists())
     {
