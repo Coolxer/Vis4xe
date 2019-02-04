@@ -11,7 +11,7 @@
 #include <QJsonValue>
 
 #include "filemanager.h"
-
+#include "dataconverter.h"
 #include "project.h"
 
 class ProjectNameBox;
@@ -21,7 +21,7 @@ class QStackedWidget;
 class ProjectsManager
 {
 private:
-    FileManager* fileManager; //the pointer , dynamic object which is managing the file service
+    FileManager fileManager; //the pointer , dynamic object which is managing the file service
 
     QWidget* homePage; //the pointer to homePage to manage pages
     QWidget* editPage; //the pointer to EditPage to manage pages
@@ -46,8 +46,7 @@ public:
 
     QVector <ProjectNameBox*> getBoxes() { return boxes; }
 
-    void loadProject(ProjectNameBox* box, QString path); //function to loadProject from file that's running Filemanger loader
-    void loadProject();//function to loadProject from file that's running Filemanger loader
+    void loadProject(ProjectNameBox* box, QString path); //function to loadProject from file after clicked on the Name box
     void createProject(QString name, unsigned short rows, unsigned short cols); //the function that creates the new Project and opening it
     void saveProject(); //the function to saveProject to file, this runs the fileManager service
 

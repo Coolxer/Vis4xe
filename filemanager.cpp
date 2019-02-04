@@ -15,7 +15,6 @@ QByteArray FileManager::shortRead()
         data = projectsFile.readAll();
 
         projectsFile.close();
-
     }
 
     return data;
@@ -39,7 +38,7 @@ QByteArray FileManager::readProject(QString path)
     return data;
 }
 
-void FileManager::saveProject(QJsonDocument project, QJsonDocument projectsList, QString fileName)
+void FileManager::saveProject(QByteArray* data)
 {
     QFile vFile;
     QFile aFile;
@@ -148,6 +147,11 @@ void FileManager::saveProject(QJsonDocument project, QJsonDocument projectsList,
 
         projectsFile.close();
     }
+}
+
+void FileManager::saveCutProject(QByteArray* data)
+{
+
 }
 
 void FileManager::removeProject(QString path)

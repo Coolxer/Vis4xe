@@ -13,22 +13,19 @@ ProjectsManager::ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedW
     this->stackedWidget = stackedWidget;
     this->prList = prList;
 
-    fileManager = new FileManager();
-
     readBoxes();
 }
 
 ProjectsManager::~ProjectsManager()
 {
     delete currentProject;
-    delete fileManager;
 }
 
 void ProjectsManager::readBoxes()
 {
     boxes.clear();
 
-    QByteArray data = fileManager->shortRead();
+    QByteArray data = fileManager.shortRead();
 
     if(data != nullptr)
     {
@@ -95,38 +92,19 @@ void ProjectsManager::readBoxes()
 
 void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
 {
-    QByteArray data = fileManager->readProject(path);
 
-    if(data != nullptr)
+    if(path.isEmpty())
     {
-        QJsonDocument doc = QJsonDocument::fromJson(data);
-        QJsonObject obj = doc.object();
-
-        QJsonArray cellsArray = obj.value("cells").toArray();
-        QJsonArray unplacedBoxesArray = obj.value("unPlacedBoxes").toArray();
-
-        QVector <Cell*> cells;
-        QVector <UnPlacedBox*> unPlacedBoxes;
-
-        currentProject = new Project(obj.value("name").toString(), obj.value("rows").toInt(), obj.value("cols").toInt(), editPage);
-
-        for(int i = 0; i < cellsArray.size(); i++)
-            cells.push_back(new Cell(currentProject->getLcd(), i, cellsArray[i].toObject().value("id").toInt(), cellsArray[i].toObject().value("value").toString()));
-
-        for(int i = 0; i < unplacedBoxesArray.size(); i++)
-        {
-            if(i > 0)
-                unPlacedBoxes.push_back(new UnPlacedBox(currentProject, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(810, unPlacedBoxes.last()->y() + 40)));
-            else
-                unPlacedBoxes.push_back(new UnPlacedBox(currentProject, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(810, 5)));
-        }
-
-        currentProject->loadCells(cells);
-        currentProject->loadUnplacedBoxes(unPlacedBoxes);
-
-        stackedWidget->setCurrentIndex(2);
+        path = QFileDialog::getOpenFileName(editPage, "Open File",
+                                                           "",
+                                                            "Json (*.json);;All Files (*)");
     }
-    else
+
+    currentProject = DataConverter::convertToProject(fileManager.readProject(path));
+
+    if(currentProject != nullptr)
+        stackedWidget->setCurrentIndex(2);
+    else if (box != nullptr)
     {
         box->hide();
         delete box;
@@ -134,51 +112,6 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
 
         if(boxes.length() <= 0 )
             prList->setCurrentIndex(1);
-    }
-
-}
-
-void ProjectsManager::loadProject()
-{
-    QString path = QFileDialog::getOpenFileName(editPage, "Open File",
-                                                   "",
-                                                    "Json (*.json);;All Files (*)");
-
-    QByteArray data = fileManager->readProject(path);
-
-    if(data != nullptr)
-    {
-        QJsonDocument doc = QJsonDocument::fromJson(data);
-        QJsonObject obj = doc.object();
-
-        QJsonValue name = obj.value("name");
-        QJsonValue rows = obj.value("rows");
-        QJsonValue cols = obj.value("cols");
-        QJsonValue color = obj.value("color");
-
-        QJsonArray cellsArray = obj.value("cells").toArray();
-        QJsonArray unplacedBoxesArray = obj.value("unPlacedBoxes").toArray();
-
-        QVector <Cell*> cells;
-        QVector <UnPlacedBox*> unPlacedBoxes;
-
-        currentProject = new Project(name.toString(), rows.toInt(), cols.toInt(), editPage);
-
-        for(int i = 0; i < cellsArray.size(); i++)
-            cells.push_back(new Cell(currentProject->getLcd(), i, cellsArray[i].toObject().value("id").toInt(), cellsArray[i].toObject().value("value").toString()));
-
-        for(int i = 0; i < unplacedBoxesArray.size(); i++)
-        {
-            if(i > 0)
-                unPlacedBoxes.push_back(new UnPlacedBox(currentProject, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(810, unPlacedBoxes.last()->y() + 40)));
-            else
-                unPlacedBoxes.push_back(new UnPlacedBox(currentProject, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(810, 5)));
-        }
-
-        currentProject->loadCells(cells);
-        currentProject->loadUnplacedBoxes(unPlacedBoxes);
-
-        stackedWidget->setCurrentIndex(2);
     }
 }
 
@@ -189,63 +122,9 @@ void ProjectsManager::createProject(QString name, unsigned short rows, unsigned 
 
 void ProjectsManager::saveProject()
 {
-    QJsonDocument doc;
-
-    QJsonObject obj;
-
-    QJsonArray cells;
-    QJsonArray unPlacedBoxes;
-
-    QString idStr("id");
-    QString valueStr("value");
-
-    for(int i = 0; i < currentProject->getLcd()->getNumberOfCells(); i++)
-    {
-        QJsonObject cell;
-        cell.insert(idStr, QJsonValue(currentProject->getLcd()->getCell(i)->getId()));
-        cell.insert(valueStr, QJsonValue(currentProject->getLcd()->getCell(i)->text()));
-
-        cells.push_back(QJsonValue(cell));
-    }
-
-    for(int i = 0; i < currentProject->getStringsWidget()->getAmount(); i++)
-    {
-        QJsonObject unPlacedBox;
-        unPlacedBox.insert(idStr, QJsonValue(currentProject->getStringsWidget()->getBox(i)->getId()));
-        unPlacedBox.insert(valueStr, QJsonValue(currentProject->getStringsWidget()->getBox(i)->getValue()));
-
-        unPlacedBoxes.push_back(QJsonValue(unPlacedBox));
-    }
-
-    obj.insert(QString("name"), QJsonValue(currentProject->getName()));
-    obj.insert(QString("rows"), QJsonValue(currentProject->getLcd()->getRows()));
-    obj.insert(QString("cols"), QJsonValue(currentProject->getLcd()->getCols()));
-
-    obj.insert(QString("cells"), QJsonValue(cells));
-    obj.insert(QString("unPlacedBoxes"), QJsonValue(unPlacedBoxes));
-
-    doc.setObject(obj);
-
-    QString fileName = QFileDialog::getSaveFileName(editPage, "Open File",
-                                                   currentProject->getName(),
-                                                    "Json (*.json);;All Files (*)");
-
-    QJsonDocument doc2;
-    QJsonObject obj2;
-    QJsonObject item;
-
-    item.insert(QString("name"), QJsonValue(currentProject->getName()));
-    item.insert(QString("path"), QJsonValue(fileName));
-
-    boxesArray.push_back(item);
-
-    obj2.insert(QString("projects"), boxesArray);
-
-    doc2.setObject(obj2);
-
-    fileManager->saveProject(doc, doc2, fileName);
+    fileManager.saveProject(DataConverter::convertProjectToDocument(currentProject));
+    fileManager.saveCutProject(DataConverter::convertCutProjectToDocument(currentProject));
 
     readBoxes();
-
 }
 

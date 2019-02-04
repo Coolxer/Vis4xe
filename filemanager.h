@@ -17,6 +17,7 @@
 #include <QJsonArray>
 #include <QJsonValue>
 
+#include "dataconverter.h"
 
 class FileManager
 {
@@ -30,7 +31,8 @@ public:
 
     QByteArray readProject(QString path); //read the selected project
 
-    void saveProject(QJsonDocument project, QJsonDocument projectsList, QString fileName); //write the project to file
+    void saveProject(QByteArray* data); //write the project to file
+    void saveCutProject(QByteArray* data); //saves only name an path of the project to the projectsList file
 
     void removeProject(QString path);   //remove the project from the file
 

@@ -109,8 +109,7 @@ void MainWindow::on_addStringButton_clicked()
     }
 }
 
-
 void MainWindow::on_openProjectButton_clicked()
 {
-    projectsManager->loadProject();
+    projectsManager->loadProject(nullptr, "");
 }
