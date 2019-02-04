@@ -2,9 +2,9 @@
 
 #include "projectsmanager.h"
 
-ProjectNameBox::ProjectNameBox(QWidget* parent, QString name, QString path, QPoint pos) : QLabel (parent)
+ProjectNameBox::ProjectNameBox(ProjectsManager* projectsManager, QWidget* parent, QString name, QString path, QPoint pos) : QLabel (parent)
 {
-    this->name = name;
+    this->projectsManager = projectsManager;
     this->path = path;
 
     setGeometry(pos.x(), pos.y(), 200, 100);
@@ -13,19 +13,8 @@ ProjectNameBox::ProjectNameBox(QWidget* parent, QString name, QString path, QPoi
     setText(name);
 }
 
-ProjectNameBox::~ProjectNameBox()
-{
-
-}
-
-void ProjectNameBox::init(ProjectsManager* projectsManager)
-{
-    this->projectsManager = projectsManager;
-}
-
 void ProjectNameBox::mousePressEvent(QMouseEvent*)
 {
-    //open the edit mode with the correct / selected this project
     projectsManager->loadProject(this, path);
 }
 

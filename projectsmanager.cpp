@@ -79,8 +79,7 @@ void ProjectsManager::readBoxes()
 
                 for(int j = 0; j < c; j++)
                 {
-                    boxes.push_back(new ProjectNameBox(homePage, boxesArray[firstElement].toObject().value("name").toString(), boxesArray[m].toObject().value("path").toString(), QPoint(120 + (260 *j), (120 * i) + 100)));
-                    boxes[m]->init(this);
+                    boxes.push_back(new ProjectNameBox(this, homePage, boxesArray[firstElement].toObject().value("name").toString(), boxesArray[m].toObject().value("path").toString(), QPoint(120 + (260 *j), (120 * i) + 100)));
 
                     m++;
                     firstElement++;
@@ -209,7 +208,7 @@ void ProjectsManager::saveProject()
     {
         QJsonObject cell;
         cell.insert(idStr, QJsonValue(currentProject->getLcd()->getCell(i)->getId()));
-        cell.insert(valueStr, QJsonValue(currentProject->getLcd()->getCell(i)->getValue()));
+        cell.insert(valueStr, QJsonValue(currentProject->getLcd()->getCell(i)->text()));
 
         cells.push_back(QJsonValue(cell));
     }

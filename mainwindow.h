@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QWidget>
-#include <QString>
 
 #include "projectsmanager.h"
 
@@ -30,9 +29,9 @@ private slots:
     void on_cancelAddingButton_clicked(); //caused after the user clicked the button in the addpage
     void on_editingQuitButton_clicked(); //caused after the user clicked the button in the editpage
 
-    void on_addStringButton_clicked();
-    void on_editingQuitWithSaveButton_clicked();
-    void on_openProjectButton_clicked();
+    void on_addStringButton_clicked(); //casued after the user clicked the add button in the editpage
+    void on_editingQuitWithSaveButton_clicked(); //caused after the user clicked the save and quit button in the edit page
+    void on_openProjectButton_clicked(); //caused after the user clicked the open button in the homepage
 };
 
 #endif // MAINWINDOW_H

@@ -14,9 +14,9 @@ class Project;
 class StringsListWidget
 {
 private:
-    Project* project;
+    Project* project; //the pointer to the project object to which the class belongs
 
-    QVector <UnPlacedBox*> boxes;
+    QVector <UnPlacedBox*> boxes; //the vector<> of the strings boxes
 
 public:
     StringsListWidget(){}
@@ -24,10 +24,9 @@ public:
 
     ~StringsListWidget();
 
-    void addStringWidget(QString name);
-    void deleteStringWidget(int id);
-    void organize();
-    void loadBoxesFromFile(QVector <UnPlacedBox*> boxes) { this->boxes = boxes; }
+    void addStringWidget(QString name);//adds new string to the vector
+    void deleteStringWidget(int id); //deletes the selected string
+    void loadBoxesFromFile(QVector <UnPlacedBox*> boxes) { this->boxes = boxes; } //the function that loads the unPlacedBoxes from file
 
     int getAmount() { return boxes.length(); }
 

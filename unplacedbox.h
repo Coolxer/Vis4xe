@@ -2,10 +2,6 @@
 #define UNPLACEDBOX_H
 
 #include <QLabel>
-#include <QString>
-#include <QPoint>
-
-#include <QtDebug>
 
 #include "dragbox.h"
 #include "delbox.h"
@@ -32,9 +28,8 @@ public:
     ~UnPlacedBox();
 
     int getId() { return id; }
-    QString getValue() { return text(); }
 
-    bool checkDrop(QPoint point);
+    void checkDrop(QPoint point);
     void remove();
 
     QPoint getDragBoxPoint() { return dragBoxPoint; }

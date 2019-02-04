@@ -28,18 +28,14 @@ UnPlacedBox::~UnPlacedBox()
     delete delBox;
 }
 
-bool UnPlacedBox::checkDrop(QPoint point)
+void UnPlacedBox::checkDrop(QPoint point)
 {
     dragBoxPoint = point;
 
     if(project->writeOnLcd(this))
-    {
         show(false);
-
-        return true;
-    }
-
-    return false;
+    else
+        dragBox->reset();
 }
 
 void UnPlacedBox::remove()

@@ -19,43 +19,43 @@ private:
     unsigned short rows; //number of lcd rows
     unsigned short cols; //number of lcd cols
 
-    int numberOfCells;; //rows * cols
+    int numberOfCells; //rows * cols
 
-    void initCells();  //this function creates cells and sets their options, then appends its to vector
+    //int currentId = -1; //the id of the current selected cell
 
-    void organize();
+    //int selectedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string, normally is -1
 
-    int selectedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string, normally is -1
+    //int droppedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string
 
-    int currentId = -1;
-
-    int hoveredCell = -1; //the index of the cell which on the mouse is over, normally -1
-
-    int droppedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string
+    Cell* selectedCell = nullptr; //the pointer to the selected cell
+    Cell* droppedCell = nullptr; //the pointer to the dropped on cell
 
     bool editMode = false; //the status of the Edit string mode // edit mode allows to changing the position
                            // of the string that is already placed in lcd or remove it
 
+    QVector <Cell*> cells; //the vector of the lcd's cells
+
+    Project* project;  //the pointer to the project that lcd belongs to
+    UnPlacedBox* uBox; //the pointer to the UnPlacedBox to which the text on lcd referenced
+
+
+    /* Poles using in edit Mode */
     QString selectedString; //the string on the lcd which is focused and just opened edit mode
 
-    QVector <int> selectedNumbersOfCells; //the vector that is keeping the the cells number that are together connected
-                                //with one id // using for edit mode
+    QVector <int> selectedNumbersOfCells; //the vector of the numbers of cells that would be using in editMode, keeping for restore settings
 
-    QVector <int> operationCells;
+    QVector <int> operationCells; //the vector of the number of cells which on the operations are provided
 
-    QVector <Cell*> cells;
+    void initCells();  //this function creates cells and sets their options, then appends its to vector
 
-    Project* project;
-    UnPlacedBox* uBox;
+    void organize(); //the function that is organized the cells loaded from file
 
-    void cancelChanges();
-    void acceptChanges();
+    void cancelChanges(); //cancels the changes in editMode and exit (DELETE KEY)
+    void exitEditMode(); //accepts the changes in editMode and exit (ENTER KEY)
 
-    void exitEditMode();
+    void unpin(); //this function unpins the string from the lcd and moves it back to the StringsListWidget list
 
     void keyPressEvent(QKeyEvent* event);
-
-    void unpin();
 
 public:
     Lcd(){}
@@ -66,12 +66,12 @@ public:
     //QVector <Cell*> getCells() { return cells; }; //getter that allows to read cells
 
     //for editing mode
-    void setSelectedCell(int m);
-    int getSelectedCell() { return selectedCell; }
+    void setSelectedCell(int index);
+    Cell* getSelectedCell() { return selectedCell; }
 
     //for drag & drop unplacebox
-    void setDroppedCell(int m) { droppedCell = m; }
-    int getDroppedCell() { return droppedCell; }
+    void setDroppedCell(int index) { (index == -1)? droppedCell = nullptr : droppedCell = cells[index]; }
+    Cell* getDroppedCell() { return droppedCell; }
 
     Cell* getCell(int i) { return cells[i]; }
 
@@ -80,9 +80,7 @@ public:
     int getRows(){ return rows; }
     int getCols(){ return cols; }
 
-    void appendCells(QVector<Cell*> cells) { this->cells = cells; }
-
-    void loadCellsFromFile(QVector<Cell*> cells);
+    void loadCellsFromFile(QVector<Cell*> cells); //using for append the Array of cells loaded from *.json file
 
     bool editEnabled() { return editMode; };
 };

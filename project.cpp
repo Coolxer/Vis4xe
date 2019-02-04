@@ -5,14 +5,11 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QWidget
     this->name = name;
 
     projectNameBox = new QLabel(widget);
-
     container = new QWidget(widget);
+    lcd = new Lcd(rows, cols, container, this);
+    stringsWidget = new StringsListWidget(this);
 
     container->setGeometry(0, 60, 960, 400);
-
-    lcd = new Lcd(rows, cols, container, this);
-
-    stringsWidget = new StringsListWidget(this);
 
     projectNameBox->setGeometry(480, 3, 120, 54);
     projectNameBox->setStyleSheet("QLabel{ font-family: Bradley Hand ITC; font-size: 32px; color: #FF0000; }");
@@ -39,9 +36,11 @@ bool Project::check(QPoint point)
 {
     QPoint mappedPoint = lcd->mapFromParent(point);
 
+    Cell* cell;
+
     for(int i = 0; i < lcd->getNumberOfCells(); i++)
     {
-        Cell* cell = lcd->getCell(i);
+        cell = lcd->getCell(i);
 
         //checks if the mouse during the drop is in coordinates of any cell (did the user drop on the cell or wherever)
         if((mappedPoint.x() >= cell->x()) && (mappedPoint.x() <= cell->x() + cell->width()))
@@ -65,21 +64,14 @@ bool Project::writeOnLcd(UnPlacedBox* box)
 {
     if(check(box->getDragBoxPoint()))
     {
-        //get the row we are currently in
-        int whichRow = lcd->getDroppedCell() / lcd->getCols();
-
-        whichRow++;
-
         //check if its possible to drop this there (overfill cover)
-        //if(lcd->getDroppedCell() + box->text().length() <= lcd->getNumberOfCells())
-        //checks if the lcd overfill
-        if(lcd->getDroppedCell() < whichRow * lcd->getCols())
+        if(lcd->getDroppedCell()->getIndex() + box->text().length() < lcd->getDroppedCell()->getIndex() * lcd->getCols())
         {
             bool allCellsEnabled = true;
 
             for(int i = 0; i < box->text().length(); i++)
             {
-                if(lcd->getCell(lcd->getDroppedCell() + i)->getId() != -1)
+                if(lcd->getCell(lcd->getDroppedCell()->getIndex() + i)->getId() != -1)
                 {
                     allCellsEnabled = false;
                     break;
@@ -90,8 +82,8 @@ bool Project::writeOnLcd(UnPlacedBox* box)
             {
                 for(int i = 0; i < box->text().length(); i++)
                 {
-                    lcd->getCell(lcd->getDroppedCell() + i)->setText(box->text().at(i));
-                    lcd->getCell(lcd->getDroppedCell() + i)->setId(box->getId());
+                    lcd->getCell(lcd->getDroppedCell()->getIndex() + i)->setText(box->text().at(i));
+                    lcd->getCell(lcd->getDroppedCell()->getIndex() + i)->setId(box->getId());
                 }
 
                 lcd->setDroppedCell(-1); //release the selected cell (reset) after operation confirm
@@ -100,6 +92,7 @@ bool Project::writeOnLcd(UnPlacedBox* box)
             }
         }
     }
+
    return false;
 }
 

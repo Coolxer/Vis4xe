@@ -31,10 +31,7 @@ void DragBox::mouseReleaseEvent(QMouseEvent* event)
     lastPosition = mapToParent(event->pos());
     QApplication::restoreOverrideCursor();
 
-    if(unPlacedBox->checkDrop(lastPosition))
-        setVisible(false);
-    else
-        move(startPosition);
+    unPlacedBox->checkDrop(lastPosition);
 }
 
 void DragBox::enterEvent(QEvent*)

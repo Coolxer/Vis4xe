@@ -22,8 +22,6 @@ protected:
 public:
     ProjectNameBox() {}
     ProjectNameBox(ProjectsManager* projectsManager, QWidget* parent, QString name, QString path, QPoint pos);
-
-    void init(;
 };
 
 #endif // PROJECTNAMEBOX_H

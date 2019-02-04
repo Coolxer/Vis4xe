@@ -33,7 +33,3 @@ void StringsListWidget::deleteStringWidget(int id)
     boxes.removeAt(id);
 }
 
-void StringsListWidget::organize()
-{
-
-}

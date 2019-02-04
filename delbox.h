@@ -15,7 +15,6 @@ private:
     QPoint startPosition;
 
     void mousePressEvent(QMouseEvent* event);
-
     void enterEvent(QEvent*);
     void leaveEvent(QEvent*);
 public:

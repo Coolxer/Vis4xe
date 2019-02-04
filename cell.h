@@ -12,8 +12,6 @@ class Cell : public QLabel
 private:
     Lcd* lcd; //the pointer to its parent
 
-    QString string; //the character of the QLabel, normally its null = ""
-
     int id = -1;//this variable get you know if it is written to any string (-1 mean "empty")
 
     int index; //the index of the cell in the lcd vector (from top-left = 0)
@@ -38,10 +36,10 @@ public:
     void setId(int id) { this->id = id; }
     int getId() { return id; }
 
-    QString getValue() { return text(); }
-
     int getRow(){ return row; }
     int getCol(){ return col; }
+
+    int getIndex() { return index; }
 
 };
 
