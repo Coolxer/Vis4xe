@@ -102,18 +102,13 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
         QJsonDocument doc = QJsonDocument::fromJson(data);
         QJsonObject obj = doc.object();
 
-        QJsonValue name = obj.value("name");
-        QJsonValue rows = obj.value("rows");
-        QJsonValue cols = obj.value("cols");
-        QJsonValue color = obj.value("color");
-
         QJsonArray cellsArray = obj.value("cells").toArray();
         QJsonArray unplacedBoxesArray = obj.value("unPlacedBoxes").toArray();
 
         QVector <Cell*> cells;
         QVector <UnPlacedBox*> unPlacedBoxes;
 
-        currentProject = new Project(name.toString(), rows.toInt(), cols.toInt(), editPage);
+        currentProject = new Project(obj.value("name").toString(), obj.value("rows").toInt(), obj.value("cols").toInt(), editPage);
 
         for(int i = 0; i < cellsArray.size(); i++)
             cells.push_back(new Cell(currentProject->getLcd(), i, cellsArray[i].toObject().value("id").toInt(), cellsArray[i].toObject().value("value").toString()));

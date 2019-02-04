@@ -16,8 +16,8 @@ class UnPlacedBox;
 class Lcd : public QWidget
 {
 private:
-    unsigned short rows; //number of lcd rows
-    unsigned short cols; //number of lcd cols
+    int rows; //number of lcd rows
+    int cols; //number of lcd cols
 
     int numberOfCells; //rows * cols
 

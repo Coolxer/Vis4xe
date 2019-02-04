@@ -1,15 +1,5 @@
 #include "filemanager.h"
 
-FileManager::FileManager()
-{
-
-}
-
-FileManager::~FileManager()
-{
-
-}
-
 QByteArray FileManager::shortRead()
 {
     QByteArray data = nullptr;

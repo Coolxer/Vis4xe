@@ -17,17 +17,14 @@
 #include <QJsonArray>
 #include <QJsonValue>
 
-class QWidget;
 
 class FileManager
 {
 private:
     QFile projectsFile;
-    QWidget* widget;
 
 public:
-    FileManager();
-    ~FileManager();
+    FileManager(){}
 
     QByteArray shortRead();//read only projects names and paths to show them in the homepage's boxes
 
