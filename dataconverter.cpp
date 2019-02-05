@@ -48,7 +48,7 @@ Project* DataConverter::convertToProject(QByteArray data)
 
 }
 
-QByteArray DataConverter::convertProjectToDocument(Project* project)
+QByteArray DataConverter::convertProjectToData(Project* project)
 {
     QJsonDocument doc;
     QJsonObject obj;
@@ -89,7 +89,7 @@ QByteArray DataConverter::convertProjectToDocument(Project* project)
     return doc.toJson();
 }
 
-QByteArray DataConverter::convertCutProjectToDocument(ProjectsManager* projectsManager)
+QByteArray DataConverter::convertCutProjectToData(ProjectsManager* projectsManager)
 {
     QJsonObject o = convertVectorToJson(projectsManager);
     QJsonArray array = o.value("projects").toArray();
@@ -175,6 +175,20 @@ void DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
     }
 
     projectsManager->setBoxes(boxes);
+
+}
+
+QByteArray DataConverter::convertToTxt(Project* project)
+{
+    /*
+    QJsonObject obj = project.object();
+
+    int rows = obj.value("rows").toInt();
+    int cols = obj.value("cols").toInt();
+
+    QJsonArray cellsArray = obj.value("cells").toArray();
+    */
+
 
 }
 

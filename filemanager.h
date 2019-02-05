@@ -19,13 +19,21 @@
 
 #include "dataconverter.h"
 
+class ProjectsManager;
+
 class FileManager
 {
 private:
     QFile projectsFile;
 
+    ProjectsManager* projectsManager;
+
+    void saveVisFile(QByteArray data);
+    void saveAvrFile();
+
 public:
     FileManager(){}
+    FileManager(ProjectsManager* projectsManager);
 
     QByteArray shortRead();//read only projects names and paths to show them in the homepage's boxes
 

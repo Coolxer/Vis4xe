@@ -1,5 +1,12 @@
 #include "filemanager.h"
 
+#include "projectsmanager.h"
+
+FileManager::FileManager(ProjectsManager* projectsManager)
+{
+    this->projectsManager = projectsManager;
+}
+
 QByteArray FileManager::shortRead()
 {
     QByteArray data = nullptr;
@@ -40,59 +47,76 @@ QByteArray FileManager::readProject(QString path)
 
 void FileManager::saveProject(QByteArray data)
 {
-    QFile vFile;
-    QFile aFile;
     QDir dir;
 
+    dir.mkdir(projectsManager->getCurrentProject()->getDirPath());
 
+    saveVisFile(data);
+    saveAvrFile();
+}
 
-    dir.mkdir(sDir);
-    vFile.setFileName(sDir + vName);
-    aFile.setFileName(sDir + aName);
+void FileManager::saveCutProject(QByteArray data)
+{
+    if(!projectsFile.exists())
+        return;
 
+    if(!projectsFile.open(QIODevice::ReadWrite))
+        return;
 
-    if(!vFile.open(QFile::WriteOnly))
-        qDebug()<<"failed to Open file";
+    projectsFile.write(data);
 
-    vFile.write(project.toJson());
+    projectsFile.close();
+}
 
-    vFile.close();
+void FileManager::removeProject(QString path)
+{
 
-    if(!aFile.open(QFile::WriteOnly| QIODevice::Text))
-        qDebug()<<"failed to Open file";
+}
 
+void FileManager::saveVisFile(QByteArray data)
+{
+    QFile file;
 
-    QJsonObject obj = project.object();
+    file.setFileName(projectsManager->getCurrentProject()->getVisPath());
 
-    int rows = obj.value("rows").toInt();
-    int cols = obj.value("cols").toInt();
+    if(file.open(QFile::WriteOnly))
+        return;
 
-    QJsonArray cellsArray = obj.value("cells").toArray();
+    file.write(data);
 
-    QTextStream out(&aFile);
+    file.close();
+}
+
+void FileManager::saveAvrFile()
+{
+    QFile file;
+
+    file.setFileName(projectsManager->getCurrentProject()->getAvrPath());
+
+    if(!file.open(QFile::WriteOnly| QIODevice::Text))
+        return;
+
+    QTextStream out(&file);
 
     QString current = "";
 
-    out<<"lcd.begin("<<cols<<','<<rows<<");\n";
+    out<<"lcd.begin("<<projectsManager->getCurrentProject()->getLcd()->getCols()<<','<<projectsManager->getCurrentProject()->getLcd()->getRows()<<");\n";
 
-    for(int i = 0; i < cellsArray.size(); i++)
+    for(int i = 0; i < projectsManager->getCurrentProject()->getLcd()->getNumberOfCells(); i++)
     {
-        QJsonObject o = cellsArray[i].toObject();
-
-        if(o.value("id").toInt() != -1)
+        if(projectsManager->getCurrentProject()->getLcd()->getCell(i)->getId() != -1)
         {
             do
             {
-               if(cellsArray[i].toObject().value("id").toInt() == -1)
+               if(projectsManager->getCurrentProject()->getLcd()->getCell(i)->getId() == -1)
                    break;
 
-               current += cellsArray[i].toObject().value("value").toString();
+               current += projectsManager->getCurrentProject()->getLcd()->getCell(i)->text();
 
                i++;
 
             }while(1);
 
-            //out<<"\nlcd.setCursor("<<o.value("")<<','<<row<<");";
             out<<"\nlcd.print(\""<<current<<"\");";
 
             current = "";
@@ -101,26 +125,6 @@ void FileManager::saveProject(QByteArray data)
         }
     }
 
-
-    aFile.close();
-
-    if (projectsFile.exists())
-    {
-        if(!projectsFile.open(QIODevice::ReadWrite))
-            qDebug()<<"failed opened the file";
-
-        projectsFile.write(projectsList.toJson());
-
-        projectsFile.close();
-    }
+    file.close();
 }
 
-void FileManager::saveCutProject(QByteArray data)
-{
-
-}
-
-void FileManager::removeProject(QString path)
-{
-
-}
