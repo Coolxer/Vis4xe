@@ -38,47 +38,13 @@ QByteArray FileManager::readProject(QString path)
     return data;
 }
 
-void FileManager::saveProject(QByteArray* data)
+void FileManager::saveProject(QByteArray data)
 {
     QFile vFile;
     QFile aFile;
     QDir dir;
 
-    QString sDir="";
 
-    QString vName = "";
-    QString aName = "";
-
-    for(int i = 0; i <= fileName.length() - 6; i++)
-        sDir += fileName[i];
-
-    int x = 0;
-
-    //vName
-    for(int i = fileName.length() -1; i>=0; i--)
-    {
-        if(fileName[i] == '/')
-            break;
-
-        x++;
-    }
-
-    int k = fileName.length() - 1 - x;
-
-    for(int i = k; i<=fileName.length()-1; i++)
-        vName += fileName[i];
-
-
-    //aName
-    for(int i = 0; i <= vName.length() - 1; i++)
-    {
-        if(vName[i] == '.')
-            break;
-
-        aName += vName[i];
-    }
-
-    aName += ".txt";
 
     dir.mkdir(sDir);
     vFile.setFileName(sDir + vName);
@@ -149,7 +115,7 @@ void FileManager::saveProject(QByteArray* data)
     }
 }
 
-void FileManager::saveCutProject(QByteArray* data)
+void FileManager::saveCutProject(QByteArray data)
 {
 
 }

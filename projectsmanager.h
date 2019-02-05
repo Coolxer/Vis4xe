@@ -1,14 +1,7 @@
 #ifndef PROJECTSLIST_H
 #define PROJECTSLIST_H
 
-#include <QFileDialog>
-#include <QByteArray>
 #include <QVector>
-
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
-#include <QJsonValue>
 
 #include "filemanager.h"
 #include "dataconverter.h"
@@ -33,8 +26,6 @@ private:
 
     Project* currentProject = nullptr; //the pointer to the current opened project
 
-    QJsonArray boxesArray; //the JSON array of the homePage boxes
-
     void readBoxes();//reads the boxes from projects.json file and puts them on the homePage screen
 
 public:
@@ -51,6 +42,11 @@ public:
     void saveProject(); //the function to saveProject to file, this runs the fileManager service
 
     void releaseProject() { delete currentProject; currentProject = nullptr; } //the function that's closing current opened project
+
+    void setBoxes(QVector<ProjectNameBox*> boxes) { this->boxes = boxes; }
+    void addBox(ProjectNameBox* box) { boxes.push_back(box); }
+
+    QWidget* getHomePage() { return homePage; }
 };
 
 #endif // PROJECTSLIST_H

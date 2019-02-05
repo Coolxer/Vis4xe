@@ -2,7 +2,7 @@
 
 #include "projectsmanager.h"
 
-ProjectNameBox::ProjectNameBox(ProjectsManager* projectsManager, QWidget* parent, QString name, QString path, QPoint pos) : QLabel (parent)
+ProjectNameBox::ProjectNameBox(ProjectsManager* projectsManager, QString name, QString path, QPoint pos) : QLabel (projectsManager->getHomePage())
 {
     this->projectsManager = projectsManager;
     this->path = path;
@@ -12,6 +12,11 @@ ProjectNameBox::ProjectNameBox(ProjectsManager* projectsManager, QWidget* parent
     setAlignment(Qt::AlignCenter);
     setText(name);
 }
+
+ void ProjectNameBox::setPosition(QPoint p)
+ {
+     setGeometry(p.x(), p.y(), 200, 100);
+ }
 
 void ProjectNameBox::mousePressEvent(QMouseEvent*)
 {
@@ -31,3 +36,5 @@ void ProjectNameBox::leaveEvent(QEvent*)
 
     QApplication::restoreOverrideCursor();
 }
+
+

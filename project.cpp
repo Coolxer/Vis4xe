@@ -96,6 +96,39 @@ bool Project::writeOnLcd(UnPlacedBox* box)
    return false;
 }
 
+void Project::setPath(QString path)
+{
+
+    for(int i = 0; i <= path.length() - 6; i++)
+        dirPath += path[i];
+
+    int x = 0;
+
+    //visPath
+    for(int i = path.length() -1; i>=0; i--)
+    {
+        if(path[i] == '/')
+            break;
+
+        x++;
+    }
+
+    int k = path.length() - 1 - x;
+
+    for(int i = k; i<=path.length()-1; i++)
+        visPath += path[i];
+
+    //avrPath
+    for(int i = 0; i <= visPath.length() - 1; i++)
+    {
+        if(visPath[i] == '.')
+            break;
+
+        avrPath += visPath[i];
+    }
+
+    avrPath += ".txt";
+}
 
 void Project::loadUnplacedBoxes(QVector<UnPlacedBox*> unPlacedBoxes)
 {

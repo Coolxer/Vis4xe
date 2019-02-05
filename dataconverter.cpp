@@ -1,5 +1,6 @@
 #include "dataconverter.h"
 
+#include "projectsmanager.h"
 #include "project.h"
 #include "unplacedbox.h"
 #include "cell.h"
@@ -47,7 +48,7 @@ Project* DataConverter::convertToProject(QByteArray data)
 
 }
 
-QByteArray* DataConverter::convertProjectToDocument(Project* project)
+QByteArray DataConverter::convertProjectToDocument(Project* project)
 {
     QJsonDocument doc;
     QJsonObject obj;
@@ -59,8 +60,8 @@ QByteArray* DataConverter::convertProjectToDocument(Project* project)
 
     for(int i = 0; i < project->getLcd()->getNumberOfCells(); i++)
     {
-        cell.insert("id", QJsonValue(project->getLcd()->getCell(i)->getId()));
-        cell.insert("value", QJsonValue(project->getLcd()->getCell(i)->text()));
+        cell.insert(QString("id"), QJsonValue(project->getLcd()->getCell(i)->getId()));
+        cell.insert(QString("value"), QJsonValue(project->getLcd()->getCell(i)->text()));
 
         cells.push_back(QJsonValue(cell));
     }
@@ -70,8 +71,8 @@ QByteArray* DataConverter::convertProjectToDocument(Project* project)
     for(int i = 0; i < project->getStringsWidget()->getAmount(); i++)
     {
 
-        unPlacedBox.insert("id", QJsonValue(project->getStringsWidget()->getBox(i)->getId()));
-        unPlacedBox.insert("value", QJsonValue(project->getStringsWidget()->getBox(i)->text()));
+        unPlacedBox.insert(QString("id"), QJsonValue(project->getStringsWidget()->getBox(i)->getId()));
+        unPlacedBox.insert(QString("value"), QJsonValue(project->getStringsWidget()->getBox(i)->text()));
 
         unPlacedBoxes.push_back(QJsonValue(unPlacedBox));
     }
@@ -85,35 +86,115 @@ QByteArray* DataConverter::convertProjectToDocument(Project* project)
 
     doc.setObject(obj);
 
-    QString fileName = QFileDialog::getSaveFileName(editPage, "Open File",
-                                                   currentProject->getName(),
-                                                    "Json (*.json);;All Files (*)");
-
-
-
-
-    return &doc.toJson();
+    return doc.toJson();
 }
 
-QByteArray* DataConverter::convertCutProjectToDocument(Project* project)
+QByteArray DataConverter::convertCutProjectToDocument(ProjectsManager* projectsManager)
 {
+    QJsonObject o = convertVectorToJson(projectsManager);
+    QJsonArray array = o.value("projects").toArray();
+
     QJsonDocument doc;
-    QJsonObject obj;
     QJsonObject item;
+    QJsonObject obj;
 
-    item.insert(QString("name"), QJsonValue(project->getName()));
-    item.insert(QString("path"), QJsonValue(fileName));
+    item.insert(QString("name"), QJsonValue(projectsManager->getCurrentProject()->getName()));
+    item.insert(QString("path"), QJsonValue(projectsManager->getCurrentProject()->getVisPath()));
 
-    boxesArray.push_back(item);
+    array.push_back(item);
 
-    obj.insert(QString("projects"), boxesArray);
+    obj.insert(QString("projects"), array);
 
-    doc.setObject(obj);
+    doc.setObject(o);
 
-    return &doc.toJson();
+    return doc.toJson();
 }
 
-void DataConverter::convertToNameBoxes(QByteArray data)
+void DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteArray data)
 {
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    QJsonArray array = doc.object()["projects"].toArray();
+    QVector <ProjectNameBox*> boxes;
+
+    int count = array.size();
+
+    if(count <= 0)
+        return;
+    else if (count > 0 && count < 9)
+    {
+        int rows = (count / 3) + 1;
+
+        int lastItemColumn = count % 3;
+
+        if(lastItemColumn == 0)
+            lastItemColumn = 3;
+
+        int c = 3;
+
+        if(count < c)
+            c = lastItemColumn;
+
+        /*
+        if(r == 1)
+        {
+            if(lastItemColumn == 1)
+                lastItemColumn = 2;
+            else if (lastItemColumn == 2)
+                lastItemColumn = 1;
+        }
+           */
+
+        int m = 0;
+
+        for(int i = 0; i < rows; i++)
+        {
+            if(i == rows - 1)
+                c = lastItemColumn;
+
+            for(int j = 0; j < c; j++)
+            {
+                boxes.push_back(new ProjectNameBox(projectsManager, array[m].toObject().value("name").toString(), array[m].toObject().value("path").toString(), QPoint(120 + (260 *j), (120 * i) + 100)));
+
+                m++;
+            }
+        }
+    }
+    else if (count >= 9)
+    {
+        int currentElement = count - 9;
+        count = 9;
+
+        for(int i = 0; i < 3; i++)
+        {
+            for(int j = 0; j < 3; j++)
+            {
+                 boxes.push_back(new ProjectNameBox(projectsManager, array[currentElement].toObject().value("name").toString(), array[currentElement].toObject().value("path").toString(), QPoint(120 + (260 *j), (120 * i) + 100)));
+                 currentElement++;
+            }
+        }
+    }
+
+    projectsManager->setBoxes(boxes);
 
 }
+
+QJsonObject DataConverter::convertVectorToJson(ProjectsManager* projectsManager)
+{
+    QJsonArray array;
+    QJsonObject obj, item;
+
+    int n = projectsManager->getBoxes().size();
+
+    for(int i = 0; i < n; i++)
+    {
+        item.insert(QString("name"), QJsonValue(projectsManager->getBoxes().at(i)->getName()));
+        item.insert(QString("path"), QJsonValue(projectsManager->getBoxes().at(i)->getPath()));
+
+        array.push_back(item);
+    }
+
+    obj.insert(QString("projects"), array);
+
+    return obj;
+}
+

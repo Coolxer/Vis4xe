@@ -21,7 +21,11 @@ protected:
 
 public:
     ProjectNameBox() {}
-    ProjectNameBox(ProjectsManager* projectsManager, QWidget* parent, QString name, QString path, QPoint pos);
+    ProjectNameBox(ProjectsManager* projectsManager, QString name, QString path, QPoint pos);
+
+    void setPosition(QPoint p);
+    QString getName() { return text(); }
+    QString getPath() { return path; }
 };
 
 #endif // PROJECTNAMEBOX_H
