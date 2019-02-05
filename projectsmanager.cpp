@@ -25,22 +25,16 @@ void ProjectsManager::readBoxes()
 {
     boxes.clear();
 
-    QByteArray data = fileManager.shortRead();
+    DataConverter::convertToNameBoxes(this, fileManager.shortRead());
 
-    if(data != nullptr)
-    {
-
-            prList->setCurrentIndex(0);
-        }
-        else
-            prList->setCurrentIndex(1);
-
-    }
+    if(boxes.length() == 0)
+        prList->setCurrentIndex(1);
+    else
+        prList->setCurrentIndex(0);
 }
 
 void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
 {
-
     if(path.isEmpty())
     {
         path = QFileDialog::getOpenFileName(editPage, "Open File",
@@ -48,7 +42,7 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
                                                             "Json (*.json);;All Files (*)");
     }
 
-    currentProject = DataConverter::convertToProject(fileManager.readProject(path));
+    currentProject = DataConverter::convertToProject(this, fileManager.readProject(path));
 
     if(currentProject != nullptr)
         stackedWidget->setCurrentIndex(2);
@@ -73,6 +67,9 @@ void ProjectsManager::saveProject()
     currentProject->setPath(QFileDialog::getSaveFileName(currentProject->getContainer(), "Open File",
                                                    currentProject->getName(),
                                                     "Json (*.json);;All Files (*)"));
+
+    if(currentProject->getDirPath().isEmpty())
+        return;
 
     fileManager.saveProject(DataConverter::convertProjectToData(currentProject));
     fileManager.saveCutProject(DataConverter::convertCutProjectToData(this));

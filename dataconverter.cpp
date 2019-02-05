@@ -11,7 +11,7 @@ DataConverter::DataConverter()
 
 }
 
-Project* DataConverter::convertToProject(QByteArray data)
+Project* DataConverter::convertToProject(ProjectsManager* projectsManager, QByteArray data)
 {
     if(data == nullptr)
         return nullptr;
@@ -27,7 +27,7 @@ Project* DataConverter::convertToProject(QByteArray data)
     QVector <Cell*> cells;
     QVector <UnPlacedBox*> unPlacedBoxes;
 
-    project = new Project(obj.value("name").toString(), obj.value("rows").toInt(), obj.value("cols").toInt(), editPage);
+    project = new Project(obj.value("name").toString(), obj.value("rows").toInt(), obj.value("cols").toInt(), projectsManager->getEditPage());
 
     for(int i = 0; i < cellsArray.size(); i++)
         cells.push_back(new Cell(project->getLcd(), i, cellsArray[i].toObject().value("id").toInt(), cellsArray[i].toObject().value("value").toString()));
@@ -42,7 +42,6 @@ Project* DataConverter::convertToProject(QByteArray data)
 
     project->loadCells(cells);
     project->loadUnplacedBoxes(unPlacedBoxes);
-
 
     return project;
 
@@ -175,20 +174,6 @@ void DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
     }
 
     projectsManager->setBoxes(boxes);
-
-}
-
-QByteArray DataConverter::convertToTxt(Project* project)
-{
-    /*
-    QJsonObject obj = project.object();
-
-    int rows = obj.value("rows").toInt();
-    int cols = obj.value("cols").toInt();
-
-    QJsonArray cellsArray = obj.value("cells").toArray();
-    */
-
 
 }
 

@@ -26,12 +26,10 @@ private:
 public:
     DataConverter();
 
-    static Project* convertToProject(QByteArray data);
+    static Project* convertToProject(ProjectsManager* projectsManager, QByteArray data);
     static QByteArray convertProjectToData(Project* project);
     static QByteArray convertCutProjectToData(ProjectsManager* projectsManager);
     static void convertToNameBoxes(ProjectsManager* projectsManager, QByteArray data);
-
-    static QByteArray convertToTxt(Project* project);
 
     static QJsonObject convertVectorToJson(ProjectsManager* projectsManager);
 };

@@ -17,9 +17,6 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QWidget* widget, Project* pro
 
     initCells();
 
-    uBox = nullptr;
-
-    //this->setMouseTracking(true);
     this->setFocusPolicy(Qt::ClickFocus);
 }
 
@@ -116,11 +113,9 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
                             cells[operationCells[i]]->setText(selectedString.at(m));
                             cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
-                            cells[operationCells[i]]->setId(currentId);
+                            cells[operationCells[i]]->setId(selectedCell->getId());
                         }
                     }
-                    else
-                        qDebug()<<"blocked";
                 }
             }
             else
@@ -182,7 +177,7 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
                         cells[operationCells[i]]->setText(selectedString.at(i));
                         cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
-                        cells[operationCells[i]]->setId(currentId);
+                        cells[operationCells[i]]->setId(selectedCell->getId());
                     }
                 }
             }
@@ -262,6 +257,8 @@ void Lcd::exitEditMode()
 void Lcd::unpin()
 {
     uBox->reset();
+
+    uBox = nullptr;
 
     for(int i=0; i<selectedString.length(); i++)
     {

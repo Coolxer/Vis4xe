@@ -98,7 +98,6 @@ bool Project::writeOnLcd(UnPlacedBox* box)
 
 void Project::setPath(QString path)
 {
-
     for(int i = 0; i <= path.length() - 6; i++)
         dirPath += path[i];
 

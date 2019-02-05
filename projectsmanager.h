@@ -47,6 +47,7 @@ public:
     void addBox(ProjectNameBox* box) { boxes.push_back(box); }
 
     QWidget* getHomePage() { return homePage; }
+    QWidget* getEditPage() { return editPage; }
 };
 
 #endif // PROJECTSLIST_H

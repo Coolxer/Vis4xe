@@ -5,19 +5,21 @@
 FileManager::FileManager(ProjectsManager* projectsManager)
 {
     this->projectsManager = projectsManager;
+
+    documentsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+
+    dir.mkdir(documentsPath + "/Vis4xe");
+
+    projectsFile.setFileName(dir.path() + "/projects.json");
 }
 
 QByteArray FileManager::shortRead()
 {
     QByteArray data = nullptr;
 
-    projectsFile.setFileName("C:/Users/lukasz/Desktop/projects.json");
-
     if(projectsFile.exists())
     {
-
-        if(!projectsFile.open(QIODevice::ReadOnly | QIODevice::Text))
-            qDebug()<<"failed to open file";
+        projectsFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
         data = projectsFile.readAll();
 
@@ -34,8 +36,7 @@ QByteArray FileManager::readProject(QString path)
 
     if (file.exists())
     {
-        if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-           qDebug()<<"Opened file";
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
 
         data = file.readAll();
 

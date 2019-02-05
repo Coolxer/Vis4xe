@@ -1,21 +1,15 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
-#include <QtDebug>
-#include <QString>
-
 #include <QFile>
 #include <QFileInfo>
 #include <QFileDialog>
 #include <QDir>
 
+#include <QStandardPaths>
+
 #include <QTextStream>
 #include <QByteArray>
-
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QJsonValue>
 
 #include "dataconverter.h"
 
@@ -24,7 +18,9 @@ class ProjectsManager;
 class FileManager
 {
 private:
+    QDir dir;
     QFile projectsFile;
+    QString documentsPath;
 
     ProjectsManager* projectsManager;
 
