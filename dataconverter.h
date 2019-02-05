@@ -26,12 +26,12 @@ private:
 public:
     DataConverter();
 
-    static Project* convertToProject(ProjectsManager* projectsManager, QByteArray data);
-    static QByteArray convertProjectToData(Project* project);
-    static QByteArray convertCutProjectToData(ProjectsManager* projectsManager);
-    static void convertToNameBoxes(ProjectsManager* projectsManager, QByteArray data);
+    static Project* convertToProject(ProjectsManager* projectsManager, QByteArray data); //converts json data from File to project
+    static QByteArray convertProjectToData(Project* project); //converts project to json format to save it in file
+    static QByteArray convertCutProjectToData(ProjectsManager* projectsManager); //converts the shortcut of project to save it in projectsList file
+    static void convertToNameBoxes(ProjectsManager* projectsManager, QByteArray data); //converts the json array boxes to their program types
 
-    static QJsonObject convertVectorToJson(ProjectsManager* projectsManager);
+    static QJsonObject convertVectorToJson(ProjectsManager* projectsManager); //converts the c++ <Vector> to json array type
 };
 
 

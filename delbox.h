@@ -10,9 +10,9 @@ class UnPlacedBox;
 class DelBox : public QLabel
 {
 private:
-    UnPlacedBox* unPlacedBox;
+    UnPlacedBox* unPlacedBox; //the pointer to its parent
 
-    QPoint startPosition;
+    QPoint startPosition; //the start Position of the delBox
 
     void mousePressEvent(QMouseEvent* event);
     void enterEvent(QEvent*);
@@ -21,7 +21,7 @@ public:
     DelBox(){}
     DelBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos);
 
-    void reset();
+    void reset(); //the function that's moving this box to the start Postion
 
 };
 

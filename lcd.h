@@ -23,10 +23,6 @@ private:
 
     int currentId = -1; //the id of the current selected cell
 
-    //int selectedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string, normally is -1
-
-    //int droppedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string
-
     Cell* selectedCell = nullptr; //the pointer to the selected cell
     Cell* droppedCell = nullptr; //the pointer to the dropped on cell
 

@@ -20,14 +20,14 @@ class ProjectsManager;
 class FileManager
 {
 private:
-    QFile projectsFile;
+    ProjectsManager* projectsManager; //the pointer to the ProjectsManager
 
-    ProjectsManager* projectsManager;
+    QFile projectsFile; //the projectsListFile that includes the short description of the created projects
 
-    QString documentsPath;
+    QString documentsPath; //the path of the user Documents folder (C:\Users\user)
 
-    void saveVisFile(QByteArray data);
-    void saveAvrFile();
+    void saveVisFile(QByteArray data); //method that saves the data to the json file (readable by Vis4xe)
+    void saveAvrFile(); //method that saves the algorithm of arduino instructions to use with LCD screen (using LiquidCrystal library) to text (*.txt) file
 
 public:
     FileManager(){}

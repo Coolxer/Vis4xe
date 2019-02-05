@@ -19,9 +19,9 @@ private:
     QWidget* container; //the widget for storing others widgets like lcd and stringsWidget
     QString name; //name of the project
 
-    QString dirPath; //path where the projct is saved
-    QString visPath;
-    QString avrPath;
+    QString dirPath; //path where folder with project is placed
+    QString visPath; //path where the *.json file is placed
+    QString avrPath; //path where the *.txt file is placed (Arduino)
 
     Lcd* lcd; //pointer of lcd, for keeping dynamic object
     StringsListWidget* stringsWidget;  //pointer of stringsListWidget, for keeping dynamic object
@@ -33,7 +33,7 @@ public:
 
     QString getName() { return name; }
 
-    void setPath(QString path);
+    void setPath(QString path); //the function that prepares the paths of the files
 
     QString getDirPath() { return dirPath; }
     QString getVisPath() { return visPath; }
@@ -42,8 +42,8 @@ public:
     Lcd* getLcd() { return lcd; }
     StringsListWidget* getStringsWidget() { return stringsWidget; }
 
-    bool check(QPoint point);
-    bool writeOnLcd(UnPlacedBox* box); //the function is drawing the text from unplacedBox
+    bool check(QPoint point); //the method checks if the dragBoxPoint is over any cell and returns TRUE if it is or otherwise FALSE
+    bool writeOnLcd(UnPlacedBox* box); //the function is drawing the text from unplacedBox on lcd
 
     void loadUnplacedBoxes(QVector <UnPlacedBox*> unPlacedBoxes); //using to load UnplacedBoxes from *.json file
     void loadCells(QVector<Cell*> cells); //using to load cells from *.json file

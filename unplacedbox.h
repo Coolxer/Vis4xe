@@ -12,16 +12,16 @@ class QWidget;
 class UnPlacedBox : public QLabel
 {
 private:
-    Project* project;
-    QWidget* listWidget;
+    Project* project; //the pointer to the project
+    QWidget* listWidget; //the pointer to its parent
 
-    DragBox* dragBox;
-    DelBox* delBox;
+    DragBox* dragBox; //the dynamic object of DragBox
+    DelBox* delBox; // the dynamic object of DelBox
 
-    QPoint startPosition;
-    QPoint dragBoxPoint;
+    QPoint startPosition; //the startPosition of the UnplacedBox text box
+    QPoint dragBoxPoint; // the position of the DragBox
 
-    int id;
+    int id; //the id of the unplacedBox in the StringsListWidget
 
 public:
     UnPlacedBox(Project* project, int id, QString text, QPoint pos);
@@ -29,12 +29,12 @@ public:
 
     int getId() { return id; }
 
-    void checkDrop(QPoint point);
+    void checkDrop(QPoint point); //
     void remove();
 
     QPoint getDragBoxPoint() { return dragBoxPoint; }
     void show(bool x);
-    void reset();
+    void reset(); //the function that moves the box to the start position
 };
 
 #endif // UNPLACEDBOX_H

@@ -12,9 +12,9 @@ class DragBox : public QLabel
 private:
     UnPlacedBox* unPlacedBox;
 
-    QPoint startPosition;
-    QPoint offset;
-    QPoint lastPosition;
+    QPoint startPosition; //start Position of the DragBox
+    QPoint offset; //the offset, /\ delta movement
+    QPoint lastPosition; //the lastPostion that was registered
 
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
@@ -26,7 +26,7 @@ public:
     DragBox(){}
     DragBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos);
 
-    void reset();
+    void reset();  //the function that's moving this box to the start Postion
 };
 
 #endif // DRAGBOX_H
