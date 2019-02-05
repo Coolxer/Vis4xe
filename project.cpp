@@ -111,7 +111,7 @@ void Project::setPath(QString path)
     int x = 0;
 
     //visPath
-    for(int i = path.length() -1; i>=0; i--)
+    for(int i = path.length() -1; i >= 0; i--)
     {
         if(path[i] == '/')
             break;
@@ -121,8 +121,10 @@ void Project::setPath(QString path)
 
     int k = path.length() - 1 - x;
 
-    for(int i = k; i<=path.length()-1; i++)
+    for(int i = k; i <= path.length()-1; i++)
         visPath += path[i];
+
+    visPath = dirPath + visPath;
 
     //avrPath
     for(int i = 0; i <= visPath.length() - 1; i++)

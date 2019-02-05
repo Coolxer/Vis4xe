@@ -24,6 +24,8 @@ private:
 
     ProjectsManager* projectsManager;
 
+    QString documentsPath;
+
     void saveVisFile(QByteArray data);
     void saveAvrFile();
 

@@ -6,13 +6,9 @@ FileManager::FileManager(ProjectsManager* projectsManager)
 {
     this->projectsManager = projectsManager;
 
-    QString documentsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
-    QDir dir;
+    documentsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
 
-    if(!dir.exists(documentsPath))
-        dir.mkdir(documentsPath + "/Vis4xe");
-
-    projectsFile.setFileName(dir.path() + "/projects.json");
+    projectsFile.setFileName(documentsPath + "/Vis4xe/projects.json");
 }
 
 QByteArray FileManager::shortRead()
@@ -37,7 +33,7 @@ QByteArray FileManager::readProject(QString path)
     QFile file(path);
     QByteArray data = nullptr;
 
-    if (file.exists())
+    if(file.exists())
     {
         if(file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
@@ -54,19 +50,21 @@ void FileManager::saveProject(QByteArray data)
 {
     QDir dir;
 
-    if(dir.mkdir(projectsManager->getCurrentProject()->getDirPath()))
-    {
-        saveVisFile(data);
-        saveAvrFile();
-    }
+    if(!dir.exists(projectsManager->getCurrentProject()->getDirPath()))
+        dir.mkdir(projectsManager->getCurrentProject()->getDirPath());
+
+    saveVisFile(data);
+    saveAvrFile();
 }
 
 void FileManager::saveCutProject(QByteArray data)
 {
-    if(!projectsFile.exists())
-        return;
+    QDir dir;
 
-    if(!projectsFile.open(QIODevice::ReadWrite))
+    if(!dir.exists(documentsPath + "/Vis4xe"))
+        dir.mkdir(documentsPath + "/Vis4xe");
+
+    if(!projectsFile.open(QIODevice::WriteOnly))
         return;
 
     projectsFile.write(data);
@@ -82,8 +80,6 @@ void FileManager::removeProject(QString path)
 void FileManager::saveVisFile(QByteArray data)
 {
     QFile file(projectsManager->getCurrentProject()->getVisPath());
-
-    qDebug()<<projectsManager->getCurrentProject()->getVisPath();
 
     if(!file.open(QFile::WriteOnly))
         return;
