@@ -13,14 +13,14 @@
 
 #include "dataconverter.h"
 
+#include <QtDebug>
+
 class ProjectsManager;
 
 class FileManager
 {
 private:
-    QDir dir;
     QFile projectsFile;
-    QString documentsPath;
 
     ProjectsManager* projectsManager;
 

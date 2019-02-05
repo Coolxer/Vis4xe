@@ -6,9 +6,11 @@ FileManager::FileManager(ProjectsManager* projectsManager)
 {
     this->projectsManager = projectsManager;
 
-    documentsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    QString documentsPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    QDir dir;
 
-    dir.mkdir(documentsPath + "/Vis4xe");
+    if(!dir.exists(documentsPath))
+        dir.mkdir(documentsPath + "/Vis4xe");
 
     projectsFile.setFileName(dir.path() + "/projects.json");
 }
@@ -19,11 +21,12 @@ QByteArray FileManager::shortRead()
 
     if(projectsFile.exists())
     {
-        projectsFile.open(QIODevice::ReadOnly | QIODevice::Text);
+        if(projectsFile.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            data = projectsFile.readAll();
 
-        data = projectsFile.readAll();
-
-        projectsFile.close();
+            projectsFile.close();
+        }
     }
 
     return data;
@@ -36,11 +39,12 @@ QByteArray FileManager::readProject(QString path)
 
     if (file.exists())
     {
-        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            data = file.readAll();
 
-        data = file.readAll();
-
-        file.close();
+            file.close();
+        }
     }
 
     return data;
@@ -50,10 +54,11 @@ void FileManager::saveProject(QByteArray data)
 {
     QDir dir;
 
-    dir.mkdir(projectsManager->getCurrentProject()->getDirPath());
-
-    saveVisFile(data);
-    saveAvrFile();
+    if(dir.mkdir(projectsManager->getCurrentProject()->getDirPath()))
+    {
+        saveVisFile(data);
+        saveAvrFile();
+    }
 }
 
 void FileManager::saveCutProject(QByteArray data)
@@ -76,11 +81,11 @@ void FileManager::removeProject(QString path)
 
 void FileManager::saveVisFile(QByteArray data)
 {
-    QFile file;
+    QFile file(projectsManager->getCurrentProject()->getVisPath());
 
-    file.setFileName(projectsManager->getCurrentProject()->getVisPath());
+    qDebug()<<projectsManager->getCurrentProject()->getVisPath();
 
-    if(file.open(QFile::WriteOnly))
+    if(!file.open(QFile::WriteOnly))
         return;
 
     file.write(data);
@@ -90,9 +95,7 @@ void FileManager::saveVisFile(QByteArray data)
 
 void FileManager::saveAvrFile()
 {
-    QFile file;
-
-    file.setFileName(projectsManager->getCurrentProject()->getAvrPath());
+    QFile file(projectsManager->getCurrentProject()->getAvrPath());
 
     if(!file.open(QFile::WriteOnly| QIODevice::Text))
         return;

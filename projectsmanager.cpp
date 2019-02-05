@@ -13,6 +13,8 @@ ProjectsManager::ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedW
     this->stackedWidget = stackedWidget;
     this->prList = prList;
 
+    fileManager = new FileManager(this);
+
     readBoxes();
 }
 
@@ -25,7 +27,7 @@ void ProjectsManager::readBoxes()
 {
     boxes.clear();
 
-    DataConverter::convertToNameBoxes(this, fileManager.shortRead());
+    DataConverter::convertToNameBoxes(this, fileManager->shortRead());
 
     if(boxes.length() == 0)
         prList->setCurrentIndex(1);
@@ -42,7 +44,7 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
                                                             "Json (*.json);;All Files (*)");
     }
 
-    currentProject = DataConverter::convertToProject(this, fileManager.readProject(path));
+    currentProject = DataConverter::convertToProject(this, fileManager->readProject(path));
 
     if(currentProject != nullptr)
         stackedWidget->setCurrentIndex(2);
@@ -71,8 +73,8 @@ void ProjectsManager::saveProject()
     if(currentProject->getDirPath().isEmpty())
         return;
 
-    fileManager.saveProject(DataConverter::convertProjectToData(currentProject));
-    fileManager.saveCutProject(DataConverter::convertCutProjectToData(this));
+    fileManager->saveProject(DataConverter::convertProjectToData(currentProject));
+    fileManager->saveCutProject(DataConverter::convertCutProjectToData(this));
 
     readBoxes();
 }

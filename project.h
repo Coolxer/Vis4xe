@@ -17,9 +17,9 @@ private:
     QWidget* container; //the widget for storing others widgets like lcd and stringsWidget
     QString name; //name of the project
 
-    QString dirPath=""; //path where the projct is saved
-    QString visPath="";
-    QString avrPath="";
+    QString dirPath; //path where the projct is saved
+    QString visPath;
+    QString avrPath;
 
     Lcd* lcd; //pointer of lcd, for keeping dynamic object
     StringsListWidget* stringsWidget;  //pointer of stringsListWidget, for keeping dynamic object
@@ -32,6 +32,7 @@ public:
     QString getName() { return name; }
 
     void setPath(QString path);
+
     QString getDirPath() { return dirPath; }
     QString getVisPath() { return visPath; }
     QString getAvrPath() { return avrPath; }

@@ -14,7 +14,7 @@ class QStackedWidget;
 class ProjectsManager
 {
 private:
-    FileManager fileManager; //the pointer , dynamic object which is managing the file service
+    FileManager* fileManager; //the pointer , dynamic object which is managing the file service
 
     QWidget* homePage; //the pointer to homePage to manage pages
     QWidget* editPage; //the pointer to EditPage to manage pages
