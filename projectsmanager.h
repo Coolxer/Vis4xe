@@ -38,7 +38,7 @@ public:
     QVector <ProjectNameBox*> getBoxes() { return boxes; }
 
     void loadProject(ProjectNameBox* box, QString path); //function to loadProject from file after clicked on the Name box
-    void createProject(QString name, unsigned short rows, unsigned short cols); //the function that creates the new Project and opening it
+    void createProject(QString name, int rows, int cols); //the function that creates the new Project and opening it
     void saveProject(); //the function to saveProject to file, this runs the fileManager service
 
     void releaseProject() { delete currentProject; currentProject = nullptr; } //the function that's closing current opened project

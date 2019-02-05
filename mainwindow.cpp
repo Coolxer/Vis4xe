@@ -30,8 +30,8 @@ void MainWindow::on_addNewButton_clicked()
 void MainWindow::on_finalAddButton_clicked()
 {
     QString name = ui->nameLineEdit->text();
-    unsigned short rows = ui->rowsLineEdit->text().toShort();
-    unsigned short cols = ui->colsLineEdit->text().toShort();
+    int rows = ui->rowsLineEdit->text().toInt();
+    int cols = ui->colsLineEdit->text().toInt();
 
     bool valid = true;
 

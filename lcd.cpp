@@ -3,11 +3,13 @@
 #include "project.h"
 #include "unplacedbox.h"
 
-Lcd::Lcd(unsigned short rows, unsigned short cols, QWidget* widget, Project* project) : QWidget (widget)
+Lcd::Lcd(int rows, int cols, QWidget* widget, Project* project) : QWidget (widget)
 {
     this->rows = rows;
     this->cols = cols;
     this->project = project;
+
+    numberOfCells = rows * cols;
 
     int width = (this->cols * 20) + (this->cols + 1) * 5;
     int height = (this->rows * 30) + (this->rows + 1) * 5;
@@ -22,16 +24,19 @@ Lcd::Lcd(unsigned short rows, unsigned short cols, QWidget* widget, Project* pro
 
 void Lcd::initCells()
 {
+    int m = 0;
+
     for(int i = 0; i < rows; i++)
     {
         for(int j = 0; j < cols; j++)
         {
-            Cell* cell = new Cell(this, numberOfCells);
+            Cell* cell = new Cell(this, m);
 
             cell->setGeometry(QRect((25 * j) + 5, (i * 35) + 5, 20, 30));
 
             cells.push_back(cell);
-            numberOfCells++;
+
+            m++;
         }
     }
 }
@@ -113,7 +118,7 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
                             cells[operationCells[i]]->setText(selectedString.at(m));
                             cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
-                            cells[operationCells[i]]->setId(selectedCell->getId());
+                            cells[operationCells[i]]->setId(currentId);
                         }
                     }
                 }
@@ -177,7 +182,7 @@ void Lcd::keyPressEvent(QKeyEvent* event)
 
                         cells[operationCells[i]]->setText(selectedString.at(i));
                         cells[operationCells[i]]->setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
-                        cells[operationCells[i]]->setId(selectedCell->getId());
+                        cells[operationCells[i]]->setId(currentId);
                     }
                 }
             }
@@ -197,10 +202,12 @@ void Lcd::setSelectedCell(int index)
     {
         selectedCell = cells[index];
 
+        currentId = selectedCell->getId();
+
         for(int i = 0; i < numberOfCells; i++)
         {
             //checks if the other cells have got the same id as the selected cell (same string)
-            if(cells[i]->getId() == selectedCell->getId())
+            if(cells[i]->getId() == currentId)
             {
                 selectedString += cells[i]->text();
                 operationCells.push_back(i);
@@ -214,7 +221,7 @@ void Lcd::setSelectedCell(int index)
         {
             b = project->getStringsWidget()->getBox(i);
 
-            if(b->getId() == selectedCell->getId())
+            if(b->getId() == currentId)
             {
                 uBox = b;
                 break;
@@ -236,8 +243,9 @@ void Lcd::cancelChanges()
         cells[operationCells[i]]->setId(-1);
 
         cells[selectedNumbersOfCells[i]]->setText(selectedString.at(i));
-        cells[selectedNumbersOfCells[i]]->setId(selectedCell->getId());
+        cells[selectedNumbersOfCells[i]]->setId(currentId);
     }
+
     exitEditMode();
 }
 
@@ -245,6 +253,7 @@ void Lcd::exitEditMode()
 {
     editMode = false;
     selectedCell = nullptr;
+    currentId = -1;
 
     for(int i = 0; i < selectedNumbersOfCells.length(); i++)
         cells[operationCells[i]]->setStyleSheet("QLabel{ background-color: #0099ff; font-size: 25px; }");

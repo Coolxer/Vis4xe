@@ -21,7 +21,7 @@ private:
 
     int numberOfCells; //rows * cols
 
-    //int currentId = -1; //the id of the current selected cell
+    int currentId = -1; //the id of the current selected cell
 
     //int selectedCell = -1; //the index of the cell which on the user dropped the UnplacedBox string, normally is -1
 
@@ -59,7 +59,7 @@ private:
 
 public:
     Lcd(){}
-    Lcd(unsigned short rows, unsigned short cols, QWidget* widget, Project* project);
+    Lcd(int rows, int cols, QWidget* widget, Project* project);
     //Lcd(unsigned short rows, unsigned short cols, QWidget* widget, QVector <Cell*> cells);
     ~Lcd(){}
 
@@ -70,7 +70,7 @@ public:
     Cell* getSelectedCell() { return selectedCell; }
 
     //for drag & drop unplacebox
-    void setDroppedCell(int index) { (index == -1)? droppedCell = nullptr : droppedCell = cells[index]; }
+    void setDroppedCell(int index) { (index == -1) ? droppedCell = nullptr : droppedCell = cells[index];}
     Cell* getDroppedCell() { return droppedCell; }
 
     Cell* getCell(int i) { return cells[i]; }
@@ -82,7 +82,7 @@ public:
 
     void loadCellsFromFile(QVector<Cell*> cells); //using for append the Array of cells loaded from *.json file
 
-    bool editEnabled() { return editMode; };
+    bool editEnabled() { return editMode; }
 };
 
 #endif // LCD_H

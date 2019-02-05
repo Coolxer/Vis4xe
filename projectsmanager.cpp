@@ -59,14 +59,14 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
     }
 }
 
-void ProjectsManager::createProject(QString name, unsigned short rows, unsigned short cols)
+void ProjectsManager::createProject(QString name, int rows, int cols)
 {
     currentProject = new Project(name, rows, cols, editPage);
 }
 
 void ProjectsManager::saveProject()
 {
-    currentProject->setPath(QFileDialog::getSaveFileName(currentProject->getContainer(), "Open File",
+    currentProject->setPath(QFileDialog::getSaveFileName(editPage, "Open File",
                                                    currentProject->getName(),
                                                     "Json (*.json);;All Files (*)"));
 

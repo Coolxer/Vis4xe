@@ -8,6 +8,8 @@
 
 #include <QLabel>
 
+#include <QtDebug>
+
 class Cell;
 
 class Project

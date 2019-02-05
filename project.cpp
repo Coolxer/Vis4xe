@@ -6,10 +6,11 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QWidget
 
     projectNameBox = new QLabel(widget);
     container = new QWidget(widget);
-    lcd = new Lcd(rows, cols, container, this);
-    stringsWidget = new StringsListWidget(this);
 
     container->setGeometry(0, 60, 960, 400);
+
+    lcd = new Lcd(rows, cols, container, this);
+    stringsWidget = new StringsListWidget(this);
 
     projectNameBox->setGeometry(480, 3, 120, 54);
     projectNameBox->setStyleSheet("QLabel{ font-family: Bradley Hand ITC; font-size: 32px; color: #FF0000; }");
@@ -65,7 +66,7 @@ bool Project::writeOnLcd(UnPlacedBox* box)
     if(check(box->getDragBoxPoint()))
     {
         //check if its possible to drop this there (overfill cover)
-        if(lcd->getDroppedCell()->getIndex() + box->text().length() < lcd->getDroppedCell()->getIndex() * lcd->getCols())
+        if(lcd->getDroppedCell()->getIndex() + box->text().length() <= lcd->getDroppedCell()->getRow()* lcd->getCols())
         {
             bool allCellsEnabled = true;
 
