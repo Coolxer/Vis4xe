@@ -22,6 +22,7 @@ class ProjectNameBox;
 class DataConverter
 {
 private:
+    static QJsonObject convertVectorToJson(ProjectsManager* projectsManager); //converts the c++ <Vector> to json array type
 
 public:
     DataConverter();
@@ -31,7 +32,7 @@ public:
     static QByteArray convertCutProjectToData(ProjectsManager* projectsManager); //converts the shortcut of project to save it in projectsList file
     static void convertToNameBoxes(ProjectsManager* projectsManager, QByteArray data); //converts the json array boxes to their program types
 
-    static QJsonObject convertVectorToJson(ProjectsManager* projectsManager); //converts the c++ <Vector> to json array type
+
 };
 
 

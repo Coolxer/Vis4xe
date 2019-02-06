@@ -106,6 +106,8 @@ void FileManager::saveAvrFile()
     {
         if(projectsManager->getCurrentProject()->getLcd()->getCell(i)->getId() != -1)
         {
+            int x = i;
+
             do
             {
                if(projectsManager->getCurrentProject()->getLcd()->getCell(i)->getId() == -1)
@@ -117,6 +119,7 @@ void FileManager::saveAvrFile()
 
             }while(1);
 
+            out<<"\nlcd.setCursor("<<projectsManager->getCurrentProject()->getLcd()->getCell(x)->getCol()<<','<<projectsManager->getCurrentProject()->getLcd()->getCell(x)->getRow()<<");";
             out<<"\nlcd.print(\""<<current<<"\");";
 
             current = "";

@@ -104,7 +104,7 @@ QByteArray DataConverter::convertCutProjectToData(ProjectsManager* projectsManag
 
     obj.insert(QString("projects"), array);
 
-    doc.setObject(o);
+    doc.setObject(obj);
 
     return doc.toJson();
 }
