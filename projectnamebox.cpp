@@ -42,6 +42,7 @@ void ProjectNameBox::leaveEvent(QEvent*)
 
 void ProjectNameBox::setBlocked()
 {
+    setEnabled(false);
     blocked = true;
     setText("NOT FOUND!");
     setStyleSheet("QLabel { border: 2px solid red; color: red; font-size:25px; border-radius:50px; }");

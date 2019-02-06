@@ -100,6 +100,10 @@ QByteArray DataConverter::convertCutProjectToData(ProjectsManager* projectsManag
     item.insert(QString("name"), QJsonValue(projectsManager->getCurrentProject()->getName()));
     item.insert(QString("path"), QJsonValue(projectsManager->getCurrentProject()->getVisPath()));
 
+    for(int i = 0; i < array.size(); i++)
+        if(array[i].toObject().value("name") == item.value("name"))
+            return nullptr;
+
     array.push_back(item);
 
     obj.insert(QString("projects"), array);
@@ -136,13 +140,7 @@ bool DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
     if(!allRight)
     {
         for(int i = 0; i < indexes.length(); i++)
-        {
-            QJsonObject obj =  array[indexes[i]].toObject();
-            QJsonObject* o = &obj;
-
-            delete o;
             array.removeAt(indexes[i]);
-        }
 
         count = array.size();
     }

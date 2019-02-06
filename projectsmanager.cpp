@@ -52,8 +52,12 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
     currentProject = DataConverter::convertToProject(this, fileManager->readProject(path));
 
     if(currentProject != nullptr)
+    {
         stackedWidget->setCurrentIndex(2);
-    else if (box != nullptr)
+        currentProject->setSaved(true);
+    }
+
+    if(currentProject == nullptr && box != nullptr)
     {
         box->setBlocked();
         //box->hide();
@@ -65,7 +69,7 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
         //    prList->setCurrentIndex(1);
     }
 
-    currentProject->setSaved(true);
+
 }
 
 void ProjectsManager::createProject(QString name, int rows, int cols)
@@ -83,7 +87,8 @@ void ProjectsManager::saveProject()
         return;
 
     fileManager->saveProject(DataConverter::convertProjectToData(currentProject));
-    fileManager->saveCutProject(DataConverter::convertCutProjectToData(this));
+    if(DataConverter::convertCutProjectToData(this) != nullptr)
+        fileManager->saveCutProject(DataConverter::convertCutProjectToData(this));
 
     readBoxes();
 

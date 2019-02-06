@@ -21,6 +21,8 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QWidget
     projectNameBox->setText(name);
     projectNameBox->setAlignment(Qt::AlignCenter);
     projectNameBox->show();
+
+    setSaved(false);
 }
 
 Project::~Project()
