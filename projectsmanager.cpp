@@ -27,7 +27,10 @@ void ProjectsManager::readBoxes()
 {
     boxes.clear();
 
-    DataConverter::convertToNameBoxes(this, fileManager->shortRead());
+    bool ok = DataConverter::convertToNameBoxes(this, fileManager->shortRead());
+
+    if(!ok)
+        fileManager->saveCutProject(DataConverter::convertVectorToData(this));
 
     if(boxes.length() == 0)
         prList->setCurrentIndex(1);
@@ -50,12 +53,14 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
         stackedWidget->setCurrentIndex(2);
     else if (box != nullptr)
     {
-        box->hide();
-        delete box;
-        boxes.removeLast();
+        box->setBlocked();
+        //box->hide();
+        //box->setStyleSheet("background-color: red");
+        //delete box;
+        //boxes.removeLast();
 
-        if(boxes.length() <= 0 )
-            prList->setCurrentIndex(1);
+        //if(boxes.length() <= 0 )
+        //    prList->setCurrentIndex(1);
     }
 }
 

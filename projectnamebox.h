@@ -14,6 +14,8 @@ private:
     ProjectsManager* projectsManager;//the pointer to the projectstManager
     QString path; //the path to the project file(using if user clicked property box)
 
+    bool blocked = false;
+
 protected:
     void mousePressEvent(QMouseEvent* event);
     void enterEvent(QEvent*);
@@ -26,6 +28,8 @@ public:
     void setPosition(QPoint p);
     QString getName() { return text(); }
     QString getPath() { return path; }
+
+    void setBlocked();
 };
 
 #endif // PROJECTNAMEBOX_H

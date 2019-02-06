@@ -81,7 +81,8 @@ void MainWindow::on_finalAddButton_clicked()
 
 void MainWindow::on_cancelAddingButton_clicked()
 {
-    ui->statesStackedWidget->setCurrentIndex(0);
+    projectsManager->readBoxes();
+    ui->statesStackedWidget->setCurrentIndex(0); 
 }
 
 void MainWindow::on_editingQuitButton_clicked()

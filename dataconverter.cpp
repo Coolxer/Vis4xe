@@ -90,7 +90,7 @@ QByteArray DataConverter::convertProjectToData(Project* project)
 
 QByteArray DataConverter::convertCutProjectToData(ProjectsManager* projectsManager)
 {
-    QJsonObject o = convertVectorToJson(projectsManager);
+    QJsonObject o = convertVectorToJsonObject(projectsManager);
     QJsonArray array = o.value("projects").toArray();
 
     QJsonDocument doc;
@@ -109,16 +109,45 @@ QByteArray DataConverter::convertCutProjectToData(ProjectsManager* projectsManag
     return doc.toJson();
 }
 
-void DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteArray data)
+bool DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteArray data)
 {
     QJsonDocument doc = QJsonDocument::fromJson(data);
     QJsonArray array = doc.object()["projects"].toArray();
     QVector <ProjectNameBox*> boxes;
 
+    bool allRight = true;
+
     int count = array.size();
 
+    QVector <int> indexes;
+
+    for(int i = 0; i < count; i++)
+    {
+        if(!QFileInfo::exists(array[i].toObject().value("path").toString()))
+        {
+            allRight = false;
+            //array.removeAt(i);
+
+            //count--;
+            indexes.push_back(i);
+        }
+    }
+
+    if(!allRight)
+    {
+        for(int i = 0; i < indexes.length(); i++)
+        {
+            QJsonObject obj =  array[i].toObject();
+            QJsonObject* o = &obj;
+
+           array.removeAt(i);
+           delete o;
+        }
+        count = array.size();
+    }
+
     if(count <= 0)
-        return;
+        return true;
     else if (count > 0 && count < 9)
     {
         int rows = count / 3;
@@ -136,16 +165,6 @@ void DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
         if(count < 3)
             c = lastItemColumn;
 
-        /*
-        if(rows == 1)
-        {
-            if(lastItemColumn == 1)
-                lastItemColumn = 2;
-            else if (lastItemColumn == 2)
-                lastItemColumn = 1;
-        }
-        */
-
         int m = 0;
 
         for(int i = 0; i < rows; i++)
@@ -156,7 +175,6 @@ void DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
             for(int j = 0; j < c; j++)
             {
                 boxes.push_back(new ProjectNameBox(projectsManager, array[m].toObject().value("name").toString(), array[m].toObject().value("path").toString(), QPoint(120 + (260 *j), (120 * i) + 100)));
-
                 m++;
             }
         }
@@ -178,9 +196,11 @@ void DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
 
     projectsManager->setBoxes(boxes);
 
+    return allRight;
+
 }
 
-QJsonObject DataConverter::convertVectorToJson(ProjectsManager* projectsManager)
+QJsonObject DataConverter::convertVectorToJsonObject(ProjectsManager* projectsManager)
 {
     QJsonArray array;
     QJsonObject obj, item;
@@ -198,5 +218,15 @@ QJsonObject DataConverter::convertVectorToJson(ProjectsManager* projectsManager)
     obj.insert(QString("projects"), array);
 
     return obj;
+}
+
+QByteArray DataConverter::convertVectorToData(ProjectsManager* projectsManager)
+{
+    QJsonObject obj = convertVectorToJsonObject(projectsManager);
+    QJsonDocument doc;
+
+    doc.setObject(obj);
+
+    return doc.toJson();
 }
 

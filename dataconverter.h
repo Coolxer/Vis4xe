@@ -10,8 +10,7 @@
 
 #include <QVector>
 
-#include "qwidget.h"
-#include "qfiledialog.h"
+#include <QFileInfo>
 
 class ProjectsManager;
 class Project;
@@ -22,7 +21,7 @@ class ProjectNameBox;
 class DataConverter
 {
 private:
-    static QJsonObject convertVectorToJson(ProjectsManager* projectsManager); //converts the c++ <Vector> to json array type
+    static QJsonObject convertVectorToJsonObject(ProjectsManager* projectsManager); //converts the c++ <Vector> to json array type
 
 public:
     DataConverter();
@@ -30,9 +29,9 @@ public:
     static Project* convertToProject(ProjectsManager* projectsManager, QByteArray data); //converts json data from File to project
     static QByteArray convertProjectToData(Project* project); //converts project to json format to save it in file
     static QByteArray convertCutProjectToData(ProjectsManager* projectsManager); //converts the shortcut of project to save it in projectsList file
-    static void convertToNameBoxes(ProjectsManager* projectsManager, QByteArray data); //converts the json array boxes to their program types
+    static bool convertToNameBoxes(ProjectsManager* projectsManager, QByteArray data); //converts the json array boxes to their program types
 
-
+    static QByteArray convertVectorToData(ProjectsManager* projectsManager);
 };
 
 

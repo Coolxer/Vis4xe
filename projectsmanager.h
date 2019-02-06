@@ -26,7 +26,7 @@ private:
 
     Project* currentProject = nullptr; //the pointer to the current opened project
 
-    void readBoxes();//reads the boxes from projects.json file and puts them on the homePage screen
+
 
 public:
     ProjectsManager(){}
@@ -36,6 +36,8 @@ public:
     Project* getCurrentProject() { return currentProject; } //returns the pointer to the current project
 
     QVector <ProjectNameBox*> getBoxes() { return boxes; }
+
+    void readBoxes();//reads the boxes from projects.json file and puts them on the homePage screen
 
     void loadProject(ProjectNameBox* box, QString path); //function to loadProject from file after clicked on the Name box
     void createProject(QString name, int rows, int cols); //the function that creates the new Project and opening it
