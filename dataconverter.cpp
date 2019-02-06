@@ -121,7 +121,10 @@ void DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
         return;
     else if (count > 0 && count < 9)
     {
-        int rows = (count / 3) + 1;
+        int rows = count / 3;
+
+        if(count % 3 != 0)
+            rows++;
 
         int lastItemColumn = count % 3;
 
@@ -130,18 +133,18 @@ void DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
 
         int c = 3;
 
-        if(count < c)
+        if(count < 3)
             c = lastItemColumn;
 
         /*
-        if(r == 1)
+        if(rows == 1)
         {
             if(lastItemColumn == 1)
                 lastItemColumn = 2;
             else if (lastItemColumn == 2)
                 lastItemColumn = 1;
         }
-           */
+        */
 
         int m = 0;
 

@@ -93,8 +93,6 @@ void MainWindow::on_editingQuitButton_clicked()
 void MainWindow::on_editingQuitWithSaveButton_clicked()
 {
      projectsManager->saveProject();
-     projectsManager->releaseProject();
-     ui->statesStackedWidget->setCurrentIndex(0);   
 }
 
 void MainWindow::on_addStringButton_clicked()

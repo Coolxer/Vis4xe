@@ -51,7 +51,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="homePage">
      <widget class="QLabel" name="projectNameLabel">
@@ -617,7 +617,7 @@ font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;</string>
      <widget class="QPushButton" name="editingQuitButton">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>340</x>
         <y>470</y>
         <width>150</width>
         <height>60</height>
@@ -647,7 +647,7 @@ font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;</string>
      <widget class="QPushButton" name="addStringButton">
       <property name="geometry">
        <rect>
-        <x>600</x>
+        <x>585</x>
         <y>470</y>
         <width>150</width>
         <height>60</height>
@@ -697,7 +697,8 @@ font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;</string>
       <property name="styleSheet">
        <string notr="true">background-color: #333333;
 color: #ffffff;
-border: 2px solid #0099ff;</string>
+border: 2px solid #0099ff;
+border-radius: 15px;</string>
       </property>
       <property name="text">
        <string/>
@@ -709,7 +710,7 @@ border: 2px solid #0099ff;</string>
      <widget class="QPushButton" name="editingQuitWithSaveButton">
       <property name="geometry">
        <rect>
-        <x>60</x>
+        <x>95</x>
         <y>470</y>
         <width>150</width>
         <height>60</height>
@@ -733,7 +734,7 @@ border: 2px solid #0099ff;</string>
 </string>
       </property>
       <property name="text">
-       <string>Save and quit</string>
+       <string>Save</string>
       </property>
      </widget>
      <widget class="QLabel" name="label">
