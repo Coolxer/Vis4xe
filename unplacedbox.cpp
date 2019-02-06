@@ -15,6 +15,8 @@ UnPlacedBox::UnPlacedBox(Project* project, int id, QString text, QPoint pos): QL
     setStyleSheet("QLabel{border: 3px solid #FFFFFF; color: #FFFFFF; }");
     setText(text);
     setAlignment(Qt::AlignCenter);
+
+    project->setSaved(false);
 }
 
 UnPlacedBox::~UnPlacedBox()
@@ -41,6 +43,7 @@ void UnPlacedBox::checkDrop(QPoint point)
 void UnPlacedBox::remove()
 {
     project->getStringsWidget()->deleteStringWidget(id);
+    project->setSaved(false);
 }
 
 void UnPlacedBox::show(bool x)

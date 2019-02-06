@@ -6,12 +6,14 @@
 #include "cell.h"
 #include "unplacedbox.h"
 
-ProjectsManager::ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedWidget* stackedWidget, QStackedWidget* prList)
+ProjectsManager::ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedWidget* stackedWidget, QStackedWidget* prList, QPushButton* saveButton)
 {
     this->homePage = homePage;
     this->editPage = editPage;
     this->stackedWidget = stackedWidget;
     this->prList = prList;
+
+    this->saveButton = saveButton;
 
     fileManager = new FileManager(this);
 
@@ -62,11 +64,13 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
         //if(boxes.length() <= 0 )
         //    prList->setCurrentIndex(1);
     }
+
+    currentProject->setSaved(true);
 }
 
 void ProjectsManager::createProject(QString name, int rows, int cols)
 {
-    currentProject = new Project(name, rows, cols, editPage);
+    currentProject = new Project(name, rows, cols, editPage, saveButton);
 }
 
 void ProjectsManager::saveProject()
@@ -82,5 +86,7 @@ void ProjectsManager::saveProject()
     fileManager->saveCutProject(DataConverter::convertCutProjectToData(this));
 
     readBoxes();
+
+    currentProject->setSaved(true);
 }
 

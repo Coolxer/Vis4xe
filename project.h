@@ -10,6 +10,8 @@
 
 #include <QtDebug>
 
+class QPushButton;
+
 class Cell;
 
 class Project
@@ -26,9 +28,11 @@ private:
     Lcd* lcd; //pointer of lcd, for keeping dynamic object
     StringsListWidget* stringsWidget;  //pointer of stringsListWidget, for keeping dynamic object
 
+    QPushButton* sBtn;
+
 public:
     Project(){}
-    Project(QString name, unsigned short rows, unsigned short cols, QWidget* widget);
+    Project(QString name, unsigned short rows, unsigned short cols, QWidget* widget, QPushButton* btn);
     ~Project();
 
     QString getName() { return name; }
@@ -49,6 +53,8 @@ public:
     void loadCells(QVector<Cell*> cells); //using to load cells from *.json file
 
     QWidget* getContainer() { return container; }
+
+    void setSaved(bool x);
 
 };
 

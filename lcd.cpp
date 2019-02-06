@@ -88,10 +88,10 @@ void Lcd::keyPressEvent(QKeyEvent* event)
             cancelChanges();
             break;
         case Qt::Key_Return:
-            exitEditMode();;
+            exitEditMode();
             break;
         case Qt::Key_Enter:
-            exitEditMode();;
+            exitEditMode();
             break;
         case Qt::Key_Delete:
             unpin();
@@ -255,6 +255,9 @@ void Lcd::exitEditMode()
     selectedCell = nullptr;
     currentId = -1;
 
+    if(selectedNumbersOfCells != operationCells)
+        project->setSaved(false);
+
     for(int i = 0; i < selectedNumbersOfCells.length(); i++)
         cells[operationCells[i]]->setStyleSheet("QLabel{ background-color: #0099ff; font-size: 25px; }");
 
@@ -275,7 +278,10 @@ void Lcd::unpin()
         cells[operationCells[i]]->setId(-1);
     }
 
+    project->setSaved(false);
+
     exitEditMode();
+
 }
 
 

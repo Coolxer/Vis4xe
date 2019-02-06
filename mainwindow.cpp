@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->cols_alert->setVisible(false);
     ui->rows_alert->setVisible(false);
 
-    projectsManager = new ProjectsManager(ui->homePage, ui->editPage, ui->statesStackedWidget, ui->projectsExists);
+    projectsManager = new ProjectsManager(ui->homePage, ui->editPage, ui->statesStackedWidget, ui->projectsExists, ui->saveButton);
 }
 
 MainWindow::~MainWindow()
@@ -91,11 +91,6 @@ void MainWindow::on_editingQuitButton_clicked()
     ui->statesStackedWidget->setCurrentIndex(0);
 }
 
-void MainWindow::on_editingQuitWithSaveButton_clicked()
-{
-     projectsManager->saveProject();
-}
-
 void MainWindow::on_addStringButton_clicked()
 {
     QString string = ui->stringValueLine->text();
@@ -111,4 +106,9 @@ void MainWindow::on_addStringButton_clicked()
 void MainWindow::on_openProjectButton_clicked()
 {
     projectsManager->loadProject(nullptr, "");
+}
+
+void MainWindow::on_saveButton_clicked()
+{
+    projectsManager->saveProject();
 }

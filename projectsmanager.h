@@ -10,6 +10,7 @@
 class ProjectNameBox;
 class QWidget;
 class QStackedWidget;
+class QPushButton;
 
 class ProjectsManager
 {
@@ -26,11 +27,11 @@ private:
 
     Project* currentProject = nullptr; //the pointer to the current opened project
 
-
+    QPushButton* saveButton;
 
 public:
     ProjectsManager(){}
-    ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedWidget* stackedWidget, QStackedWidget* prList);
+    ProjectsManager(QWidget* homePage, QWidget* editPage, QStackedWidget* stackedWidget, QStackedWidget* prList, QPushButton* saveButton);
     ~ProjectsManager();
 
     Project* getCurrentProject() { return currentProject; } //returns the pointer to the current project
@@ -50,6 +51,8 @@ public:
 
     QWidget* getHomePage() { return homePage; }
     QWidget* getEditPage() { return editPage; }
+
+    QPushButton* getSaveButton() { return saveButton; }
 };
 
 #endif // PROJECTSLIST_H

@@ -27,7 +27,7 @@ Project* DataConverter::convertToProject(ProjectsManager* projectsManager, QByte
     QVector <Cell*> cells;
     QVector <UnPlacedBox*> unPlacedBoxes;
 
-    project = new Project(obj.value("name").toString(), obj.value("rows").toInt(), obj.value("cols").toInt(), projectsManager->getEditPage());
+    project = new Project(obj.value("name").toString(), obj.value("rows").toInt(), obj.value("cols").toInt(), projectsManager->getEditPage(), projectsManager->getSaveButton());
 
     for(int i = 0; i < cellsArray.size(); i++)
         cells.push_back(new Cell(project->getLcd(), i, cellsArray[i].toObject().value("id").toInt(), cellsArray[i].toObject().value("value").toString()));
@@ -137,12 +137,13 @@ bool DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
     {
         for(int i = 0; i < indexes.length(); i++)
         {
-            QJsonObject obj =  array[i].toObject();
+            QJsonObject obj =  array[indexes[i]].toObject();
             QJsonObject* o = &obj;
 
-           array.removeAt(i);
-           delete o;
+            delete o;
+            array.removeAt(indexes[i]);
         }
+
         count = array.size();
     }
 

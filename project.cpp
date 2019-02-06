@@ -1,6 +1,8 @@
 #include "project.h"
 
-Project::Project(QString name, unsigned short rows, unsigned short cols, QWidget* widget)
+#include <QPushButton>
+
+Project::Project(QString name, unsigned short rows, unsigned short cols, QWidget* widget, QPushButton* btn)
 {
     this->name = name;
 
@@ -11,6 +13,8 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QWidget
 
     lcd = new Lcd(rows, cols, container, this);
     stringsWidget = new StringsListWidget(this);
+
+    sBtn = btn;
 
     projectNameBox->setGeometry(480, 3, 120, 54);
     projectNameBox->setStyleSheet("QLabel{ font-family: Bradley Hand ITC; font-size: 32px; color: #FF0000; }");
@@ -89,6 +93,8 @@ bool Project::writeOnLcd(UnPlacedBox* box)
 
                 lcd->setDroppedCell(-1); //release the selected cell (reset) after operation confirm
 
+                setSaved(false);
+
                 return true;
             }
         }
@@ -147,6 +153,16 @@ void Project::loadUnplacedBoxes(QVector<UnPlacedBox*> unPlacedBoxes)
 void Project::loadCells(QVector<Cell*> cells)
 {
     lcd->loadCellsFromFile(cells);
+}
+
+void Project::setSaved(bool x)
+{
+    sBtn->setEnabled(!x);
+
+    if(!x)
+        sBtn->setStyleSheet("QPushButton{border: 2px solid #00cc00; color: #00cc00; border-radius:30; font-size: 20px;} QPushButton:hover{background-color: #00cc00; color: #333333;}");
+    else
+        sBtn->setStyleSheet("QPushButton{border: 2px solid #808080; color: #808080; border-radius:30; font-size: 20px; opacity: 0.5; }");
 }
 
 
