@@ -35,16 +35,15 @@ Project* DataConverter::convertToProject(ProjectsManager* projectsManager, QByte
     for(int i = 0; i < unplacedBoxesArray.size(); i++)
     {
         if(i > 0)
-            unPlacedBoxes.push_back(new UnPlacedBox(project, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(810, unPlacedBoxes.last()->y() + 40)));
+            unPlacedBoxes.push_back(new UnPlacedBox(project, i, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(810, unPlacedBoxes.last()->y() + 40)));
         else
-            unPlacedBoxes.push_back(new UnPlacedBox(project, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(810, 5)));
+            unPlacedBoxes.push_back(new UnPlacedBox(project, 0, unplacedBoxesArray[i].toObject().value("id").toInt(), unplacedBoxesArray[i].toObject().value("value").toString(), QPoint(810, 10)));
     }
 
-    project->loadCells(cells);
-    project->loadUnplacedBoxes(unPlacedBoxes);
+    project->getLcd()->loadCellsFromFile(cells);
+    project->getStringsWidget()->loadBoxesFromFile(unPlacedBoxes);
 
     return project;
-
 }
 
 QByteArray DataConverter::convertProjectToData(Project* project)

@@ -49,9 +49,6 @@ public:
     bool check(QPoint point); //the method checks if the dragBoxPoint is over any cell and returns TRUE if it is or otherwise FALSE
     bool writeOnLcd(UnPlacedBox* box); //the function is drawing the text from unplacedBox on lcd
 
-    void loadUnplacedBoxes(QVector <UnPlacedBox*> unPlacedBoxes); //using to load UnplacedBoxes from *.json file
-    void loadCells(QVector<Cell*> cells); //using to load cells from *.json file
-
     QWidget* getContainer() { return container; }
 
     void setSaved(bool x);

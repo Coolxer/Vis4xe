@@ -25,7 +25,7 @@ private:
     int index;
 
 public:
-    UnPlacedBox(Project* project, int index, QString text, QPoint pos);
+    UnPlacedBox(Project* project, int index, int id, QString text, QPoint pos);
     ~UnPlacedBox();
 
     int getId() { return id; }

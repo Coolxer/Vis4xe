@@ -149,16 +149,6 @@ void Project::setPath(QString path)
     avrPath += ".txt";
 }
 
-void Project::loadUnplacedBoxes(QVector<UnPlacedBox*> unPlacedBoxes)
-{
-    stringsWidget->loadBoxesFromFile(unPlacedBoxes);
-}
-
-void Project::loadCells(QVector<Cell*> cells)
-{
-    lcd->loadCellsFromFile(cells);
-}
-
 void Project::setSaved(bool x)
 {
     sBtn->setEnabled(!x);

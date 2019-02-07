@@ -21,9 +21,9 @@ void StringsListWidget::addStringWidget(QString name)
     if(boxes.length() < 10)
     {
         if(boxes.length() > 0)
-            boxes.push_back(new UnPlacedBox(project, counter, name, QPoint(810, boxes.last()->y() + 40)));
+            boxes.push_back(new UnPlacedBox(project, boxes.length(), counter, name, QPoint(810, boxes.last()->y() + 40)));
         else
-            boxes.push_back(new UnPlacedBox(project, 0, name, QPoint(810, 10)));
+            boxes.push_back(new UnPlacedBox(project, 0, counter, name, QPoint(810, 10)));
 
         counter++;
     }
