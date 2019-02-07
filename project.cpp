@@ -95,7 +95,7 @@ bool Project::writeOnLcd(UnPlacedBox* box)
 
                 lcd->setDroppedCell(-1); //release the selected cell (reset) after operation confirm
 
-                stringsWidget->deleteStringWidget(box->getId());
+                stringsWidget->deleteStringWidget(box->getIndex());
 
                 setSaved(false);
 

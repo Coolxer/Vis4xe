@@ -18,7 +18,9 @@ private:
 
     QVector <UnPlacedBox*> boxes; //the vector<> of the strings boxes
 
-    void organize(int id);
+    void organize(int index);
+
+    int size;
 
 public:
     StringsListWidget(){}
@@ -27,7 +29,7 @@ public:
     ~StringsListWidget();
 
     void addStringWidget(QString name);//adds new string to the vector
-    void deleteStringWidget(int id); //deletes the selected string
+    void deleteStringWidget(int index); //deletes the selected string
     void loadBoxesFromFile(QVector <UnPlacedBox*> boxes) { this->boxes = boxes; } //the function that loads the unPlacedBoxes from file
 
     int getAmount() { return boxes.length(); }

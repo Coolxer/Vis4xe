@@ -3,53 +3,59 @@
 StringsListWidget::StringsListWidget(Project* project)
 {
     this->project = project;
+
+    size = 0;
 }
 
 StringsListWidget::~StringsListWidget()
 {
     for(int i = 0; i < boxes.length(); i++)
     {
-        boxes.at(i)->setVisible(false);
+        boxes[i]->setVisible(false);
         boxes.removeAt(i);
     }
 }
 
 void StringsListWidget::addStringWidget(QString name)
 {
-    if(boxes.length() < 10)
+    if(size < 10)
     {
         if(boxes.length() > 0)
-            boxes.push_back(new UnPlacedBox(project, boxes.length(), name, QPoint(810, boxes.last()->y() + 40)));
+            boxes.push_back(new UnPlacedBox(project, size, name, QPoint(810, boxes.last()->y() + 40)));
         else
             boxes.push_back(new UnPlacedBox(project, 0, name, QPoint(810, 10)));
+
+        size++;
     }
 
     boxes.last()->show(true);
 }
 
-void StringsListWidget::deleteStringWidget(int id)
+void StringsListWidget::deleteStringWidget(int index)
 {
-    if(id != boxes.length() - 1)
-        for(int i = id + 1; i < boxes.length(); i++)
+    if(index != size - 1)
+        for(int i = index + 1; i < size; i++)
             boxes[i]->decrease();
 
-    delete boxes[id];
-    //boxes.removeAt(id);
-    boxes.erase(boxes.begin() + id);
+    delete boxes[index];
+    boxes.removeAt(index);
+    //boxes.erase(boxes.begin() + index);
 
-    if(boxes.length() > 0)
-        organize(id);
+    size--;
+
+    if(size > 0)
+        organize(index);
 }
 
-void StringsListWidget::organize(int id)
+void StringsListWidget::organize(int index)
 {
-    if(id == 0)
+    if(index == 0)
     {
         boxes[0]->moveTo(QPoint(810, 10));
-        id++;
+        index++;
     }
 
-    for(int i = id; i < boxes.length(); i++)
+    for(int i = index; i < size; i++)
         boxes[i]->moveTo(QPoint(810, boxes[i-1]->y() + 40));
 }
 

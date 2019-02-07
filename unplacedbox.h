@@ -22,12 +22,14 @@ private:
     QPoint dragBoxPoint; // the position of the DragBox
 
     int id; //the id of the unplacedBox in the StringsListWidget
+    int index;
 
 public:
-    UnPlacedBox(Project* project, int id, QString text, QPoint pos);
+    UnPlacedBox(Project* project, int index, QString text, QPoint pos);
     ~UnPlacedBox();
 
     int getId() { return id; }
+    int getIndex() { return index; }
 
     void checkDrop(QPoint point); //
     void remove();
@@ -36,7 +38,7 @@ public:
     void show(bool x);
     void reset(); //the function that moves the box to the start position
 
-    void decrease() { id--; }
+    void decrease() { index--; }
     void moveTo(QPoint p);
 
 };

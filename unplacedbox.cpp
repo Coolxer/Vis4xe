@@ -2,10 +2,10 @@
 
 #include "project.h"
 
-UnPlacedBox::UnPlacedBox(Project* project, int id, QString text, QPoint pos): QLabel(project->getContainer())
+UnPlacedBox::UnPlacedBox(Project* project, int index, QString text, QPoint pos): QLabel(project->getContainer())
 {
     this->project = project;
-    this->id = id;
+    this->index = index;
     startPosition = pos;
 
     dragBox = new DragBox(this, QPoint(pos.x() - 35, pos.y()));
@@ -15,6 +15,8 @@ UnPlacedBox::UnPlacedBox(Project* project, int id, QString text, QPoint pos): QL
     setStyleSheet("QLabel{border: 3px solid #FFFFFF; color: #FFFFFF; }");
     setText(text);
     setAlignment(Qt::AlignCenter);
+
+    id = index;
 
     project->setSaved(false);
 }
@@ -41,7 +43,7 @@ void UnPlacedBox::checkDrop(QPoint point)
 void UnPlacedBox::remove()
 {
     project->setSaved(false);
-    project->getStringsWidget()->deleteStringWidget(id);
+    project->getStringsWidget()->deleteStringWidget(index);
 }
 
 void UnPlacedBox::show(bool x)
