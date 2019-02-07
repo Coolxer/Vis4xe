@@ -645,6 +645,9 @@ font-family: &quot;Tw Cen MT Condensed&quot;,  Extra Bold;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="addStringButton">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>585</x>

@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->cols_alert->setVisible(false);
     ui->rows_alert->setVisible(false);
 
+    ui->addStringButton->setStyleSheet("QPushButton{border: 2px solid #808080; color: #808080; border-radius:30; font-size: 20px; opacity: 0.5;}");
+
     projectsManager = new ProjectsManager(ui->homePage, ui->editPage, ui->statesStackedWidget, ui->projectsExists, ui->saveButton);
 }
 
@@ -95,12 +97,12 @@ void MainWindow::on_addStringButton_clicked()
 {
     QString string = ui->stringValueLine->text();
 
-    //checks if the string is not empty
-    if(string.length() > 0)
-    {
-        projectsManager->getCurrentProject()->getStringsWidget()->addStringWidget(string);
-        ui->stringValueLine->clear();
-    }
+    projectsManager->getCurrentProject()->getStringsWidget()->addStringWidget(string);
+    ui->stringValueLine->clear();
+
+    ui->addStringButton->setEnabled(false);
+    ui->addStringButton->setStyleSheet("QPushButton{border: 2px solid #808080; color: #808080; border-radius:30; font-size: 20px; opacity: 0.5;}");
+
 }
 
 void MainWindow::on_openProjectButton_clicked()
@@ -111,4 +113,18 @@ void MainWindow::on_openProjectButton_clicked()
 void MainWindow::on_saveButton_clicked()
 {
     projectsManager->saveProject();
+}
+
+void MainWindow::on_stringValueLine_textEdited(const QString &arg1)
+{
+    if(arg1.isEmpty())
+    {
+        ui->addStringButton->setEnabled(false);
+        ui->addStringButton->setStyleSheet("QPushButton{border: 2px solid #808080; color: #808080; border-radius:30; font-size: 20px; opacity: 0.5;}");
+    }
+    else
+    {
+        ui->addStringButton->setEnabled(true);
+        ui->addStringButton->setStyleSheet("QPushButton{ border: 2px solid #0099ff; color: #0099ff;  border-radius:30px; font-size:20px;} QPushButton:hover{ background-color: #0099ff; color: #333333; }");
+    }
 }
