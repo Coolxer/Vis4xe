@@ -61,3 +61,10 @@ void UnPlacedBox::reset()
     show(true);
 }
 
+void UnPlacedBox::moveTo(QPoint p)
+{
+    move(p);
+    dragBox->move(p.x() - 35, p.y());
+    delBox->move(p.x() + 115, p.y());
+}
+

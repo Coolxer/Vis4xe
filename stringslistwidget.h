@@ -18,6 +18,8 @@ private:
 
     QVector <UnPlacedBox*> boxes; //the vector<> of the strings boxes
 
+    void organize(int id);
+
 public:
     StringsListWidget(){}
     StringsListWidget(Project* project);

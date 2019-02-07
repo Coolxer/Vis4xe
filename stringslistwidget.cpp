@@ -30,13 +30,20 @@ void StringsListWidget::addStringWidget(QString name)
 void StringsListWidget::deleteStringWidget(int id)
 {
     if(id != boxes.length() - 1)
-    {
         for(int i = id + 1; i < boxes.length(); i++)
             boxes[i]->decrease();
-    }
 
     delete boxes[id];
     //boxes.removeAt(id);
     boxes.erase(boxes.begin() + id);
+
+    if(id != 0)
+        organize(id);
+}
+
+void StringsListWidget::organize(int id)
+{  
+    for(int i = id; i < boxes.length(); i++)
+        boxes[i]->moveTo(QPoint(810, boxes[i-1]->y() + 40));
 }
 

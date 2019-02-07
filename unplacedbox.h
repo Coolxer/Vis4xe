@@ -37,6 +37,7 @@ public:
     void reset(); //the function that moves the box to the start position
 
     void decrease() { id--; }
+    void moveTo(QPoint p);
 
 };
 
