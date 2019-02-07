@@ -21,8 +21,8 @@ private:
     QPoint startPosition; //the startPosition of the UnplacedBox text box
     QPoint dragBoxPoint; // the position of the DragBox
 
-    int id; //the id of the unplacedBox in the StringsListWidget
-    int index;
+    int id; //the id of the unplacedBox in the StringsListWidget (->Lcd)
+    int index; //the index of the unplacedBox in the StringsListWidget
 
 public:
     UnPlacedBox(Project* project, int index, int id, QString text, QPoint pos);
@@ -31,15 +31,15 @@ public:
     int getId() { return id; }
     int getIndex() { return index; }
 
-    void checkDrop(QPoint point); //
-    void remove();
+    void checkDrop(QPoint point); //checks the dragBox position
+    void remove(); //gives a signal to its parent to delete itself
 
     QPoint getDragBoxPoint() { return dragBoxPoint; }
-    void show(bool x);
+    void show(bool x); //the function to show/hide drag & unplaced & del [boxes]
     void reset(); //the function that moves the box to the start position
 
-    void decrease() { index--; }
-    void moveTo(QPoint p);
+    void decrease() { index--; } //decreases the index of the unplacedBox after removed another
+    void moveTo(QPoint p); //moves the box one level up
 
 };
 

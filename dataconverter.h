@@ -31,7 +31,7 @@ public:
     static QByteArray convertCutProjectToData(ProjectsManager* projectsManager); //converts the shortcut of project to save it in projectsList file
     static bool convertToNameBoxes(ProjectsManager* projectsManager, QByteArray data); //converts the json array boxes to their program types
 
-    static QByteArray convertVectorToData(ProjectsManager* projectsManager);
+    static QByteArray convertVectorToData(ProjectsManager* projectsManager); //converts QVector<> to QByteArray data type ready to save in txt file
 };
 
 

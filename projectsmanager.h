@@ -27,7 +27,7 @@ private:
 
     Project* currentProject = nullptr; //the pointer to the current opened project
 
-    QPushButton* saveButton;
+    QPushButton* saveButton; //the pointer to the save button
 
 public:
     ProjectsManager(){}

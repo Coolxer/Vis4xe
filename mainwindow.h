@@ -31,8 +31,8 @@ private slots:
     void on_addStringButton_clicked(); //casued after the user clicked the add button in the editpage
     void on_openProjectButton_clicked(); //caused after the user clicked the open button in the homepage
     void on_saveButton_clicked(); //caused after the user clicked the save  button in the edit page
-    void on_stringValueLine_textEdited(const QString &arg1);
-    void on_stringValueLine_returnPressed();
+    void on_stringValueLine_textEdited(const QString &arg1); //caused after the user edit string in Edit line
+    void on_stringValueLine_returnPressed(); // caused after the user pressed Enter on focused Edit line
 };
 
 #endif // MAINWINDOW_H

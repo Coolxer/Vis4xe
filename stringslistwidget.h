@@ -18,9 +18,9 @@ private:
 
     QVector <UnPlacedBox*> boxes; //the vector<> of the strings boxes
 
-    void organize(int index);
+    void organize(int index); //organizes the unplacedBoxes after one of them was removed or dragged out
 
-    int counter;
+    int counter; // the counter of the total unplacedBoxes created (not decreasing after deleting) for id of new box
 
 public:
     StringsListWidget(){}

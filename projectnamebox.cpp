@@ -13,11 +13,6 @@ ProjectNameBox::ProjectNameBox(ProjectsManager* projectsManager, QString name, Q
     setText(name);
 }
 
-void ProjectNameBox::setPosition(QPoint p)
-{
-    setGeometry(p.x(), p.y(), 200, 100);
-}
-
 void ProjectNameBox::mousePressEvent(QMouseEvent*)
 {
     if(!blocked)

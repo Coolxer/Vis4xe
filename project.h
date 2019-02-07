@@ -28,7 +28,7 @@ private:
     Lcd* lcd; //pointer of lcd, for keeping dynamic object
     StringsListWidget* stringsWidget;  //pointer of stringsListWidget, for keeping dynamic object
 
-    QPushButton* sBtn;
+    QPushButton* sBtn; //the pointer to the save button
 
 public:
     Project(){}
@@ -51,7 +51,7 @@ public:
 
     QWidget* getContainer() { return container; }
 
-    void setSaved(bool x);
+    void setSaved(bool x); //turns on that the user made changes which are not saved yet
 
 };
 

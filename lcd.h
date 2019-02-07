@@ -58,7 +58,7 @@ public:
     //QVector <Cell*> getCells() { return cells; }; //getter that allows to read cells
 
     //for editing mode
-    void setSelectedCell(int index);
+    void setSelectedCell(int index); //marks the cell as selected
     Cell* getSelectedCell() { return selectedCell; }
 
     //for drag & drop unplacebox
