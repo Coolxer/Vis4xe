@@ -95,6 +95,9 @@ void MainWindow::on_editingQuitButton_clicked()
 
 void MainWindow::on_addStringButton_clicked()
 {
+    if(projectsManager->getCurrentProject()->getStringsWidget()->getAmount() >= 10)
+        return;
+
     QString string = ui->stringValueLine->text();
 
     projectsManager->getCurrentProject()->getStringsWidget()->addStringWidget(string);
@@ -102,7 +105,6 @@ void MainWindow::on_addStringButton_clicked()
 
     ui->addStringButton->setEnabled(false);
     ui->addStringButton->setStyleSheet("QPushButton{border: 2px solid #808080; color: #808080; border-radius:30; font-size: 20px; opacity: 0.5;}");
-
 }
 
 void MainWindow::on_openProjectButton_clicked()
@@ -117,6 +119,9 @@ void MainWindow::on_saveButton_clicked()
 
 void MainWindow::on_stringValueLine_textEdited(const QString &arg1)
 {
+    if(projectsManager->getCurrentProject()->getStringsWidget()->getAmount() >= 10)
+        return;
+
     if(arg1.isEmpty())
     {
         ui->addStringButton->setEnabled(false);
@@ -127,4 +132,18 @@ void MainWindow::on_stringValueLine_textEdited(const QString &arg1)
         ui->addStringButton->setEnabled(true);
         ui->addStringButton->setStyleSheet("QPushButton{ border: 2px solid #0099ff; color: #0099ff;  border-radius:30px; font-size:20px;} QPushButton:hover{ background-color: #0099ff; color: #333333; }");
     }
+}
+
+void MainWindow::on_stringValueLine_returnPressed()
+{
+    if(projectsManager->getCurrentProject()->getStringsWidget()->getAmount() >= 10)
+        return;
+
+    QString string = ui->stringValueLine->text();
+
+    projectsManager->getCurrentProject()->getStringsWidget()->addStringWidget(string);
+    ui->stringValueLine->clear();
+
+    ui->addStringButton->setEnabled(false);
+    ui->addStringButton->setStyleSheet("QPushButton{border: 2px solid #808080; color: #808080; border-radius:30; font-size: 20px; opacity: 0.5;}");
 }

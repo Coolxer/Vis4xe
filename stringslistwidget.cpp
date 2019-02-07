@@ -29,7 +29,14 @@ void StringsListWidget::addStringWidget(QString name)
 
 void StringsListWidget::deleteStringWidget(int id)
 {
-    delete boxes.at(id);
-    boxes.removeAt(id);
+    if(id != boxes.length() - 1)
+    {
+        for(int i = id + 1; i < boxes.length(); i++)
+            boxes[i]->decrease();
+    }
+
+    delete boxes[id];
+    //boxes.removeAt(id);
+    boxes.erase(boxes.begin() + id);
 }
 

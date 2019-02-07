@@ -35,6 +35,9 @@ public:
     QPoint getDragBoxPoint() { return dragBoxPoint; }
     void show(bool x);
     void reset(); //the function that moves the box to the start position
+
+    void decrease() { id--; }
+
 };
 
 #endif // UNPLACEDBOX_H
