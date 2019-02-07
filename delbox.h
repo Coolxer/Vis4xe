@@ -19,7 +19,7 @@ private:
     void leaveEvent(QEvent*);
 public:
     DelBox(){}
-    DelBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos);
+    DelBox(UnPlacedBox* unPlacedBox, QPoint pos);
 
     void reset(); //the function that's moving this box to the start Postion
 

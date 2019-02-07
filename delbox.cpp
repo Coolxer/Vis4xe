@@ -2,7 +2,7 @@
 
 #include "unplacedbox.h"
 
-DelBox::DelBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos): QLabel(parent)
+DelBox::DelBox(UnPlacedBox* unPlacedBox, QPoint pos): QLabel(unPlacedBox->parentWidget())
 {
     this->unPlacedBox = unPlacedBox;
     startPosition = pos;

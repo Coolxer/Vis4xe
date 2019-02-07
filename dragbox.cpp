@@ -2,7 +2,7 @@
 
 #include "unplacedbox.h"
 
-DragBox::DragBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos): QLabel(parent)
+DragBox::DragBox(UnPlacedBox* unPlacedBox, QPoint pos): QLabel(unPlacedBox->parentWidget())
 {
     this->unPlacedBox = unPlacedBox;
 

@@ -24,7 +24,7 @@ private:
     void leaveEvent(QEvent*);
 public:
     DragBox(){}
-    DragBox(UnPlacedBox* unPlacedBox, QWidget* parent, QPoint pos);
+    DragBox(UnPlacedBox* unPlacedBox, QPoint pos);
 
     void reset();  //the function that's moving this box to the start Postion
 };

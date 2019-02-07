@@ -8,8 +8,8 @@ UnPlacedBox::UnPlacedBox(Project* project, int id, QString text, QPoint pos): QL
     this->id = id;
     startPosition = pos;
 
-    dragBox = new DragBox(this, project->getContainer(), QPoint(pos.x() - 35, pos.y()));
-    delBox = new DelBox(this, project->getContainer(), QPoint(pos.x() + 115, pos.y()));
+    dragBox = new DragBox(this, QPoint(pos.x() - 35, pos.y()));
+    delBox = new DelBox(this, QPoint(pos.x() + 115, pos.y()));
 
     setGeometry(pos.x(), pos.y(), 110, 30);
     setStyleSheet("QLabel{border: 3px solid #FFFFFF; color: #FFFFFF; }");
