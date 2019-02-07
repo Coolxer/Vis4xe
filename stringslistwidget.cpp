@@ -4,7 +4,7 @@ StringsListWidget::StringsListWidget(Project* project)
 {
     this->project = project;
 
-    size = 0;
+    counter = 0;
 }
 
 StringsListWidget::~StringsListWidget()
@@ -18,14 +18,14 @@ StringsListWidget::~StringsListWidget()
 
 void StringsListWidget::addStringWidget(QString name)
 {
-    if(size < 10)
+    if(boxes.length() < 10)
     {
         if(boxes.length() > 0)
-            boxes.push_back(new UnPlacedBox(project, size, name, QPoint(810, boxes.last()->y() + 40)));
+            boxes.push_back(new UnPlacedBox(project, counter, name, QPoint(810, boxes.last()->y() + 40)));
         else
             boxes.push_back(new UnPlacedBox(project, 0, name, QPoint(810, 10)));
 
-        size++;
+        counter++;
     }
 
     boxes.last()->show(true);
@@ -33,17 +33,15 @@ void StringsListWidget::addStringWidget(QString name)
 
 void StringsListWidget::deleteStringWidget(int index)
 {
-    if(index != size - 1)
-        for(int i = index + 1; i < size; i++)
+    if(index != boxes.length() - 1)
+        for(int i = index + 1; i < boxes.length(); i++)
             boxes[i]->decrease();
 
     delete boxes[index];
     boxes.removeAt(index);
     //boxes.erase(boxes.begin() + index);
 
-    size--;
-
-    if(size > 0)
+    if(boxes.length() > 0)
         organize(index);
 }
 
@@ -55,7 +53,7 @@ void StringsListWidget::organize(int index)
         index++;
     }
 
-    for(int i = index; i < size; i++)
+    for(int i = index; i < boxes.length(); i++)
         boxes[i]->moveTo(QPoint(810, boxes[i-1]->y() + 40));
 }
 

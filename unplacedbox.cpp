@@ -66,5 +66,8 @@ void UnPlacedBox::moveTo(QPoint p)
     move(p);
     dragBox->move(p.x() - 35, p.y());
     delBox->move(p.x() + 115, p.y());
+
+    startPosition = p;
+    dragBox->setStartPosition(QPoint(p.x() - 35, p.y()));
 }
 

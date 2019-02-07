@@ -27,6 +27,8 @@ public:
     DragBox(UnPlacedBox* unPlacedBox, QPoint pos);
 
     void reset();  //the function that's moving this box to the start Postion
+
+    void setStartPosition(QPoint point) { startPosition = point; }
 };
 
 #endif // DRAGBOX_H

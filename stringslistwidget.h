@@ -20,7 +20,7 @@ private:
 
     void organize(int index);
 
-    int size;
+    int counter;
 
 public:
     StringsListWidget(){}
