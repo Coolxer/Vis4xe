@@ -215,20 +215,6 @@ void Lcd::setSelectedCell(int index)
             }
         }
 
-        UnPlacedBox* b;
-
-        for(int i = 0; i <project->getStringsWidget()->getAmount(); i++)
-        {
-            b = project->getStringsWidget()->getBox(i);
-
-            if(b->getId() == currentId)
-            {
-                uBox = b;
-                break;
-            }
-
-        }
-
         selectedNumbersOfCells = operationCells;
 
         editMode = true;
@@ -268,10 +254,6 @@ void Lcd::exitEditMode()
 
 void Lcd::unpin()
 {
-    uBox->reset();
-
-    uBox = nullptr;
-
     for(int i=0; i<selectedString.length(); i++)
     {
         cells[operationCells[i]]->clear();

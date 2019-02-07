@@ -37,12 +37,18 @@ void StringsListWidget::deleteStringWidget(int id)
     //boxes.removeAt(id);
     boxes.erase(boxes.begin() + id);
 
-    if(id != 0)
+    if(boxes.length() > 0)
         organize(id);
 }
 
 void StringsListWidget::organize(int id)
-{  
+{
+    if(id == 0)
+    {
+        boxes[0]->moveTo(QPoint(810, 10));
+        id++;
+    }
+
     for(int i = id; i < boxes.length(); i++)
         boxes[i]->moveTo(QPoint(810, boxes[i-1]->y() + 40));
 }

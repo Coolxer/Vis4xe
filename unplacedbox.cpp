@@ -34,9 +34,7 @@ void UnPlacedBox::checkDrop(QPoint point)
 {
     dragBoxPoint = point;
 
-    if(project->writeOnLcd(this))
-        show(false);
-    else
+    if(!project->writeOnLcd(this))
         dragBox->reset();
 }
 

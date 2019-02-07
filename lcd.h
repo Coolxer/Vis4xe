@@ -7,11 +7,9 @@
 #include <QVector>
 #include <QWidget>
 
-
 #include "cell.h"
 
 class Project;
-class UnPlacedBox;
 
 class Lcd : public QWidget
 {
@@ -32,8 +30,6 @@ private:
     QVector <Cell*> cells; //the vector of the lcd's cells
 
     Project* project;  //the pointer to the project that lcd belongs to
-    UnPlacedBox* uBox = nullptr; //the pointer to the UnPlacedBox to which the text on lcd referenced
-
 
     /* Poles using in edit Mode */
     QString selectedString; //the string on the lcd which is focused and just opened edit mode

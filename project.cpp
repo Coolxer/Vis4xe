@@ -56,7 +56,7 @@ bool Project::check(QPoint point)
             {
                 //checks if the cell is empty
                 if(cell->getId() == -1)
-                {
+                {      
                     lcd->setDroppedCell(i);
                     return true;
                 }
@@ -94,6 +94,8 @@ bool Project::writeOnLcd(UnPlacedBox* box)
                 }
 
                 lcd->setDroppedCell(-1); //release the selected cell (reset) after operation confirm
+
+                stringsWidget->deleteStringWidget(box->getId());
 
                 setSaved(false);
 
