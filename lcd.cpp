@@ -3,7 +3,7 @@
 #include "project.h"
 #include "unplacedbox.h"
 
-Lcd::Lcd(int rows, int cols, QWidget* widget, Project* project) : QWidget (widget)
+Lcd::Lcd(int rows, int cols, Project* project) : QWidget (project->getContainer())
 {
     this->rows = rows;
     this->cols = cols;
@@ -14,7 +14,7 @@ Lcd::Lcd(int rows, int cols, QWidget* widget, Project* project) : QWidget (widge
     int width = (this->cols * 20) + (this->cols + 1) * 5;
     int height = (this->rows * 30) + (this->rows + 1) * 5;
 
-    setGeometry(QRect((widget->width() - 160)/2 - width/2, widget->height()/2 - height/2, width, height));
+    setGeometry(QRect((project->getContainer()->width() - 160)/2 - width/2, project->getContainer()->height()/2 - height/2, width, height));
     setStyleSheet("QWidget{ background-color: #262626; }");
 
     initCells();

@@ -55,7 +55,7 @@ private:
 
 public:
     Lcd(){}
-    Lcd(int rows, int cols, QWidget* widget, Project* project);
+    Lcd(int rows, int cols, Project* project);
     //Lcd(unsigned short rows, unsigned short cols, QWidget* widget, QVector <Cell*> cells);
     ~Lcd(){}
 
