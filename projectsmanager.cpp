@@ -58,18 +58,7 @@ void ProjectsManager::loadProject(ProjectNameBox* box, QString path)
     }
 
     if(currentProject == nullptr && box != nullptr)
-    {
         box->setBlocked();
-        //box->hide();
-        //box->setStyleSheet("background-color: red");
-        //delete box;
-        //boxes.removeLast();
-
-        //if(boxes.length() <= 0 )
-        //    prList->setCurrentIndex(1);
-    }
-
-
 }
 
 void ProjectsManager::createProject(QString name, int rows, int cols)

@@ -24,6 +24,11 @@ MainWindow::~MainWindow()
     delete projectsManager;
 }
 
+void MainWindow::on_openProjectButton_clicked()
+{
+    projectsManager->loadProject(nullptr, "");
+}
+
 void MainWindow::on_addNewButton_clicked()
 {
     ui->statesStackedWidget->setCurrentIndex(1);
@@ -87,6 +92,11 @@ void MainWindow::on_cancelAddingButton_clicked()
     ui->statesStackedWidget->setCurrentIndex(0); 
 }
 
+void MainWindow::on_saveButton_clicked()
+{
+    projectsManager->saveProject();
+}
+
 void MainWindow::on_editingQuitButton_clicked()
 {
     projectsManager->releaseProject();
@@ -113,16 +123,6 @@ void MainWindow::on_addStringButton_clicked()
 
     if(projectsManager->getCurrentProject()->getStringsWidget()->getAmount() >= 10)
         ui->stringValueLine->setStyleSheet("QLineEdit{ background-color: #333333;  color: #ffffff; border: 2px solid red; border-radius: 15px;}");
-}
-
-void MainWindow::on_openProjectButton_clicked()
-{
-    projectsManager->loadProject(nullptr, "");
-}
-
-void MainWindow::on_saveButton_clicked()
-{
-    projectsManager->saveProject();
 }
 
 void MainWindow::on_stringValueLine_textEdited(const QString &arg1)

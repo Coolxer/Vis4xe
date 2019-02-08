@@ -16,6 +16,18 @@ StringsListWidget::~StringsListWidget()
     }
 }
 
+void StringsListWidget::organize(int index)
+{
+    if(index == 0)
+    {
+        boxes[0]->moveTo(QPoint(810, 10));
+        index++;
+    }
+
+    for(int i = index; i < boxes.length(); i++)
+        boxes[i]->moveTo(QPoint(810, boxes[i-1]->y() + 40));
+}
+
 void StringsListWidget::addStringWidget(QString name)
 {
     if(boxes.length() < 10)
@@ -39,21 +51,10 @@ void StringsListWidget::deleteStringWidget(int index)
 
     delete boxes[index];
     boxes.removeAt(index);
-    //boxes.erase(boxes.begin() + index);
 
     if(boxes.length() > 0)
         organize(index);
 }
 
-void StringsListWidget::organize(int index)
-{
-    if(index == 0)
-    {
-        boxes[0]->moveTo(QPoint(810, 10));
-        index++;
-    }
 
-    for(int i = index; i < boxes.length(); i++)
-        boxes[i]->moveTo(QPoint(810, boxes[i-1]->y() + 40));
-}
 

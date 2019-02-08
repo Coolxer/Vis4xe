@@ -11,6 +11,61 @@ FileManager::FileManager(ProjectsManager* projectsManager)
     projectsFile.setFileName(documentsPath + "/Vis4xe/projects.json");
 }
 
+void FileManager::saveVisFile(QByteArray data)
+{
+    QFile file(projectsManager->getCurrentProject()->getVisPath());
+
+    if(!file.open(QFile::WriteOnly))
+        return;
+
+    file.write(data);
+
+    file.close();
+}
+
+void FileManager::saveAvrFile()
+{
+    QFile file(projectsManager->getCurrentProject()->getAvrPath());
+
+    if(!file.open(QFile::WriteOnly| QIODevice::Text))
+        return;
+
+    QTextStream out(&file);
+
+    QString current = "";
+
+    out<<"lcd.begin("<<projectsManager->getCurrentProject()->getLcd()->getCols()<<','<<projectsManager->getCurrentProject()->getLcd()->getRows()<<");\n";
+
+    for(int i = 0; i < projectsManager->getCurrentProject()->getLcd()->getNumberOfCells(); i++)
+    {
+        if(projectsManager->getCurrentProject()->getLcd()->getCell(i)->getId() != -1)
+        {
+            int x = i;
+
+            do
+            {
+               if(projectsManager->getCurrentProject()->getLcd()->getCell(i)->getId() == -1)
+                   break;
+
+               current += projectsManager->getCurrentProject()->getLcd()->getCell(i)->text();
+
+               i++;
+
+            }while(1);
+
+            out<<"\nlcd.setCursor("<<projectsManager->getCurrentProject()->getLcd()->getCell(x)->getCol()<<','<<projectsManager->getCurrentProject()->getLcd()->getCell(x)->getRow()<<");";
+            out<<"\nlcd.print(\""<<current<<"\");";
+
+            current = "";
+
+            out<<"\n";
+        }
+    }
+
+    file.close();
+}
+
+
 QByteArray FileManager::shortRead()
 {
     QByteArray data = nullptr;
@@ -72,63 +127,6 @@ void FileManager::saveCutProject(QByteArray data)
     projectsFile.close();
 }
 
-void FileManager::removeProject(QString path)
-{
 
-}
-
-void FileManager::saveVisFile(QByteArray data)
-{
-    QFile file(projectsManager->getCurrentProject()->getVisPath());
-
-    if(!file.open(QFile::WriteOnly))
-        return;
-
-    file.write(data);
-
-    file.close();
-}
-
-void FileManager::saveAvrFile()
-{
-    QFile file(projectsManager->getCurrentProject()->getAvrPath());
-
-    if(!file.open(QFile::WriteOnly| QIODevice::Text))
-        return;
-
-    QTextStream out(&file);
-
-    QString current = "";
-
-    out<<"lcd.begin("<<projectsManager->getCurrentProject()->getLcd()->getCols()<<','<<projectsManager->getCurrentProject()->getLcd()->getRows()<<");\n";
-
-    for(int i = 0; i < projectsManager->getCurrentProject()->getLcd()->getNumberOfCells(); i++)
-    {
-        if(projectsManager->getCurrentProject()->getLcd()->getCell(i)->getId() != -1)
-        {
-            int x = i;
-
-            do
-            {
-               if(projectsManager->getCurrentProject()->getLcd()->getCell(i)->getId() == -1)
-                   break;
-
-               current += projectsManager->getCurrentProject()->getLcd()->getCell(i)->text();
-
-               i++;
-
-            }while(1);
-
-            out<<"\nlcd.setCursor("<<projectsManager->getCurrentProject()->getLcd()->getCell(x)->getCol()<<','<<projectsManager->getCurrentProject()->getLcd()->getCell(x)->getRow()<<");";
-            out<<"\nlcd.print(\""<<current<<"\");";
-
-            current = "";
-
-            out<<"\n";
-        }
-    }
-
-    file.close();
-}
 
 

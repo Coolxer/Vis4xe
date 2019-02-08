@@ -36,9 +36,6 @@ public:
 
     void saveProject(QByteArray data); //write the project to file
     void saveCutProject(QByteArray data); //saves only name an path of the project to the projectsList file
-
-    void removeProject(QString path);   //remove the project from the file
-
 };
 
 #endif // FILEMANAGER_H

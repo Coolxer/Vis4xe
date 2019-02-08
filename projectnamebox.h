@@ -16,7 +16,6 @@ private:
 
     bool blocked = false; //the state of the nameBox, blocked = file with the project not exists
 
-protected:
     void mousePressEvent(QMouseEvent* event);
     void enterEvent(QEvent*);
     void leaveEvent(QEvent*);

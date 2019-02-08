@@ -6,9 +6,24 @@
 #include "cell.h"
 #include "projectnamebox.h"
 
-DataConverter::DataConverter()
+QJsonObject DataConverter::convertVectorToJsonObject(ProjectsManager* projectsManager)
 {
+    QJsonArray array;
+    QJsonObject obj, item;
 
+    int n = projectsManager->getBoxes().size();
+
+    for(int i = 0; i < n; i++)
+    {
+        item.insert(QString("name"), QJsonValue(projectsManager->getBoxes().at(i)->getName()));
+        item.insert(QString("path"), QJsonValue(projectsManager->getBoxes().at(i)->getPath()));
+
+        array.push_back(item);
+    }
+
+    obj.insert(QString("projects"), array);
+
+    return obj;
 }
 
 Project* DataConverter::convertToProject(ProjectsManager* projectsManager, QByteArray data)
@@ -196,26 +211,6 @@ bool DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
 
     return allRight;
 
-}
-
-QJsonObject DataConverter::convertVectorToJsonObject(ProjectsManager* projectsManager)
-{
-    QJsonArray array;
-    QJsonObject obj, item;
-
-    int n = projectsManager->getBoxes().size();
-
-    for(int i = 0; i < n; i++)
-    {
-        item.insert(QString("name"), QJsonValue(projectsManager->getBoxes().at(i)->getName()));
-        item.insert(QString("path"), QJsonValue(projectsManager->getBoxes().at(i)->getPath()));
-
-        array.push_back(item);
-    }
-
-    obj.insert(QString("projects"), array);
-
-    return obj;
 }
 
 QByteArray DataConverter::convertVectorToData(ProjectsManager* projectsManager)

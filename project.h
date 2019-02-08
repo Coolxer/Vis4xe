@@ -31,8 +31,6 @@ public:
     Project(QString name, unsigned short rows, unsigned short cols, QWidget* widget, QPushButton* btn);
     ~Project();
 
-    void setPath(QString path); //the function that prepares the paths of the files
-
     QWidget* getContainer() { return container; }
     Lcd* getLcd() { return lcd; }
     StringsListWidget* getStringsWidget() { return stringsWidget; }
@@ -44,6 +42,7 @@ public:
 
     bool check(QPoint point); //the method checks if the dragBoxPoint is over any cell and returns TRUE if it is or otherwise FALSE
     bool writeOnLcd(UnPlacedBox* box); //the function is drawing the text from unplacedBox on lcd    
+    void setPath(QString path); //the function that prepares the paths of the files
     void setSaved(bool x); //turns on that the user made changes which are not saved yet
 
 };

@@ -56,11 +56,50 @@ void Lcd::organize()
 
 }
 
-void Lcd::loadCellsFromFile(QVector <Cell*> cells)
+void Lcd::cancelChanges()
 {
-    this->cells = cells;
-    organize();
+    for(int i = 0; i < selectedNumbersOfCells.length(); i++)
+    {
+        cells[operationCells[i]]->clear();
+        cells[operationCells[i]]->setId(-1);
+
+        cells[selectedNumbersOfCells[i]]->setText(selectedString.at(i));
+        cells[selectedNumbersOfCells[i]]->setId(currentId);
+    }
+
+    exitEditMode();
 }
+
+void Lcd::unpin()
+{
+    for(int i=0; i<selectedString.length(); i++)
+    {
+        cells[operationCells[i]]->clear();
+        cells[operationCells[i]]->setId(-1);
+    }
+
+    project->setSaved(false);
+
+    exitEditMode();
+}
+
+void Lcd::exitEditMode()
+{
+    editMode = false;
+    selectedCell = nullptr;
+    currentId = -1;
+
+    if(selectedNumbersOfCells != operationCells)
+        project->setSaved(false);
+
+    for(int i = 0; i < selectedNumbersOfCells.length(); i++)
+        cells[operationCells[i]]->setStyleSheet("QLabel{ background-color: #0099ff; font-size: 25px; }");
+
+    selectedString.clear();
+    selectedNumbersOfCells.clear();
+    operationCells.clear();
+}
+
 
 void Lcd::keyPressEvent(QKeyEvent* event)
 {
@@ -221,49 +260,12 @@ void Lcd::setSelectedCell(int index)
     }
 }
 
-void Lcd::cancelChanges()
+void Lcd::loadCellsFromFile(QVector <Cell*> cells)
 {
-    for(int i = 0; i < selectedNumbersOfCells.length(); i++)
-    {
-        cells[operationCells[i]]->clear();
-        cells[operationCells[i]]->setId(-1);
-
-        cells[selectedNumbersOfCells[i]]->setText(selectedString.at(i));
-        cells[selectedNumbersOfCells[i]]->setId(currentId);
-    }
-
-    exitEditMode();
+    this->cells = cells;
+    organize();
 }
 
-void Lcd::exitEditMode()
-{
-    editMode = false;
-    selectedCell = nullptr;
-    currentId = -1;
 
-    if(selectedNumbersOfCells != operationCells)
-        project->setSaved(false);
-
-    for(int i = 0; i < selectedNumbersOfCells.length(); i++)
-        cells[operationCells[i]]->setStyleSheet("QLabel{ background-color: #0099ff; font-size: 25px; }");
-
-    selectedString.clear();
-    selectedNumbersOfCells.clear();
-    operationCells.clear();
-}
-
-void Lcd::unpin()
-{
-    for(int i=0; i<selectedString.length(); i++)
-    {
-        cells[operationCells[i]]->clear();
-        cells[operationCells[i]]->setId(-1);
-    }
-
-    project->setSaved(false);
-
-    exitEditMode();
-
-}
 
 
