@@ -34,10 +34,10 @@ SOURCES += \
         filemanager.cpp \
         projectnamebox.cpp \
         projectsmanager.cpp \
-    stringslistwidget.cpp \
     dragbox.cpp \
     delbox.cpp \
-    dataconverter.cpp
+    dataconverter.cpp \
+    stringslist.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,10 +48,10 @@ HEADERS += \
         filemanager.h \
         projectnamebox.h \
         projectsmanager.h \
-    stringslistwidget.h \
     dragbox.h \
     delbox.h \
-    dataconverter.h
+    dataconverter.h \
+    stringslist.h
 
 FORMS += \
         mainwindow.ui

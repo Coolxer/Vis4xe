@@ -12,7 +12,7 @@ Project::Project(QString name, unsigned short rows, unsigned short cols, QWidget
     container->setGeometry(0, 60, 960, 400);
 
     lcd = new Lcd(rows, cols, this);
-    stringsWidget = new StringsListWidget(this);
+    stringsList = new StringsList(this);
 
     sBtn = btn;
 
@@ -33,7 +33,7 @@ Project::~Project()
     lcd->setVisible(false);
     delete lcd;
 
-    delete stringsWidget;
+    delete stringsList;
 
     container->setVisible(false);
     delete container;
@@ -95,7 +95,7 @@ bool Project::writeOnLcd(UnPlacedBox* box)
 
                 lcd->setDroppedCell(-1); //release the selected cell (reset) after operation confirm
 
-                stringsWidget->deleteStringWidget(box->getIndex());
+                stringsList->deleteString(box->getIndex());
 
                 setSaved(false);
 

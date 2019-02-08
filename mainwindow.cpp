@@ -115,19 +115,19 @@ void MainWindow::on_addStringButton_clicked()
 
     ui->stringValueLine->setStyleSheet("QLineEdit{ background-color: #333333;  color: #ffffff; border: 2px solid #0099ff; border-radius: 15px;}");
 
-    projectsManager->getCurrentProject()->getStringsWidget()->addStringWidget(string);
+    projectsManager->getCurrentProject()->getStringsList()->addString(string);
     ui->stringValueLine->clear();
 
     ui->addStringButton->setEnabled(false);
     ui->addStringButton->setStyleSheet("QPushButton{border: 2px solid #808080; color: #808080; border-radius:30; font-size: 20px; opacity: 0.5;}");
 
-    if(projectsManager->getCurrentProject()->getStringsWidget()->getAmount() >= 10)
+    if(projectsManager->getCurrentProject()->getStringsList()->getAmount() >= 10)
         ui->stringValueLine->setStyleSheet("QLineEdit{ background-color: #333333;  color: #ffffff; border: 2px solid red; border-radius: 15px;}");
 }
 
 void MainWindow::on_stringValueLine_textEdited(const QString &arg1)
 {
-    if(projectsManager->getCurrentProject()->getStringsWidget()->getAmount() >= 10 || arg1.isEmpty())
+    if(projectsManager->getCurrentProject()->getStringsList()->getAmount() >= 10 || arg1.isEmpty())
     {
         ui->addStringButton->setEnabled(false);
         ui->addStringButton->setStyleSheet("QPushButton{border: 2px solid #808080; color: #808080; border-radius:30; font-size: 20px; opacity: 0.5;}");
@@ -153,12 +153,12 @@ void MainWindow::on_stringValueLine_returnPressed()
 
     ui->stringValueLine->setStyleSheet("QLineEdit{ background-color: #333333;  color: #ffffff; border: 2px solid #0099ff; border-radius: 15px;}");
 
-    projectsManager->getCurrentProject()->getStringsWidget()->addStringWidget(string);
+    projectsManager->getCurrentProject()->getStringsList()->addString(string);
     ui->stringValueLine->clear();
 
     ui->addStringButton->setEnabled(false);
     ui->addStringButton->setStyleSheet("QPushButton{border: 2px solid #808080; color: #808080; border-radius:30; font-size: 20px; opacity: 0.5;}");
 
-    if(projectsManager->getCurrentProject()->getStringsWidget()->getAmount() >= 10)
+    if(projectsManager->getCurrentProject()->getStringsList()->getAmount() >= 10)
         ui->stringValueLine->setStyleSheet("QLineEdit{ background-color: #333333;  color: #ffffff; border: 2px solid red; border-radius: 15px;}");
 }

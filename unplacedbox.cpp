@@ -43,7 +43,7 @@ void UnPlacedBox::checkDrop(QPoint point)
 void UnPlacedBox::remove()
 {
     project->setSaved(false);
-    project->getStringsWidget()->deleteStringWidget(index);
+    project->getStringsList()->deleteString(index);
 }
 
 void UnPlacedBox::show(bool x)

@@ -21,8 +21,8 @@ private:
     QPoint startPosition; //the startPosition of the UnplacedBox text box
     QPoint dragBoxPoint; // the position of the DragBox
 
-    int id; //the id of the unplacedBox in the StringsListWidget (->Lcd)
-    int index; //the index of the unplacedBox in the StringsListWidget
+    int id; //the id of the unplacedBox in the StringsList (->Lcd)
+    int index; //the index of the unplacedBox in the StringsList
 
 public:
     UnPlacedBox(Project* project, int index, int id, QString text, QPoint pos);

@@ -3,7 +3,6 @@
 
 #include <QApplication>
 #include <QLabel>
-#include <QPoint>
 
 class UnPlacedBox;
 

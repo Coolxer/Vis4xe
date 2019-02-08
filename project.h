@@ -5,7 +5,7 @@
 #include <QLabel>
 
 #include "lcd.h"
-#include "stringslistwidget.h"
+#include "stringslist.h"
 
 class QPushButton;
 class Cell;
@@ -18,7 +18,7 @@ private:
     QLabel* projectNameBox; //the box which is displaying project name in editpage upper crossbar
     QWidget* container; //the widget for storing others widgets like lcd and stringsWidget
     Lcd* lcd; //pointer of lcd, for keeping dynamic object
-    StringsListWidget* stringsWidget;  //pointer of stringsListWidget, for keeping dynamic object
+    StringsList* stringsList;  //pointer of stringsList, for keeping dynamic object
 
     QString name; //name of the project
 
@@ -33,7 +33,7 @@ public:
 
     QWidget* getContainer() { return container; }
     Lcd* getLcd() { return lcd; }
-    StringsListWidget* getStringsWidget() { return stringsWidget; }
+    StringsList* getStringsList() { return stringsList; }
 
     QString getName() { return name; }
     QString getDirPath() { return dirPath; }

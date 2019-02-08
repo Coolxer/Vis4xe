@@ -1,13 +1,13 @@
-#include "stringslistwidget.h"
+#include "stringslist.h"
 
-StringsListWidget::StringsListWidget(Project* project)
+StringsList::StringsList(Project* project)
 {
     this->project = project;
 
     counter = 0;
 }
 
-StringsListWidget::~StringsListWidget()
+StringsList::~StringsList()
 {
     for(int i = 0; i < boxes.length(); i++)
     {
@@ -16,7 +16,7 @@ StringsListWidget::~StringsListWidget()
     }
 }
 
-void StringsListWidget::organize(int index)
+void StringsList::organize(int index)
 {
     if(index == 0)
     {
@@ -28,7 +28,7 @@ void StringsListWidget::organize(int index)
         boxes[i]->moveTo(QPoint(810, boxes[i-1]->y() + 40));
 }
 
-void StringsListWidget::addStringWidget(QString name)
+void StringsList::addString(QString name)
 {
     if(boxes.length() < 10)
     {
@@ -43,7 +43,7 @@ void StringsListWidget::addStringWidget(QString name)
     boxes.last()->show(true);
 }
 
-void StringsListWidget::deleteStringWidget(int index)
+void StringsList::deleteString(int index)
 {
     if(index != boxes.length() - 1)
         for(int i = index + 1; i < boxes.length(); i++)

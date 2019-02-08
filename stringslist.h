@@ -27,8 +27,8 @@ public:
     int getAmount() { return boxes.length(); }
     UnPlacedBox* getBox(int i) { return boxes.at(i); }
 
-    void addStringWidget(QString name);//adds new string to the vector
-    void deleteStringWidget(int index); //deletes the selected string
+    void addString(QString name);//adds new string to the vector
+    void deleteString(int index); //deletes the selected string
     void loadBoxesFromFile(QVector <UnPlacedBox*> boxes) { this->boxes = boxes; counter = boxes.last()->getId() + 1; } //the function that loads the unPlacedBoxes from file
 
 

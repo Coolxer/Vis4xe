@@ -56,7 +56,7 @@ Project* DataConverter::convertToProject(ProjectsManager* projectsManager, QByte
     }
 
     project->getLcd()->loadCellsFromFile(cells);
-    project->getStringsWidget()->loadBoxesFromFile(unPlacedBoxes);
+    project->getStringsList()->loadBoxesFromFile(unPlacedBoxes);
 
     return project;
 }
@@ -81,11 +81,11 @@ QByteArray DataConverter::convertProjectToData(Project* project)
 
     QJsonObject unPlacedBox;
 
-    for(int i = 0; i < project->getStringsWidget()->getAmount(); i++)
+    for(int i = 0; i < project->getStringsList()->getAmount(); i++)
     {
 
-        unPlacedBox.insert(QString("id"), QJsonValue(project->getStringsWidget()->getBox(i)->getId()));
-        unPlacedBox.insert(QString("value"), QJsonValue(project->getStringsWidget()->getBox(i)->text()));
+        unPlacedBox.insert(QString("id"), QJsonValue(project->getStringsList()->getBox(i)->getId()));
+        unPlacedBox.insert(QString("value"), QJsonValue(project->getStringsList()->getBox(i)->text()));
 
         unPlacedBoxes.push_back(QJsonValue(unPlacedBox));
     }
