@@ -116,37 +116,54 @@ void Project::setPath(QString path)
     if(path.isEmpty())
         return;
 
-    for(int i = 0; i <= path.length() - 6; i++)
-        dirPath += path[i];
-
-    int x = 0;
-
-    //visPath
-    for(int i = path.length() -1; i >= 0; i--)
+    if(!QFileInfo::exists(path))
     {
-        if(path[i] == '/')
-            break;
+        for(int i = 0; i <= path.length() - 6; i++)
+            dirPath += path[i];
 
-        x++;
+        int x = 0;
+
+        //visPath
+        for(int i = path.length() -1; i >= 0; i--)
+        {
+            if(path[i] == '/')
+                break;
+
+            x++;
+        }
+
+        int k = path.length() - 1 - x;
+
+        for(int i = k; i <= path.length()-1; i++)
+            visPath += path[i];
+
+        visPath = dirPath + visPath;
+
+        //avrPath
+        for(int i = 0; i <= visPath.length() - 1; i++)
+        {
+            if(visPath[i] == '.')
+                break;
+
+            avrPath += visPath[i];
+        }
+
+        avrPath += ".txt";
     }
-
-    int k = path.length() - 1 - x;
-
-    for(int i = k; i <= path.length()-1; i++)
-        visPath += path[i];
-
-    visPath = dirPath + visPath;
-
-    //avrPath
-    for(int i = 0; i <= visPath.length() - 1; i++)
+    else
     {
-        if(visPath[i] == '.')
-            break;
+        visPath = path;
 
-        avrPath += visPath[i];
+        for(int i = 0; i <= visPath.length() - 1; i++)
+        {
+            if(visPath[i] == '.')
+                break;
+
+            avrPath += visPath[i];
+        }
+
+        avrPath += ".txt";
     }
-
-    avrPath += ".txt";
 }
 
 void Project::setSaved(bool x)

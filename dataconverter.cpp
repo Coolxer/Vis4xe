@@ -36,6 +36,9 @@ Project* DataConverter::convertToProject(ProjectsManager* projectsManager, QByte
     QJsonDocument doc = QJsonDocument::fromJson(data);
     QJsonObject obj = doc.object();
 
+    if(obj.value("Info").toString() != "Created by Vis4xe. Copyright (C). All rights reserved.")
+        return nullptr;
+
     QJsonArray cellsArray = obj.value("cells").toArray();
     QJsonArray unplacedBoxesArray = obj.value("unPlacedBoxes").toArray();
 
@@ -69,6 +72,7 @@ QByteArray DataConverter::convertProjectToData(Project* project)
     QJsonArray cells;
     QJsonArray unPlacedBoxes;
 
+
     QJsonObject cell;
 
     for(int i = 0; i < project->getLcd()->getNumberOfCells(); i++)
@@ -90,6 +94,7 @@ QByteArray DataConverter::convertProjectToData(Project* project)
         unPlacedBoxes.push_back(QJsonValue(unPlacedBox));
     }
 
+    obj.insert(QString("Info"), QJsonValue("Created by Vis4xe. Copyright (C). All rights reserved."));
     obj.insert(QString("name"), QJsonValue(project->getName()));
     obj.insert(QString("rows"), QJsonValue(project->getLcd()->getRows()));
     obj.insert(QString("cols"), QJsonValue(project->getLcd()->getCols()));

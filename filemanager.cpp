@@ -105,7 +105,7 @@ void FileManager::saveProject(QByteArray data)
 {
     QDir dir;
 
-    if(!dir.exists(projectsManager->getCurrentProject()->getDirPath()))
+    if(!dir.exists(projectsManager->getCurrentProject()->getDirPath()) && !projectsManager->getCurrentProject()->isSavedInFile())
         dir.mkdir(projectsManager->getCurrentProject()->getDirPath());
 
     saveVisFile(data);

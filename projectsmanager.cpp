@@ -72,7 +72,7 @@ void ProjectsManager::saveProject()
                                                    currentProject->getName(),
                                                     "Json (*.json);;All Files (*)"));
 
-    if(currentProject->getDirPath().isEmpty())
+    if(currentProject->getVisPath().isEmpty())
         return;
 
     fileManager->saveProject(DataConverter::convertProjectToData(currentProject));
