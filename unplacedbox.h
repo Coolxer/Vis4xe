@@ -30,14 +30,12 @@ public:
 
     int getId() { return id; }
     int getIndex() { return index; }
+    QPoint getDragBoxPoint() { return dragBoxPoint; }
 
     void checkDrop(QPoint point); //checks the dragBox position
     void remove(); //gives a signal to its parent to delete itself
-
-    QPoint getDragBoxPoint() { return dragBoxPoint; }
     void show(bool x); //the function to show/hide drag & unplaced & del [boxes]
     void reset(); //the function that moves the box to the start position
-
     void decrease() { index--; } //decreases the index of the unplacedBox after removed another
     void moveTo(QPoint p); //moves the box one level up
 

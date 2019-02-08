@@ -24,7 +24,7 @@ private:
     static QJsonObject convertVectorToJsonObject(ProjectsManager* projectsManager); //converts the c++ <Vector> to json array type
 
 public:
-    DataConverter();
+    DataConverter(){}
 
     static Project* convertToProject(ProjectsManager* projectsManager, QByteArray data); //converts json data from File to project
     static QByteArray convertProjectToData(Project* project); //converts project to json format to save it in file

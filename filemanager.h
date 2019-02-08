@@ -1,19 +1,17 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QFileDialog>
-#include <QDir>
-
-#include <QStandardPaths>
 
 #include <QTextStream>
 #include <QByteArray>
 
-#include "dataconverter.h"
+#include <QStandardPaths>
 
-#include <QtDebug>
+#include "dataconverter.h"
 
 class ProjectsManager;
 
@@ -22,9 +20,8 @@ class FileManager
 private:
     ProjectsManager* projectsManager; //the pointer to the ProjectsManager
 
-    QFile projectsFile; //the projectsListFile that includes the short description of the created projects
-
     QString documentsPath; //the path of the user Documents folder (C:\Users\user)
+    QFile projectsFile; //the projectsListFile that includes the short description of the created projects
 
     void saveVisFile(QByteArray data); //method that saves the data to the json file (readable by Vis4xe)
     void saveAvrFile(); //method that saves the algorithm of arduino instructions to use with LCD screen (using LiquidCrystal library) to text (*.txt) file

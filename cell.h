@@ -3,7 +3,6 @@
 
 #include <QApplication>
 #include <QLabel>
-#include <QString>
 
 class Lcd;
 
@@ -18,7 +17,7 @@ private:
     int row; //the row in which the cell is placed
     int col; //the column in which the cell is placed
 
-    void init();
+    void init(); //prepares the array of cell in lcd
 
 protected:
     void enterEvent(QEvent*);
@@ -31,14 +30,11 @@ public:
     Cell(Lcd* lcd, int index);
     Cell(Lcd* lcd, int index, int id, QString value);
 
-    ~Cell();
-
     void setId(int id) { this->id = id; }
-    int getId() { return id; }
 
+    int getId() { return id; }
     int getRow(){ return row; }
     int getCol(){ return col; }
-
     int getIndex() { return index; }
 
 };

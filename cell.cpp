@@ -35,11 +35,6 @@ void Cell::init()
     setStyleSheet("QLabel{ background-color: #0099ff; font-size: 25px; }");
 }
 
-Cell::~Cell()
-{
-    //delete lcd;
-}
-
 void Cell::enterEvent(QEvent*)
 {
     if(!lcd->editEnabled())
@@ -62,5 +57,4 @@ void Cell::mousePressEvent(QMouseEvent*)
 {
     if(id != -1)
         lcd->setSelectedCell(index);
-    //setStyleSheet("QLabel { background-color: #ff0000; font-size: 25px; }");
 }
