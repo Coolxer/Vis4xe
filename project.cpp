@@ -72,7 +72,7 @@ bool Project::writeOnLcd(UnPlacedBox* box)
     if(check(box->getDragBoxPoint()))
     {
         //check if its possible to drop this there (overfill cover)
-        if(lcd->getDroppedCell()->getIndex() + box->text().length() <= lcd->getDroppedCell()->getRow()* lcd->getCols())
+        if(lcd->getDroppedCell()->getIndex() + box->text().length() <= lcd->getDroppedCell()->getRow() * lcd->getCols())
         {
             bool allCellsEnabled = true;
 

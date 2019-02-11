@@ -42,18 +42,18 @@ void FileManager::saveAvrFile()
         {
             int x = i;
 
-            do
+            while(1)
             {
-               if(projectsManager->getCurrentProject()->getLcd()->getCell(i)->getId() == -1)
-                   break;
+                if(i >= projectsManager->getCurrentProject()->getLcd()->getNumberOfCells() || projectsManager->getCurrentProject()->getLcd()->getCell(i)->getId() == -1)
+                    break;
 
-               current += projectsManager->getCurrentProject()->getLcd()->getCell(i)->text();
+                 current += projectsManager->getCurrentProject()->getLcd()->getCell(i)->text();
 
-               i++;
+                 i++;
 
-            }while(1);
+            }
 
-            out<<"\nlcd.setCursor("<<projectsManager->getCurrentProject()->getLcd()->getCell(x)->getCol()<<','<<projectsManager->getCurrentProject()->getLcd()->getCell(x)->getRow()<<");";
+            out<<"\nlcd.setCursor("<<projectsManager->getCurrentProject()->getLcd()->getCell(x)->getCol()<<','<<projectsManager->getCurrentProject()->getLcd()->getCell(x)->getRow() - 1<<");";
             out<<"\nlcd.print(\""<<current<<"\");";
 
             current = "";
