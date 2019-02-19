@@ -56,5 +56,14 @@ void StringsList::deleteString(int index)
         organize(index);
 }
 
+void StringsList::loadBoxesFromFile(QVector <UnPlacedBox*> boxes)
+{
+    if(boxes.length() <= 0)
+        return;
+
+    this->boxes = boxes;
+    counter = boxes.last()->getIndex() + 1;
+}
+
 
 

@@ -6,6 +6,8 @@
 
 #include "unplacedbox.h"
 
+#include <QDebug>
+
 class Project;
 
 class StringsList
@@ -15,7 +17,7 @@ private:
 
     QVector <UnPlacedBox*> boxes; //the vector<> of the strings boxes
 
-    int counter; // the counter of the total unplacedBoxes created (not decreasing after deleting) for id of new box
+    int counter; // the counter of the total unplacedBoxes created (not decreasing after deleting) for index of new box
 
     void organize(int index); //organizes the unplacedBoxes after one of them was removed or dragged out    
 
@@ -29,7 +31,7 @@ public:
 
     void addString(QString name);//adds new string to the vector
     void deleteString(int index); //deletes the selected string
-    void loadBoxesFromFile(QVector <UnPlacedBox*> boxes) { this->boxes = boxes; counter = boxes.last()->getId() + 1; } //the function that loads the unPlacedBoxes from file
+    void loadBoxesFromFile(QVector <UnPlacedBox*> boxes); //the function that loads the unPlacedBoxes from file
 
 
 };
