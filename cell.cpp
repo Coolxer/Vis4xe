@@ -8,8 +8,6 @@ Cell::Cell(Lcd* lcd, int index) : QLabel(lcd)
     this->index = index;
 
     row = (index / lcd->getCols()) + 1;
-    //col = index - (row * lcd->getCols());
-
     col = index - ((row - 1) * lcd->getCols());
 
     init();

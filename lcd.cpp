@@ -53,7 +53,6 @@ void Lcd::organize()
             m++;
         }
     }
-
 }
 
 void Lcd::cancelChanges()

@@ -11,7 +11,7 @@ QJsonObject DataConverter::convertVectorToJsonObject(ProjectsManager* projectsMa
     QJsonArray array;
     QJsonObject obj, item;
 
-    int n = projectsManager->getBoxes().size();
+    int n = projectsManager->getBoxes().length();
 
     for(int i = 0; i < n; i++)
     {
@@ -149,9 +149,6 @@ bool DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
         if(!QFileInfo::exists(array[i].toObject().value("path").toString()))
         {
             allRight = false;
-            //array.removeAt(i);
-
-            //count--;
             indexes.push_back(i);
         }
     }
@@ -165,7 +162,7 @@ bool DataConverter::convertToNameBoxes(ProjectsManager* projectsManager, QByteAr
     }
 
     if(count <= 0)
-        return true;
+        return false;
     else if (count > 0 && count < 9)
     {
         int rows = count / 3;
